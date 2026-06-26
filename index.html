@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNPSuite — Tools for Child Nutrition Program Administration</title>
+<meta name="description" content="A growing suite of regulation-grounded tools for the state agency staff who administer USDA Child Nutrition Programs. By LS Digital Solutions, LLC.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23001E3C'/%3E%3Crect x='22' y='22' width='24' height='24' rx='5' fill='%230077B6'/%3E%3Crect x='54' y='22' width='24' height='24' rx='5' fill='%2325543C'/%3E%3Crect x='22' y='54' width='24' height='24' rx='5' fill='%23C68A1E'/%3E%3Crect x='54' y='54' width='24' height='24' rx='5' fill='none' stroke='%238FA8BC' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#001E3C;
+    --navy-deep:#00152A;
+    --navy-2:#002A4F;
+    --cerulean:#0077B6;
+    --cerulean-ink:#025E94;
+    --sky:#7FB7DE;
+    --pine:#25543C;
+    --amber:#C68A1E;
+    --paper:#F4F8FB;
+    --ink:#152532;
+    --slate:#5E7283;
+    --line:#DBE6EF;
+    --white:#fff;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.55}
+  a{color:inherit}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase}
+
+  /* ---- pinned announcement bar ---- */
+  .topbar{background:var(--navy-deep);color:#cfe2f1;font-size:13px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .topbar .wrap{display:flex;align-items:center;gap:12px;min-height:42px;padding-top:8px;padding-bottom:8px}
+  .topbar .sect{font-family:var(--mono);color:var(--sky);font-size:11px;letter-spacing:.12em;flex:0 0 auto}
+  .topbar a.msg{color:#eaf3fa;text-decoration:none;font-weight:500}
+  .topbar a.msg:hover{text-decoration:underline;text-decoration-color:var(--sky)}
+  .topbar .arrow{color:var(--sky)}
+  .topbar .x{margin-left:auto;background:none;border:0;color:#7e98ac;cursor:pointer;font-size:18px;line-height:1;padding:4px 6px;border-radius:6px;flex:0 0 auto}
+  .topbar .x:hover{color:#cfe2f1;background:rgba(255,255,255,.06)}
+  .topbar.hide{display:none}
+
+  /* ---- nav ---- */
+  header.nav{background:var(--navy);color:var(--white);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(255,255,255,.08)}
+  header.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+  .brandmark{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--white);font-weight:700;letter-spacing:.01em;font-size:18px}
+  .brandmark svg{width:26px;height:26px;flex:0 0 auto}
+  .brandmark .suite{font-family:var(--serif);font-weight:600}
+  nav.links{margin-left:auto;display:flex;gap:6px;align-items:center}
+  nav.links a{font-size:14px;font-weight:600;color:#bcd0e1;text-decoration:none;padding:8px 12px;border-radius:8px;transition:.15s}
+  nav.links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+  nav.links a.cta{background:var(--cerulean);color:#fff;margin-left:6px}
+  nav.links a.cta:hover{background:#0a8ad0}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:2px;border-radius:6px}
+
+  /* ---- hero ---- */
+  .hero{background:radial-gradient(120% 130% at 85% -20%, var(--navy-2), var(--navy-deep) 60%);color:var(--white);position:relative;overflow:hidden}
+  .hero .wrap{padding-top:74px;padding-bottom:72px;position:relative;z-index:1}
+  .hero .mark{width:84px;height:84px;margin-bottom:26px}
+  .hero .mark rect.grow{animation:none}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.04;letter-spacing:-.015em;margin:0;max-width:16ch}
+  .hero h1 em{font-style:normal;color:var(--sky)}
+  .hero .lede{font-size:clamp(16px,2.1vw,19px);color:rgba(232,241,248,.82);max-width:54ch;margin:22px 0 0}
+  .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .btn{font-family:var(--sans);font-weight:700;font-size:15px;text-decoration:none;border-radius:11px;padding:13px 22px;display:inline-flex;align-items:center;gap:9px;transition:.15s;border:1px solid transparent;cursor:pointer}
+  .btn.primary{background:var(--cerulean);color:#fff}
+  .btn.primary:hover{background:#0a8ad0;transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:#dbe8f2;border-color:rgba(255,255,255,.28)}
+  .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5)}
+  .hero .meta{margin-top:34px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#86a8c4;display:flex;flex-wrap:wrap;gap:8px 18px}
+  .hero .meta span{display:inline-flex;align-items:center;gap:8px}
+  .hero .meta b{color:var(--sky);font-weight:500}
+
+  /* ---- section frame ---- */
+  section{padding:74px 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:34px}
+  .sec-head .eyebrow{color:var(--cerulean-ink)}
+  .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(24px,3.4vw,33px);letter-spacing:-.01em;margin:6px 0 0;color:var(--navy)}
+  .sec-head .side{font-size:13.5px;color:var(--slate)}
+  .sec-head .side a{color:var(--cerulean-ink);font-weight:600;text-decoration:none}
+  .sec-head .side a:hover{text-decoration:underline}
+
+  /* ---- tools grid ---- */
+  #tools{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .tool{position:relative;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:26px 24px 24px;display:flex;flex-direction:column;transition:.18s;overflow:hidden}
+  .tool::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--cerulean))}
+  .tool.live:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(0,30,60,.4);border-color:#c6d6e4}
+  .tool .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+  .tool .tmark{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:var(--accent-soft,#e6f1f9);color:var(--accent,var(--cerulean));flex:0 0 auto}
+  .tool .tmark svg{width:18px;height:18px}
+  .status{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:99px;font-weight:500}
+  .status.live{background:rgba(0,119,182,.1);color:var(--cerulean-ink)}
+  .status.coming{background:rgba(198,138,30,.14);color:#8a5e12}
+  .tool .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--accent,var(--cerulean));text-transform:uppercase}
+  .tool h3{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.01em;margin:4px 0 0;color:var(--navy)}
+  .tool p{font-size:14.5px;color:#43586a;margin:11px 0 0;flex:1 1 auto}
+  .tool .badges{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0}
+  .tool .badges span{font-size:11.5px;color:var(--slate);background:#f1f6fa;border:1px solid var(--line);border-radius:99px;padding:4px 10px}
+  .tool .cta{margin-top:20px;font-weight:700;font-size:14.5px;color:var(--accent,var(--cerulean));text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  .tool .cta:hover{gap:11px}
+  .tool .cta.disabled{color:var(--slate);font-weight:600;font-style:italic;pointer-events:none}
+
+  /* ---- updates ---- */
+  .updates{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .update{display:grid;grid-template-columns:148px 1fr auto;gap:22px;align-items:start;padding:22px 6px;border-bottom:1px solid var(--line)}
+  .update .when{font-family:var(--mono);font-size:12px;color:var(--slate);padding-top:2px}
+  .update .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cerulean-ink);background:rgba(0,119,182,.08);border-radius:5px;padding:3px 8px;margin-bottom:8px}
+  .update h4{margin:0;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:-.005em}
+  .update p{margin:6px 0 0;font-size:14px;color:#46596a;max-width:62ch}
+  .update .go{align-self:center;white-space:nowrap;font-weight:700;font-size:13.5px;color:var(--cerulean-ink);text-decoration:none}
+  .update .go:hover{text-decoration:underline}
+  .updates .note{font-size:13px;color:var(--slate);padding:18px 6px 0}
+
+  /* ---- backed by ---- */
+  #about{background:var(--navy);color:var(--white)}
+  #about .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+  #about .eyebrow{color:var(--sky)}
+  #about h2{font-family:var(--serif);font-weight:500;font-size:clamp(23px,3vw,30px);margin:8px 0 0;letter-spacing:-.01em}
+  #about p{color:rgba(225,237,247,.8);font-size:15.5px;margin:16px 0 0;max-width:50ch}
+  #about .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  #about .stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px 18px}
+  #about .stat b{font-family:var(--serif);font-size:26px;font-weight:600;color:#fff;display:block;line-height:1}
+  #about .stat span{font-size:12px;color:#9fbcd2;margin-top:7px;display:block}
+  #about .link{margin-top:22px;display:inline-flex;align-items:center;gap:9px;color:#fff;font-weight:700;text-decoration:none;font-size:15px}
+  #about .link:hover{gap:12px}
+  #about .link .u{border-bottom:2px solid var(--cerulean)}
+
+  /* ---- footer ---- */
+  footer.site{background:var(--navy-deep);color:#9fb6c8;padding:46px 0 36px;font-size:13.5px}
+  footer.site .wrap{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between}
+  footer.site .b{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:17px;margin-bottom:10px}
+  footer.site .b svg{width:24px;height:24px}
+  footer.site .b .suite{font-family:var(--serif);font-weight:600}
+  footer.site .col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#6f8a9e;margin:0 0 12px}
+  footer.site a{color:#bcd0e1;text-decoration:none;display:block;margin-bottom:8px}
+  footer.site a:hover{color:#fff;text-decoration:underline}
+  footer.site .fine{width:100%;border-top:1px solid rgba(255,255,255,.08);margin-top:14px;padding-top:18px;color:#7f97aa;font-size:12px;line-height:1.6}
+  footer.site .fine .priv{font-family:var(--mono);font-size:11px;color:#6f8a9e;margin-top:6px}
+
+  /* ---- reveal ---- */
+  .reveal{opacity:0;transform:translateY(12px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+
+  @media (max-width:860px){
+    .tools{grid-template-columns:1fr;gap:16px}
+    #about .wrap{grid-template-columns:1fr;gap:28px}
+    section{padding:56px 0}
+    .hero .wrap{padding-top:56px;padding-bottom:56px}
+  }
+  @media (max-width:560px){
+    nav.links a:not(.cta){display:none}
+    .update{grid-template-columns:1fr;gap:6px;padding:18px 4px}
+    .update .when{order:-1}
+    .update .go{align-self:start;margin-top:4px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn:hover,.tool.live:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- reusable suite mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="suitemark" viewBox="0 0 100 100">
+    <rect x="6" y="6" width="40" height="40" rx="9" fill="#0077B6"/>
+    <rect x="54" y="6" width="40" height="40" rx="9" fill="#25543C"/>
+    <rect x="6" y="54" width="40" height="40" rx="9" fill="#C68A1E"/>
+    <rect x="54" y="54" width="40" height="40" rx="9" fill="none" stroke="#8FA8BC" stroke-width="3.5"/>
+  </symbol>
+</svg>
+
+<!-- pinned announcement bar (shows the featured update) -->
+<div class="topbar" id="topbar" role="region" aria-label="Latest announcement">
+  <div class="wrap">
+    <span class="sect">§ LATEST</span>
+    <a class="msg" id="topbarMsg" href="#updates">—</a>
+    <span class="arrow" aria-hidden="true">→</span>
+    <button class="x" id="topbarX" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brandmark" href="#top"><svg><use href="#suitemark"/></svg><span>CNP<span class="suite">Suite</span></span></a>
+    <nav class="links" aria-label="Primary">
+      <a href="#tools">Tools</a>
+      <a href="#updates">Updates</a>
+      <a href="#about">About</a>
+      <a class="cta" href="https://www.cnpregai.com" target="_blank" rel="noopener">Launch CNPReg AI</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <svg class="mark" aria-hidden="true"><use href="#suitemark"/></svg>
+      <h1>Tools for Child Nutrition Program <em>administration.</em></h1>
+      <p class="lede">A growing suite of practical, regulation-grounded tools for the state agency staff who administer USDA Child Nutrition Programs — built and run by LS Digital Solutions.</p>
+      <div class="actions">
+        <a class="btn primary" href="#tools">Explore the tools</a>
+        <a class="btn ghost" href="https://www.lsdigitalsolutions.com" target="_blank" rel="noopener">About LS Digital Solutions →</a>
+      </div>
+      <div class="meta">
+        <span><b>§</b> Grounded in 7&nbsp;CFR &amp; USDA&nbsp;FNS policy</span>
+        <span><b>·</b> Free to start</span>
+        <span><b>·</b> Built for state agencies</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">§ The tools</div>
+          <h2>One suite, each tool its own job.</h2>
+        </div>
+        <div class="side">Free to use · no account required for live tools.</div>
+      </div>
+      <div class="tools" id="toolGrid"></div>
+    </div>
+  </section>
+
+  <section id="updates" style="background:var(--paper)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="eyebrow">§ What's new</div>
+          <h2>Program updates &amp; releases.</h2>
+        </div>
+        <div class="side">Regulatory changes, grant news, and new tools as they land.</div>
+      </div>
+      <div class="updates" id="updateList"></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">§ Backed by</div>
+        <h2>Built and run by LS&nbsp;Digital&nbsp;Solutions.</h2>
+        <p>Software that understands the rules it has to follow — practical tools and regulatory-grounded AI for the agencies that have to get Child Nutrition Program compliance right.</p>
+        <a class="link" href="https://www.lsdigitalsolutions.com" target="_blank" rel="noopener"><span class="u">Visit LS Digital Solutions</span> →</a>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><b>14+</b><span>Years in USDA Child Nutrition Program technology</span></div>
+        <div class="stat"><b>20+</b><span>Years of enterprise public-sector IT</span></div>
+        <div class="stat"><b>MBE</b><span>Certified business</span></div>
+        <div class="stat"><b>eCFR</b><span>Tools synced to live federal regulation</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="col">
+      <div class="b"><svg><use href="#suitemark"/></svg><span>CNP<span class="suite">Suite</span></span></div>
+      <div style="max-width:34ch;color:#90a8bb">Tools for Child Nutrition Program administration. A suite by LS Digital Solutions, LLC.</div>
+    </div>
+    <div class="col">
+      <h5>Tools</h5>
+      <a href="https://www.cnpregai.com" target="_blank" rel="noopener">CNPReg AI</a>
+      <a href="#" id="footDeck">Readiness Deck</a>
+      <a href="#updates">What's new</a>
+    </div>
+    <div class="col">
+      <h5>Company</h5>
+      <a href="https://www.lsdigitalsolutions.com" target="_blank" rel="noopener">LS Digital Solutions</a>
+      <a href="https://www.lsdigitalsolutions.com/#contact" target="_blank" rel="noopener">Start a project</a>
+    </div>
+    <div class="fine">
+      © <span id="yr"></span> LS Digital Solutions, LLC · MBE Certified · CNPSuite is an independent tool suite and is not affiliated with or endorsed by the USDA.
+      <div class="priv">This site sets no cookies and uses no tracking or analytics.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   EDIT HERE — TOOLS
+   Add a tool by adding an object. status: "live" | "coming".
+   accent/soft = the card's color. url+cta only matter for live tools.
+   ===================================================================== */
+const TOOLS=[
+  {
+    key:"cnpregai", status:"live",
+    accent:"#0077B6", soft:"#e6f1f9",
+    kicker:"Regulatory intelligence",
+    name:"CNPReg AI",
+    desc:"Ask a Child Nutrition Program question and get an instant answer cited to the exact CFR section — synced from the live eCFR and grounded in USDA FNS policy memos.",
+    badges:["Cited to CFR","Live eCFR sync","Free · no login"],
+    cta:"Launch CNPReg AI", url:"https://www.cnpregai.com",
+    icon:'<path d="M4 5h16v11H7l-3 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10h8M8 13h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+  },
+  {
+    key:"deck", status:"live",
+    accent:"#25543C", soft:"#e7efe9",
+    kicker:"ME prep & self-assessment",
+    name:"Readiness Deck",
+    desc:"Flip-card drills across the standard NSLP Management Evaluation areas — each card gives the requirement, the citation, and what to have ready — with progress that saves as you study.",
+    badges:["44 cards","11 ME areas","Saves your progress"],
+    cta:"Open the deck", url:"/readiness-deck/",   /* bundled on cnpsuite.com */
+    icon:'<rect x="4" y="5" width="13" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 5l11 2-2 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+  },
+  {
+    key:"mefiles", status:"coming",
+    accent:"#C68A1E", soft:"#f6ecd9",
+    kicker:"ME documentation, managed",
+    name:"ME File Manager",
+    desc:"A workbench for assembling, tracking, and maintaining Management Evaluation files and corrective action — built carefully, with the security a system handling sensitive program data demands.",
+    badges:["In development"],
+    cta:"In development", url:null,
+    icon:'<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+  }
+];
+
+/* =====================================================================
+   EDIT HERE — ANNOUNCEMENTS  (newest first)
+   The first item also fills the pinned bar at the top of the page.
+   tag = short label · when = display date · link optional ({label,href}).
+   ===================================================================== */
+const ANNOUNCEMENTS=[
+  {
+    when:"Jun 2026", tag:"USDA · Grant",
+    title:"USDA releases the CACFP Technology Innovation Grant (TIG)",
+    body:"New federal funding to help state agencies modernize CACFP technology, data systems, and program integrity. Review eligibility and application timelines before the window closes.",
+    link:{label:"Read the announcement", href:"#"}
+  },
+  {
+    when:"Jun 2026", tag:"New tool",
+    title:"The Readiness Deck is live — drill the NSLP ME areas",
+    body:"Forty-four flip cards across all eleven Management Evaluation areas, each with the requirement, the citation, and what to have ready for the reviewer.",
+    link:{label:"Open the deck", href:"/readiness-deck/"}
+  },
+  {
+    when:"Nov 2025", tag:"Reg reminder",
+    title:"Verification season: completion deadline is November 15",
+    body:"A reminder for state agencies and SFAs — verification of approved applications must be completed and reported by the established date under 7 CFR 245.6a.",
+    link:null
+  }
+];
+
+/* ---------- render tools ---------- */
+function iconSvg(p){return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'+p+'</svg>';}
+function renderTools(){
+  const grid=document.getElementById("toolGrid");
+  grid.innerHTML=TOOLS.map(t=>{
+    const live=t.status==="live";
+    const cta = (live && t.url)
+      ? `<a class="cta" href="${t.url}"${t.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.cta} →</a>`
+      : `<span class="cta disabled">${t.cta}</span>`;
+    return `<article class="tool ${t.status} reveal" style="--accent:${t.accent};--accent-soft:${t.soft}">
+      <div class="topline">
+        <span class="tmark">${iconSvg(t.icon)}</span>
+        <span class="status ${t.status}">${live?"Live · Free":"Coming"}</span>
+      </div>
+      <div class="kicker">${t.kicker}</div>
+      <h3>${t.name}</h3>
+      <p>${t.desc}</p>
+      <div class="badges">${t.badges.map(b=>`<span>${b}</span>`).join("")}</div>
+      ${cta}
+    </article>`;
+  }).join("");
+}
+
+/* ---------- render announcements ---------- */
+function renderUpdates(){
+  const list=document.getElementById("updateList");
+  list.innerHTML=ANNOUNCEMENTS.map(a=>{
+    const go=a.link?`<a class="go" href="${a.link.href}"${a.link.href.startsWith("http")?' target="_blank" rel="noopener"':''}>${a.link.label} →</a>`:`<span></span>`;
+    return `<div class="update reveal">
+      <div class="when">${a.when}</div>
+      <div><span class="tag">${a.tag}</span><h4>${a.title}</h4><p>${a.body}</p></div>
+      ${go}
+    </div>`;
+  }).join("")+`<div class="note">More updates as regulations change and tools ship. Bookmark this page to keep current.</div>`;
+}
+
+/* ---------- pinned bar from featured announcement ---------- */
+function renderTopbar(){
+  const a=ANNOUNCEMENTS[0];
+  if(!a){document.getElementById("topbar").classList.add("hide");return;}
+  const msg=document.getElementById("topbarMsg");
+  msg.textContent=a.title;
+  if(a.link&&a.link.href){msg.setAttribute("href",a.link.href);} 
+  document.getElementById("topbarX").onclick=()=>document.getElementById("topbar").classList.add("hide");
+}
+
+/* ---------- scroll reveal ---------- */
+function setupReveal(){
+  const els=[...document.querySelectorAll(".reveal")];
+  if(!("IntersectionObserver" in window)){els.forEach(e=>e.classList.add("in"));return;}
+  const io=new IntersectionObserver((ents)=>{
+    ents.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+  },{threshold:.12});
+  els.forEach(e=>io.observe(e));
+}
+
+/* ---------- init ---------- */
+renderTools();
+renderUpdates();
+renderTopbar();
+setupReveal();
+document.getElementById("yr").textContent=new Date().getFullYear();
+// keep footer "Readiness Deck" link in sync with the tool's url
+(function(){const d=TOOLS.find(t=>t.key==="deck");if(d&&d.url){document.getElementById("footDeck").setAttribute("href",d.url);}})();
+</script>
+</body>
+</html>
