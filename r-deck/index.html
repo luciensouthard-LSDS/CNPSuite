@@ -1,1 +1,673 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readiness Deck — NSLP Management Evaluation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20271f;
+    --desk:#2e3a31;
+    --desk-2:#283329;
+    --paper:#f1e4c3;       /* manila card face */
+    --paper-2:#f6edd4;     /* ruled back, slightly lighter */
+    --pine:#25543c;
+    --gold:#d7a12b;
+    --clay:#b5562f;
+    --line:rgba(32,39,31,.16);
+    --line-strong:rgba(32,39,31,.32);
+    --offwhite:#ede7d4;
+    --muted:#b9c2b3;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:var(--sans);
+    color:var(--offwhite);
+    background:
+      radial-gradient(120% 80% at 50% -10%, #36443a 0%, var(--desk) 45%, var(--desk-2) 100%);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(14px,3vw,34px);
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* ---- masthead ---- */
+  .mast{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:6px}
+  .suitebar{margin-bottom:16px}
+  .suitebar a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+  .suitebar a:hover{color:var(--gold)}
+  .suitebar a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+  .brand .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .brand h1{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(26px,5.4vw,40px);line-height:1.02;margin:.18em 0 0;
+    color:#fbf6e7;letter-spacing:-.01em;
+  }
+  .brand .sub{font-size:13px;color:var(--muted);margin-top:6px;max-width:46ch}
+
+  /* ---- readiness meter ---- */
+  .meter{min-width:190px;flex:1 1 190px;max-width:260px}
+  .meter .pct{font-family:var(--mono);font-size:13px;color:var(--offwhite);display:flex;justify-content:space-between;margin-bottom:6px}
+  .meter .pct b{color:var(--gold);font-weight:500}
+  .bar{height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e6b443,var(--gold));border-radius:99px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+  .tally{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:7px;letter-spacing:.02em}
+
+  .rule{height:1px;background:rgba(255,255,255,.12);margin:18px 0 16px}
+
+  /* ---- filters ---- */
+  .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+  .seg{display:inline-flex;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:3px;align-self:flex-start}
+  .seg button{
+    font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--muted);
+    background:none;border:0;padding:6px 14px;border-radius:99px;cursor:pointer;transition:.15s
+  }
+  .seg button[aria-pressed="true"]{background:var(--offwhite);color:var(--ink)}
+  .seg button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .tabs::-webkit-scrollbar{height:6px}
+  .tabs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:99px}
+  .tab{
+    flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;
+    font-size:12.5px;font-weight:600;color:var(--offwhite);
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    padding:7px 13px;border-radius:8px 8px 4px 4px;cursor:pointer;white-space:nowrap;transition:.15s
+  }
+  .tab .dot{width:9px;height:9px;border-radius:50%;background:var(--c,#888);flex:0 0 auto}
+  .tab .ct{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .tab[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .tab[aria-pressed="true"] .ct{color:rgba(32,39,31,.6)}
+  .tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  /* overflow affordances for the area row */
+  .tabsWrap{position:relative}
+  .tabs{scroll-behavior:smooth}
+  .edge{position:absolute;top:0;bottom:5px;width:56px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:2}
+  .edge.l{left:0;background:linear-gradient(90deg,var(--desk) 18%,rgba(46,58,49,0))}
+  .edge.r{right:0;background:linear-gradient(270deg,var(--desk) 18%,rgba(46,58,49,0))}
+  .tabsWrap.can-left .edge.l{opacity:1}
+  .tabsWrap.can-right .edge.r{opacity:1}
+  .tscroll{position:absolute;top:calc(50% - 3px);transform:translateY(-50%);z-index:3;
+    width:30px;height:30px;border-radius:50%;display:none;place-items:center;
+    background:var(--paper);color:var(--ink);border:1px solid rgba(0,0,0,.18);
+    cursor:pointer;font-size:17px;line-height:1;box-shadow:0 5px 14px -5px rgba(0,0,0,.6)}
+  .tscroll:hover{filter:brightness(1.05)}
+  .tscroll:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .tscroll.l{left:0}
+  .tscroll.r{right:0}
+  .tabsWrap.can-left .tscroll.l{display:grid}
+  .tabsWrap.can-right .tscroll.r{display:grid}
+  @media (max-width:560px){ .tscroll{display:none !important} }
+  @media (prefers-reduced-motion:reduce){ .tabs{scroll-behavior:auto} .edge{transition:none} }
+
+  /* ---- card scene ---- */
+  .scene{perspective:1800px;margin:4px auto 0;max-width:600px}
+  .card{
+    position:relative;width:100%;height:452px;
+    transform-style:preserve-3d;transition:transform .62s cubic-bezier(.2,.75,.2,1);
+    cursor:pointer;border-radius:14px
+  }
+  .card.flip{transform:rotateY(180deg)}
+  .face{
+    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:14px;overflow:hidden;
+    box-shadow:0 26px 50px -22px rgba(0,0,0,.6),0 2px 0 rgba(255,255,255,.25) inset;
+  }
+  /* file-folder tab */
+  .face::before{
+    content:"";position:absolute;top:-13px;left:30px;width:128px;height:22px;
+    background:var(--c,var(--pine));border-radius:7px 7px 0 0;z-index:0;
+    box-shadow:0 -1px 0 rgba(255,255,255,.18) inset
+  }
+  .front{background:var(--paper);color:var(--ink);
+    background-image:radial-gradient(120% 100% at 80% 0%, rgba(255,255,255,.5), transparent 60%)}
+  .back{background:var(--paper-2);color:var(--ink);transform:rotateY(180deg)}
+
+  .face-inner{position:relative;z-index:1;height:100%;padding:30px 30px 26px;display:flex;flex-direction:column}
+  .areatag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--c,var(--pine));font-weight:500;display:flex;align-items:center;gap:8px}
+  .areatag .pip{width:8px;height:8px;border-radius:50%;background:var(--c,var(--pine))}
+  .status-flag{margin-left:auto;font-size:10px;letter-spacing:.12em;padding:3px 8px;border-radius:99px;font-weight:700}
+  .status-flag.m{background:rgba(215,161,43,.22);color:#876310}
+  .status-flag.r{background:rgba(181,86,47,.18);color:#8a3d1c}
+
+  /* FRONT: the prompt */
+  .prompt{font-family:var(--serif);font-weight:500;font-size:clamp(22px,3.8vw,30px);
+    line-height:1.18;letter-spacing:-.01em;margin:auto 0;color:#2a1f12}
+  .hint{font-size:12px;color:rgba(32,39,31,.5);font-family:var(--mono);letter-spacing:.04em;
+    display:flex;align-items:center;gap:7px}
+  .hint svg{width:14px;height:14px}
+
+  /* BACK: ruled answer */
+  .back .face-inner{overflow-y:auto}
+  .back .face-inner::-webkit-scrollbar{width:7px}
+  .back .face-inner::-webkit-scrollbar-thumb{background:rgba(32,39,31,.22);border-radius:99px}
+  .answer{font-size:15.5px;line-height:1.95;margin:14px 0 0;
+    background-image:repeating-linear-gradient(transparent,transparent 29px,rgba(32,39,31,.14) 30px);
+    padding-bottom:2px}
+  .answer b{font-weight:700}
+  .cite{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;margin:16px 0 4px;
+    font-family:var(--mono);font-size:12px;color:#3a4a3a;
+    border:1px dashed var(--line-strong);border-radius:6px;padding:6px 10px;background:rgba(37,84,60,.06)}
+  .cite .k{color:var(--pine);font-weight:500}
+  .ready{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+  .ready h4{margin:0 0 8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(32,39,31,.55);font-weight:500}
+  .ready ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+  .ready li{font-size:13.5px;line-height:1.4;padding-left:20px;position:relative;color:#33402f}
+  .ready li::before{content:"";position:absolute;left:2px;top:7px;width:9px;height:9px;border-radius:2px;
+    border:1.5px solid var(--pine)}
+
+  /* ---- controls ---- */
+  .controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px auto 0;max-width:600px}
+  .count{font-family:var(--mono);font-size:13px;color:var(--muted);min-width:78px;text-align:center}
+  .nav{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:var(--offwhite);
+    width:42px;height:42px;border-radius:11px;cursor:pointer;font-size:18px;display:grid;place-items:center;transition:.15s}
+  .nav:hover{background:rgba(255,255,255,.13)}
+  .judge{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px auto 0;max-width:600px}
+  .btn{font-family:var(--sans);font-weight:700;font-size:14px;border:0;border-radius:11px;padding:12px 22px;cursor:pointer;transition:.15s;letter-spacing:.01em}
+  .btn.got{background:var(--gold);color:#3a2a05}
+  .btn.got:hover{filter:brightness(1.05)}
+  .btn.rev{background:rgba(181,86,47,.16);color:#f0c3ad;border:1px solid rgba(181,86,47,.5)}
+  .btn.rev:hover{background:rgba(181,86,47,.26)}
+  .btn:focus-visible,.nav:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,.16);font-weight:600}
+
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px auto 0;max-width:600px}
+  .toolbar .left{display:flex;gap:9px;flex-wrap:wrap}
+
+  /* empty state */
+  .empty{max-width:600px;margin:0 auto;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.18);
+    border-radius:14px;padding:46px 28px;text-align:center;color:var(--muted);height:452px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+  .empty .big{font-family:var(--serif);font-size:22px;color:var(--offwhite)}
+
+  footer{max-width:600px;margin:26px auto 0;font-size:12px;line-height:1.6;color:var(--muted);
+    border-top:1px solid rgba(255,255,255,.1);padding-top:14px}
+  footer b{color:var(--offwhite);font-weight:600}
+  .persist{font-family:var(--mono);font-size:10.5px;color:var(--gold);letter-spacing:.04em;margin-top:8px}
+  .credit{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);
+    font-size:12.5px;color:var(--muted);letter-spacing:.01em}
+  .credit a{color:var(--gold);text-decoration:none;font-weight:600;border-bottom:1px solid transparent;transition:.15s}
+  .credit a:hover{border-bottom-color:var(--gold)}
+  .credit a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+  .privacy{margin-top:10px;font-size:11.5px;line-height:1.5;color:rgba(185,194,179,.75)}
+
+  @media (max-width:560px){
+    .card,.empty{height:480px}
+    .face-inner{padding:26px 22px 22px}
+    .brand h1{font-size:30px}
+    .meter{max-width:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .card{transition:none}
+    .bar>i{transition:none}
+  }
+</style>
+
+<div class="wrap">
+  <div class="suitebar"><a href="https://www.cnpsuite.com">‹ CNPSuite</a></div>
+  <header class="mast">
+    <div class="brand">
+      <div class="eyebrow">Readiness Deck</div>
+      <h1>NSLP Management Evaluation</h1>
+      <div class="sub">Drill the items a federal reviewer probes when evaluating your state agency’s administration of the National School Lunch Program. Tap a card to reveal the requirement, the citation, and what to have ready.</div>
+    </div>
+    <div class="meter" aria-label="Readiness progress">
+      <div class="pct"><span>Readiness</span><b id="pctNum">0%</b></div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div class="tally" id="tally">— mastered · — to review · — untouched</div>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <div class="filters">
+    <div class="seg" role="group" aria-label="Filter by status">
+      <button data-status="all" aria-pressed="true">All cards</button>
+      <button data-status="review">To review</button>
+      <button data-status="mastered">Mastered</button>
+    </div>
+    <div class="tabsWrap">
+      <div class="tabs" id="tabs" role="group" aria-label="Filter by area"></div>
+      <div class="edge l" aria-hidden="true"></div>
+      <div class="edge r" aria-hidden="true"></div>
+      <button class="tscroll l" id="tabLeft" aria-label="Scroll areas left">‹</button>
+      <button class="tscroll r" id="tabRight" aria-label="Scroll areas right">›</button>
+    </div>
+  </div>
+
+  <div class="scene" id="scene">
+    <div class="card" id="card">
+      <div class="face front">
+        <div class="face-inner">
+          <div class="areatag"><span class="pip"></span><span id="fArea">Area</span>
+            <span class="status-flag" id="fFlag" hidden></span></div>
+          <div class="prompt" id="fPrompt">—</div>
+          <div class="hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+            Tap to reveal
+          </div>
+        </div>
+      </div>
+      <div class="face back">
+        <div class="face-inner">
+          <div class="areatag"><span class="pip"></span><span id="bArea">Area</span></div>
+          <div class="answer" id="bAnswer">—</div>
+          <div class="cite"><span class="k">CITE</span><span id="bCite">—</span></div>
+          <div class="ready">
+            <h4>Have ready for the reviewer</h4>
+            <ul id="bReady"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav" id="prev" aria-label="Previous card">‹</button>
+    <span class="count" id="count">0 / 0</span>
+    <button class="nav" id="next" aria-label="Next card">›</button>
+  </div>
+
+  <div class="judge">
+    <button class="btn rev" id="reviewBtn">Review again</button>
+    <button class="btn got" id="gotBtn">Got it</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="left">
+      <button class="btn ghost" id="flipBtn">Flip</button>
+      <button class="btn ghost" id="shuffleBtn">Shuffle</button>
+    </div>
+    <button class="btn ghost" id="resetBtn">Reset progress</button>
+  </div>
+
+  <footer>
+    <b>About this deck.</b> Cards are drafted from the standard NSLP Management Evaluation areas and current federal rules, reflecting the 2023 Child Nutrition Program Integrity and CEP rules. As of June 1, 2026, FNS is the Food and Nutrition Administration (FNA), so newer source documents may carry the new name. This is a study aid — confirm every item against your FNA regional office’s ME guidance, the current eCFR, and your state’s own procedures before relying on it in a review.
+    <div class="persist" id="persistNote"></div>
+    <div class="credit">Part of <a href="https://www.cnpsuite.com">CNPSuite</a> · a study tool by <a href="https://www.lsdigitalsolutions.com" target="_blank" rel="noopener">LS Digital Solutions</a></div>
+    <div class="privacy">Your progress is saved on your own device. This tool sets no cookies and uses no tracking, analytics, or personal-data collection.</div>
+  </footer>
+</div>
+
+<script>
+/* ---------------- area metadata ---------------- */
+const AREAS = {
+  cbi:   {label:"Certification & Benefit Issuance", color:"#2e7d5b"},
+  verif: {label:"Verification",                     color:"#1f7a82"},
+  claim: {label:"Meal Counting & Claiming",         color:"#3e6aa8"},
+  pattern:{label:"Meal Pattern & Nutrition",        color:"#7c8a2a"},
+  resource:{label:"Resource Management",            color:"#c08a1a"},
+  procure:{label:"Procurement",                     color:"#b25a2a"},
+  civil: {label:"Civil Rights",                     color:"#884a86"},
+  prof:  {label:"Professional Standards",           color:"#9a3550"},
+  safety:{label:"Food Safety & Wellness",           color:"#3f7a48"},
+  admin: {label:"State Agency Administration",      color:"#4a5a66"},
+  prov:  {label:"Special Provisions",               color:"#8a6a2e"}
+};
+
+/* ---------------- card content ---------------- */
+const CARDS = [
+  // Certification & Benefit Issuance
+  {id:"cbi1",area:"cbi",front:"Income thresholds for free vs. reduced-price meals?",
+   answer:"<b>Free:</b> household income at or below <b>130%</b> of the Federal Poverty Guidelines. <b>Reduced-price:</b> above 130% up to <b>185%</b>. Above 185% pays the full (paid) price. Thresholds update each year in the Income Eligibility Guidelines.",
+   cite:"7 CFR 245.3; annual IEGs",ready:["Current-year IEG table","Sample of approved and denied applications","Determining-official records"]},
+  {id:"cbi2",area:"cbi",front:"What is direct certification, and which programs confer categorical eligibility?",
+   answer:"Certifying a child for free meals through a <b>data match</b> instead of an application. Categorical (free) eligibility comes from <b>SNAP, TANF, and FDPIR</b>; also directly certified are foster, homeless, migrant, runaway, and Head Start children. Benefits extend to all students in the same household.",
+   cite:"7 CFR 245.6",ready:["DC match records and match frequency","Extension-of-benefits documentation","Source-list agreements"]},
+  {id:"cbi3",area:"cbi",front:"What state-level direct certification result triggers a continuous improvement plan?",
+   answer:"If the state directly certifies <b>fewer than 95%</b> of children in SNAP households, it must submit and carry out a <b>continuous improvement plan</b> to raise the rate.",
+   cite:"7 CFR 245.6; HHFKA",ready:["Annual DC performance rate","CIP if below the 95% benchmark"]},
+  {id:"cbi4",area:"cbi",front:"How long does a free/reduced eligibility determination stay valid?",
+   answer:"A determination is valid for the <b>entire school year</b> it is made. At the start of a new year, prior-year eligibility carries over for up to <b>30 operating days</b> until a new determination is made.",
+   cite:"7 CFR 245.6(c)",ready:["Carryover tracking","Current-year rosters and approvals"]},
+
+  // Verification
+  {id:"ver1",area:"verif",front:"What is the annual verification completion deadline?",
+   answer:"<b>November 15</b> each school year. The LEA verifies a sample of approved applications and reports results to the state agency by the established date.",
+   cite:"7 CFR 245.6a",ready:["Verification Collection Report","Notice-to-household and response records"]},
+  {id:"ver2",area:"verif",front:"What is the standard verification sample size and selection basis?",
+   answer:"The <b>lesser of 3% or 3,000</b> approved household applications, drawn from <b>error-prone</b> applications (income within <b>$100/month or $1,200/year</b> of an eligibility limit), as of <b>October 1</b>.",
+   cite:"7 CFR 245.6a(c)",ready:["Sample-size calculation","Error-prone selection list","Confirmation-review records"]},
+  {id:"ver3",area:"verif",front:"What is direct verification?",
+   answer:"Before contacting households, the LEA may confirm eligibility against <b>SNAP/TANF/Medicaid</b> records (where the state is approved). It reduces household burden by removing already-confirmed applications from the sample.",
+   cite:"7 CFR 245.6a(b)",ready:["Direct-verification source records","Reduced-sample documentation"]},
+
+  // Meal Counting & Claiming
+  {id:"clm1",area:"claim",front:"Where must reimbursable meals be counted?",
+   answer:"At the <b>point of service</b> — the count must correctly identify each reimbursable meal by category (free / reduced / paid) at the moment it is served, not reconstructed later.",
+   cite:"7 CFR 210.7, 210.9",ready:["POS counting-system description","Roster/back-up procedures"]},
+  {id:"clm2",area:"claim",front:"What is the edit-check requirement?",
+   answer:"Daily category counts are compared against the number of children <b>eligible × an attendance factor</b>; any count exceeding that figure must be investigated and reconciled before the claim is filed.",
+   cite:"7 CFR 210.8(a)",ready:["Edit-check worksheets","Reconciliation of flagged days"]},
+  {id:"clm3",area:"claim",front:"What is the 60-day rule for claims?",
+   answer:"Original and upward-adjusted claims are generally <b>not paid if received more than 60 days</b> after the last day of the claim month, absent a state-approved exception.",
+   cite:"7 CFR 210.8(b)–(c)",ready:["Claim submission logs","Any 60-day exception requests"]},
+  {id:"clm4",area:"claim",front:"What is the state agency’s claim-validation duty?",
+   answer:"The state must <b>review and validate</b> SFA claims and edit checks and reconcile them, ensuring meals claimed are supported by point-of-service counts and current eligibility.",
+   cite:"7 CFR 210.8, 210.18",ready:["State claim-review procedures","Validation results and any recoveries"]},
+
+  // Meal Pattern & Nutrition
+  {id:"pat1",area:"pattern",front:"What components make up the NSLP lunch meal pattern?",
+   answer:"Five components: <b>fruits, vegetables</b> (with weekly subgroups), <b>grains</b> (whole-grain-rich requirement), <b>meats/meat alternates</b>, and <b>fluid milk</b> — in the quantities set for each age/grade group.",
+   cite:"7 CFR 210.10",ready:["Daily production records","Menu certification documentation"]},
+  {id:"pat2",area:"pattern",front:"Under Offer vs. Serve at lunch, what must a student take?",
+   answer:"At least <b>three of the five components</b>, and at least one selection must be a <b>½ cup of fruit or vegetable</b>.",
+   cite:"7 CFR 210.10(e)",ready:["OVS signage at the line","Cashier/server training records"]},
+  {id:"pat3",area:"pattern",front:"What dietary specifications must menus meet?",
+   answer:"Weekly averages for <b>calories</b> (by age/grade), <b>saturated fat</b>, and <b>sodium</b>, plus <b>zero grams added trans fat</b> — averaged over the school week, not per meal.",
+   cite:"7 CFR 210.10(f)",ready:["Nutrient analysis or menu certification","Product nutrition documentation"]},
+  {id:"pat4",area:"pattern",front:"What documentation proves meal-pattern compliance?",
+   answer:"<b>Production records</b> showing foods offered, portion sizes, and quantities for each serving day, supported by standardized recipes and <b>CN labels or product formulation statements</b>.",
+   cite:"7 CFR 210.10",ready:["Production records","Standardized recipes","CN labels / PFS"]},
+
+  // Resource Management
+  {id:"res1",area:"resource",front:"What is the nonprofit school food service account requirement?",
+   answer:"All revenue from the food service operation must be used <b>solely to operate or improve the food service</b>, for the benefit of children — not diverted to other purposes.",
+   cite:"7 CFR 210.14(a)",ready:["Food service financial statements","Revenue and expenditure ledgers"]},
+  {id:"res2",area:"resource",front:"What is the limit on net cash resources?",
+   answer:"Net cash resources may not exceed <b>three months’</b> average operating expenditures. If exceeded, the state may require a <b>spend-down plan</b>.",
+   cite:"7 CFR 210.9(b), 210.19(a)",ready:["Net-cash-resource calculation","Spend-down plan if over limit"]},
+  {id:"res3",area:"resource",front:"What is Paid Lunch Equity (PLE)?",
+   answer:"SFAs must show paid-lunch revenue (or non-federal contributions) is adequate by comparing the average paid price to the <b>free-minus-paid reimbursement gap</b>, using the PLE tool — subject to any current-year waiver.",
+   cite:"7 CFR 210.14(e)",ready:["PLE tool calculation","Board-approved pricing records"]},
+  {id:"res4",area:"resource",front:"What is required for revenue from nonprogram foods?",
+   answer:"Revenue from <b>nonprogram foods</b> (à la carte, adult meals, vended items) must at least be proportional to their food cost: nonprogram revenue ÷ total revenue ≥ nonprogram food cost ÷ total food cost.",
+   cite:"7 CFR 210.14(f)",ready:["Nonprogram food revenue tool","Cost and revenue data for nonprogram items"]},
+  {id:"res5",area:"resource",front:"What must be demonstrated for indirect costs?",
+   answer:"Only <b>allowable</b> indirect costs charged to the food service account, supported by an <b>approved indirect cost rate</b> and consistent treatment of direct vs. indirect costs.",
+   cite:"2 CFR 200.414; 7 CFR 210.14",ready:["Approved indirect cost rate agreement","Cost-allocation records"]},
+
+  // Procurement
+  {id:"pro1",area:"procure",front:"Which procurement standards apply to NSLP purchases?",
+   answer:"The federal uniform standards in <b>2 CFR 200.317–200.327</b> plus NSLP-specific rules — applying the <b>most restrictive</b> of federal, state, or local requirements.",
+   cite:"7 CFR 210.21; 2 CFR 200",ready:["Written procurement procedures","Code of conduct / conflict-of-interest policy"]},
+  {id:"pro2",area:"procure",front:"What are the federal micro-purchase and simplified-acquisition thresholds?",
+   answer:"<b>Micro-purchase:</b> up to <b>$10,000</b> (no competitive quotes if price is reasonable). <b>Simplified acquisition (small purchase):</b> up to <b>$250,000</b> with informal quotes; above that requires formal bidding. State/local limits may be lower.",
+   cite:"2 CFR 200.1, 200.320",ready:["Quote and bid documentation by method","Procurement thresholds in policy"]},
+  {id:"pro3",area:"procure",front:"Geographic preference vs. Buy American — what’s the difference?",
+   answer:"<b>Geographic preference</b> is an <b>optional</b> scoring advantage for local unprocessed foods. <b>Buy American</b> is a <b>mandatory</b> requirement to buy domestic commodities and products to the maximum extent practicable.",
+   cite:"7 CFR 210.21(d), (g)",ready:["Buy American monitoring","Documentation for any non-domestic exception"]},
+  {id:"pro4",area:"procure",front:"Key oversight points for a Food Service Management Company (FSMC) contract?",
+   answer:"<b>Competitively procured</b>, uses the state-prototype contract, returns all <b>credits/discounts/rebates</b> to the nonprofit account, and observes term limits (initial year plus up to four renewals).",
+   cite:"7 CFR 210.16; 2 CFR 200",ready:["FSMC contract and amendments","Cost reconciliation and rebate documentation"]},
+
+  // Civil Rights
+  {id:"civ1",area:"civil",front:"What are the core civil rights compliance elements for NSLP?",
+   answer:"Public notification, the <b>“And Justice for All”</b> poster displayed, the <b>current nondiscrimination statement</b> on materials, complaint procedures, reasonable accommodations, and meaningful language assistance.",
+   cite:"FNS Instruction 113-1; Title VI",ready:["Poster placement","Nondiscrimination statement on documents","Public-notice records"]},
+  {id:"civ2",area:"civil",front:"How must civil rights complaints be handled?",
+   answer:"Accept and forward <b>all</b> discrimination complaints, verbal or written; the USDA Program Discrimination Complaint Form is <b>AD-3027</b>; keep a complaint log <b>even if none</b> are received.",
+   cite:"FNS Instruction 113-1",ready:["Complaint log","AD-3027 availability","Referral procedure"]},
+  {id:"civ3",area:"civil",front:"What is the current expectation for race/ethnicity data collection?",
+   answer:"Collect participant racial/ethnic data by approved methods. <b>Visual identification / observation is no longer allowable</b> as a collection method.",
+   cite:"FNS Instruction 113-1 (updated)",ready:["Data-collection method statement","Aggregated participation data"]},
+
+  // Professional Standards
+  {id:"prf1",area:"prof",front:"How many annual training hours are required by role?",
+   answer:"<b>Directors 12</b>, <b>managers 10</b>, <b>staff (≥20 hrs/wk) 6</b>, <b>part-time (&lt;20 hrs/wk) 4</b> — each school year. Excess hours may be carried across two school years.",
+   cite:"7 CFR 210.30(c)–(f)",ready:["Training tracking records","Certificates / agendas / sign-in sheets"]},
+  {id:"prf2",area:"prof",front:"What is the food-safety training requirement for directors?",
+   answer:"New directors complete at least <b>8 hours of food-safety training</b> in their first year; <b>all</b> directors complete 8 hours of food-safety training <b>every 5 years</b>.",
+   cite:"7 CFR 210.30(b)",ready:["Food-safety training records by director"]},
+  {id:"prf3",area:"prof",front:"Who must meet director hiring standards, and from when?",
+   answer:"SFA directors <b>hired on or after July 1, 2015</b> must meet minimum education/experience standards that scale with LEA enrollment; directors hired earlier are <b>grandfathered</b>.",
+   cite:"7 CFR 210.30(b)(1)",ready:["New-director hiring documentation","Degree/experience verification"]},
+
+  // Food Safety & Wellness
+  {id:"saf1",area:"safety",front:"What is the food-safety inspection requirement?",
+   answer:"Each school obtains <b>two</b> health-department food-safety inspections per school year (or documents the requests made) and <b>posts</b> the most recent report.",
+   cite:"7 CFR 210.13(b)",ready:["Inspection reports","Posting at the site","Request records if fewer than two"]},
+  {id:"saf2",area:"safety",front:"What food-safety program must an SFA maintain?",
+   answer:"A <b>written food-safety program based on HACCP principles</b> covering every site where food is stored, prepared, or served.",
+   cite:"7 CFR 210.13(c)",ready:["Written HACCP-based plan","Monitoring/temperature logs"]},
+  {id:"saf3",area:"safety",front:"What must a Local School Wellness Policy include?",
+   answer:"Goals for nutrition promotion/education, physical activity, and wellness; nutrition standards for all foods sold/provided; public involvement; and a <b>triennial assessment</b> with public updates.",
+   cite:"7 CFR 210.31",ready:["Adopted policy","Triennial assessment","Public-notification records"]},
+  {id:"saf4",area:"safety",front:"What do Smart Snacks (competitive food) standards cover?",
+   answer:"<b>All foods and beverages sold to students on campus during the school day</b> outside the reimbursable meal must meet the competitive-food nutrition standards.",
+   cite:"7 CFR 210.11",ready:["Product compliance documentation","Fundraiser-exemption tracking"]},
+
+  // State Agency Administration
+  {id:"adm1",area:"admin",front:"How often must the state review each SFA?",
+   answer:"At least once every <b>three years</b> through the Administrative Review (a longer cycle only under an approved waiver), covering the established performance standards.",
+   cite:"7 CFR 210.18(c)",ready:["AR schedule and completed reviews","Any approved cycle waiver"]},
+  {id:"adm2",area:"admin",front:"What are the two performance standards assessed in an Administrative Review?",
+   answer:"<b>PS 1 — Access to reimbursement:</b> certification & benefit issuance and meal counting & claiming. <b>PS 2 — Meal pattern:</b> meal components/quantities and dietary specifications.",
+   cite:"7 CFR 210.18(g)–(h)",ready:["AR findings sorted by performance standard"]},
+  {id:"adm3",area:"admin",front:"What is fiscal action, and when is it required?",
+   answer:"Recovery of <b>overclaimed federal funds</b> — required for certification, counting/claiming, and meal-pattern errors. The state may <b>disregard</b> meal-pattern fiscal action in limited first-time, good-faith situations.",
+   cite:"7 CFR 210.18(l), 210.19(c)",ready:["Fiscal-action calculations","Corrective-action records"]},
+  {id:"adm4",area:"admin",front:"What must the state require when a review finds noncompliance?",
+   answer:"A <b>corrective action plan</b> with timeframes, <b>technical assistance</b>, and <b>follow-up</b> to verify the SFA actually fixed the deficiency.",
+   cite:"7 CFR 210.18(m)–(n)",ready:["CAP documentation","Follow-up verification evidence"]},
+  {id:"adm5",area:"admin",front:"What is the role of the state–SFA written agreement?",
+   answer:"A <b>permanent (continuing) written agreement</b> is the condition of participation; it binds the SFA to all program requirements and is the basis for the state’s oversight authority.",
+   cite:"7 CFR 210.9(b)",ready:["Current signed agreements","Policy statements on file"]},
+  {id:"adm6",area:"admin",front:"What are State Administrative Expense (SAE) funds for?",
+   answer:"Federal SAE funds support <b>state administration</b> — staffing, monitoring, training, and technical assistance — and must be spent on allowable administrative costs, with maintenance-of-effort/matching where applicable.",
+   cite:"7 CFR 235",ready:["SAE budget and expenditures","Maintenance-of-effort documentation"]},
+
+  // Special Provisions
+  {id:"prv1",area:"prov",front:"What is the minimum ISP and the multiplier for CEP?",
+   answer:"Minimum identified student percentage is <b>25%</b> (lowered from 40% in 2023). Free claiming percentage = <b>ISP × 1.6</b>; the rest is reimbursed at the paid rate. <b>15%–24.99%</b> is “near-eligible.”",
+   cite:"7 CFR 245.9(f)",ready:["ISP calculation as of April 1","CEP election records"]},
+  {id:"prv2",area:"prov",front:"What CEP notification and publication deadlines apply to the state?",
+   answer:"By <b>April 15</b> the state notifies LEAs of district-wide eligibility; by <b>May 1</b> it <b>publishes</b> lists of eligible and near-eligible LEAs/schools on its website.",
+   cite:"7 CFR 245.9(f)(6)–(7)",ready:["Notification letters","Published eligibility lists with dates"]},
+  {id:"prv3",area:"prov",front:"How long is a CEP cycle, and when is ISP recalculated?",
+   answer:"A <b>four-year</b> cycle. ISP may be locked for up to four years, with <b>optional annual recalculation</b> using the latest April 1 data and <b>required</b> recalculation on certain mid-cycle events.",
+   cite:"7 CFR 245.9(f)",ready:["Cycle start dates","Recalculation records"]},
+  {id:"prv4",area:"prov",front:"How does Provision 2 reduce administrative work?",
+   answer:"It sets claiming percentages in a <b>base year</b>, then serves all meals at no charge and claims on those percentages for the next <b>three years</b> (extendable) — ending annual applications and daily category counts in non-base years.",
+   cite:"7 CFR 245.9(b)–(d)",ready:["Base-year records","Extension approvals"]}
+];
+
+/* ---------------- progress storage ----------------
+   Backend is chosen at load, in priority order:
+     1. localStorage  — persists on a deployed site (Vercel, your domain) and most browsers
+     2. window.storage — persists inside the claude.ai preview, where localStorage is blocked
+     3. in-memory      — last-resort fallback; lasts for the session only
+*/
+const KEY="nslp_me_progress";
+const mem={};
+let progress={};            // {id: "mastered"|"review"}
+let backend="memory";
+
+function localStorageWorks(){
+  try{ const k="__nslp_test__"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }
+  catch(e){ return false; }
+}
+const hasCloud=(typeof window!=="undefined" && window.storage && typeof window.storage.get==="function");
+
+async function loadProgress(){
+  backend = localStorageWorks() ? "local" : (hasCloud ? "cloud" : "memory");
+  try{
+    if(backend==="local"){ const v=localStorage.getItem(KEY); progress=v?JSON.parse(v):{}; }
+    else if(backend==="cloud"){ const r=await window.storage.get(KEY); progress=r&&r.value?JSON.parse(r.value):{}; }
+    else{ progress=mem[KEY]?JSON.parse(mem[KEY]):{}; }
+  }catch(e){ progress={}; }
+}
+async function saveProgress(){
+  const s=JSON.stringify(progress);
+  try{
+    if(backend==="local"){ localStorage.setItem(KEY,s); }
+    else if(backend==="cloud"){ await window.storage.set(KEY,s); }
+    else{ mem[KEY]=s; }
+  }catch(e){}
+}
+
+/* ---------------- state ---------------- */
+let statusFilter="all";
+let areaFilter="all";
+let deck=[];                // active card indices into CARDS
+let pos=0;
+
+/* ---------------- elements ---------------- */
+const $=id=>document.getElementById(id);
+const cardEl=$("card"), sceneEl=$("scene");
+
+/* ---------------- build area tabs ---------------- */
+function buildTabs(){
+  const tabs=$("tabs");
+  const mk=(key,label,color,count)=>{
+    const b=document.createElement("button");
+    b.className="tab"; b.dataset.area=key; b.setAttribute("aria-pressed", key===areaFilter);
+    if(color) b.style.setProperty("--c",color);
+    b.innerHTML=(color?`<span class="dot"></span>`:"")+`${label} <span class="ct">${count}</span>`;
+    b.onclick=()=>{ areaFilter=key; rebuild(); };
+    return b;
+  };
+  tabs.innerHTML="";
+  tabs.appendChild(mk("all","All",null,CARDS.length));
+  for(const k in AREAS){
+    const c=CARDS.filter(x=>x.area===k).length;
+    tabs.appendChild(mk(k,AREAS[k].label,AREAS[k].color,c));
+  }
+  updateTabScroll();
+}
+
+/* ---------------- area-row overflow affordances ---------------- */
+function updateTabScroll(){
+  const t=$("tabs"), w=document.querySelector(".tabsWrap");
+  if(!t||!w)return;
+  const max=t.scrollWidth - t.clientWidth - 1;
+  w.classList.toggle("can-left", t.scrollLeft>2);
+  w.classList.toggle("can-right", t.scrollLeft<max);
+}
+function nudgeTabs(dir){
+  const t=$("tabs");
+  const sb=matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth";
+  t.scrollBy({left:dir*Math.max(180,t.clientWidth*0.7),behavior:sb});
+}
+
+/* ---------------- deck assembly ---------------- */
+function passesStatus(card){
+  const st=progress[card.id];
+  if(statusFilter==="all") return true;
+  if(statusFilter==="mastered") return st==="mastered";
+  if(statusFilter==="review") return st!=="mastered"; // untouched + review
+  return true;
+}
+function rebuild(keepPos){
+  deck=CARDS.map((c,i)=>i).filter(i=> (areaFilter==="all"||CARDS[i].area===areaFilter) && passesStatus(CARDS[i]) );
+  pos = keepPos ? Math.min(pos,Math.max(0,deck.length-1)) : 0;
+  syncFilterButtons();
+  render();
+  updateMeter();
+}
+function syncFilterButtons(){
+  document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.status===statusFilter));
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-pressed", b.dataset.area===areaFilter));
+}
+
+/* ---------------- render current card ---------------- */
+function render(){
+  cardEl.classList.remove("flip");
+  if(deck.length===0){ renderEmpty(); return; }
+  if(sceneEl.querySelector(".empty")) restoreCard();
+  const c=CARDS[deck[pos]], a=AREAS[c.area];
+  cardEl.style.setProperty("--c",a.color);
+  $("fArea").textContent=a.label;
+  $("bArea").textContent=a.label;
+  $("fPrompt").textContent=c.front;
+  $("bAnswer").innerHTML=c.answer;
+  $("bCite").textContent=c.cite;
+  $("bReady").innerHTML=c.ready.map(r=>`<li>${r}</li>`).join("");
+  // status flag on front
+  const st=progress[c.id], flag=$("fFlag");
+  if(st==="mastered"){ flag.hidden=false; flag.className="status-flag m"; flag.textContent="MASTERED"; }
+  else if(st==="review"){ flag.hidden=false; flag.className="status-flag r"; flag.textContent="REVIEW"; }
+  else { flag.hidden=true; }
+  $("count").textContent=`${pos+1} / ${deck.length}`;
+}
+let savedCardHTML=null;
+function renderEmpty(){
+  if(!savedCardHTML) savedCardHTML=sceneEl.innerHTML;
+  const msg = statusFilter==="mastered"
+    ? `Nothing mastered in this stack yet — mark cards <b>Got it</b> to fill it.`
+    : `This stack is clear. Switch filters to keep studying.`;
+  sceneEl.innerHTML=`<div class="empty"><div class="big">No cards here</div><div>${msg}</div></div>`;
+  $("count").textContent=`0 / 0`;
+}
+function restoreCard(){ sceneEl.innerHTML=savedCardHTML; bindCard(); }
+
+/* ---------------- meter ---------------- */
+function updateMeter(){
+  const total=CARDS.length;
+  let m=0,r=0;
+  CARDS.forEach(c=>{ if(progress[c.id]==="mastered")m++; else if(progress[c.id]==="review")r++; });
+  const untouched=total-m-r;
+  const pct=Math.round(m/total*100);
+  $("pctNum").textContent=pct+"%";
+  $("barFill").style.width=pct+"%";
+  $("tally").textContent=`${m} mastered · ${r} to review · ${untouched} untouched`;
+}
+
+/* ---------------- actions ---------------- */
+function flip(){ if(deck.length) cardEl.classList.toggle("flip"); }
+function go(d){ if(!deck.length)return; pos=(pos+d+deck.length)%deck.length; render(); }
+async function mark(state){
+  if(!deck.length)return;
+  const c=CARDS[deck[pos]];
+  progress[c.id]=state;
+  await saveProgress();
+  updateMeter();
+  // if filtering by a status this card no longer matches, the deck shrinks; advance sensibly
+  if(statusFilter!=="all" && !passesStatus(c)){ rebuild(true); }
+  else { go(1); }
+}
+function shuffle(){
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+  pos=0; render();
+}
+async function resetAll(){
+  if(!confirm("Reset all progress? This clears every mastered and review mark."))return;
+  progress={}; await saveProgress(); rebuild(); 
+}
+
+/* ---------------- bindings ---------------- */
+function bindCard(){ document.getElementById("card").addEventListener("click",flip); }
+document.getElementById("card").addEventListener("click",flip);
+$("prev").onclick=()=>go(-1);
+$("next").onclick=()=>go(1);
+$("flipBtn").onclick=flip;
+$("shuffleBtn").onclick=shuffle;
+$("gotBtn").onclick=()=>mark("mastered");
+$("reviewBtn").onclick=()=>mark("review");
+$("resetBtn").onclick=resetAll;
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{statusFilter=b.dataset.status;rebuild();});
+$("tabLeft").onclick=()=>nudgeTabs(-1);
+$("tabRight").onclick=()=>nudgeTabs(1);
+$("tabs").addEventListener("scroll",updateTabScroll,{passive:true});
+window.addEventListener("resize",updateTabScroll);
+window.addEventListener("load",updateTabScroll);
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(updateTabScroll);}
+
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="BUTTON"&&e.key==="Enter")return;
+  if(e.key==="ArrowLeft")go(-1);
+  else if(e.key==="ArrowRight")go(1);
+  else if(e.key===" "){e.preventDefault();flip();}
+  else if(e.key.toLowerCase()==="g")mark("mastered");
+  else if(e.key.toLowerCase()==="r")mark("review");
+});
+
+/* ---------------- init ---------------- */
+(async function(){
+  await loadProgress();
+  buildTabs();
+  $("persistNote").textContent = (backend==="memory")
+    ? "Note: progress is kept for this session only here."
+    : "✓ Progress saves automatically and will be here next time you open the deck.";
+  rebuild();
+})();
+</script>
 
