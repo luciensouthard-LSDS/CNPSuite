@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Readiness Deck — SFSP Management Evaluation</title>
+<meta name="description" content="Study cards and an evidence checklist for state agencies preparing for a SFSP Management Evaluation. Part of CNPSuite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a2240;
+    --navy-mid:#0d2d52;
+    --teal:#00a6c8;
+    --teal-pale:#e6f7fb;
+    --teal-mid:#b3e3ef;
+    --accent:#bd8d29;
+    --accent-pale:#fbf3e4;
+    --accent-mid:#e3c583;
+    --accent-dark:#8c6a1f;
+    --off-white:#f5f8fa;
+    --border:#d6e4ec;
+    --text-mid:#3d5a73;
+    --text-lt:#6b8fa8;
+    --gold:#f0a500;
+    --review:#94a7bb;
+    --review-pale:#eef2f5;
+    --review-dark:#4a6178;
+    --white:#fff;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--off-white);
+    color:var(--navy);
+    font-family:'Public Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Newsreader',serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;}
+
+  /* header */
+  header{
+    background:var(--navy);
+    color:var(--white);
+    position:sticky;top:0;z-index:20;
+    border-bottom:3px solid var(--accent);
+  }
+  .header-inner{
+    max-width:920px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .back-link{
+    display:inline-flex;align-items:center;gap:7px;
+    text-decoration:none;transition:opacity .15s;
+  }
+  .back-link:hover{opacity:.82;}
+  .brand-icon{width:19px;height:19px;flex-shrink:0;}
+  .back-link .wordmark{
+    font-family:'Public Sans',sans-serif;font-weight:700;font-size:.92rem;
+    letter-spacing:.005em;color:var(--white);
+  }
+  .brand-group{display:flex;align-items:center;}
+  .program-switch{
+    margin-left:10px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.04em;
+  }
+  .program-switch a{color:rgba(255,255,255,.55);text-decoration:none;transition:.15s;}
+  .program-switch a:hover{color:#fff;}
+  .program-switch .sep{color:rgba(255,255,255,.28);margin:0 4px;}
+  .brand{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;
+    color:var(--accent-mid);text-transform:uppercase;
+  }
+  .program-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+    color:#0a2240;background:var(--accent);border-radius:5px;
+    padding:3px 8px;margin-left:10px;font-weight:600;
+  }
+
+  main{max-width:720px;margin:0 auto;padding:32px 20px 80px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 6px;
+  }
+  .eyebrow .sec{color:var(--accent);margin-right:4px;}
+  .title-row{display:flex;align-items:center;gap:12px;}
+  .title-block{
+    width:28px;height:28px;border:3px solid var(--accent);border-radius:6px;
+    flex-shrink:0;
+  }
+  h1.title{
+    font-size:2rem;font-weight:600;margin:0 0 6px;color:var(--navy);
+    line-height:1.15;
+  }
+  .subtitle{color:var(--text-mid);font-size:.98rem;line-height:1.55;margin:0 0 24px;max-width:56ch;}
+
+  /* progress */
+  .progress-wrap{margin-bottom:22px;}
+  .progress-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;}
+  .progress-label{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--text-lt);letter-spacing:.06em;text-transform:uppercase;}
+  .progress-pct{font-family:'Newsreader',serif;font-size:1.4rem;font-weight:600;color:var(--navy);}
+  .progress-bar{
+    height:8px;border-radius:5px;background:var(--border);overflow:hidden;display:flex;
+  }
+  .progress-bar .seg-mastered{background:var(--accent);height:100%;}
+  .progress-bar .seg-review{background:var(--review);height:100%;}
+  .progress-legend{display:flex;gap:16px;margin-top:8px;font-size:.78rem;color:var(--text-mid);}
+  .completion-banner{
+    margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    color:var(--accent-dark);background:var(--accent-pale);border:1px solid var(--accent-mid);
+    border-radius:8px;padding:9px 13px;display:flex;align-items:center;gap:6px;
+    animation:pop-in .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .completion-banner[hidden]{display:none;}
+  @keyframes pop-in{from{opacity:0;transform:translateY(-4px) scale(.98);}to{opacity:1;transform:none;}}
+  .legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .dot-mastered{background:var(--accent);}
+  .dot-review{background:var(--review);}
+  .dot-untouched{background:var(--border);}
+
+  /* view toggle */
+  .view-toggle{
+    display:flex;gap:0;margin-bottom:22px;border:1px solid var(--border);
+    border-radius:10px;overflow:hidden;width:fit-content;background:var(--white);
+  }
+  .view-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.03em;
+    padding:10px 18px;border:none;background:transparent;color:var(--text-mid);
+    cursor:pointer;transition:.15s;
+  }
+  .view-btn.active{background:var(--navy);color:#fff;}
+  .view-btn:not(.active):hover{color:var(--navy);}
+
+  /* filter pills */
+  .filters{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+  .pill{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.03em;
+    padding:7px 14px;border-radius:20px;border:1px solid var(--border);
+    background:var(--white);color:var(--text-mid);cursor:pointer;transition:.15s;
+  }
+  .pill:hover{border-color:var(--accent);color:var(--navy);}
+  .pill.active{background:var(--navy);border-color:var(--navy);color:var(--white);}
+
+  /* card stage */
+  .stage{position:relative;margin-bottom:18px;}
+  .card-count{
+    text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    color:var(--text-lt);margin-bottom:10px;
+  }
+  .card-frame{perspective:1600px;position:relative;transition:transform .3s ease;}
+  .card-frame:hover{transform:translateY(-2px);}
+  .ghost-card{
+    position:absolute;border-radius:16px;background:var(--white);
+    border:1px solid var(--border);z-index:0;pointer-events:none;
+  }
+  .ghost-card.g1{top:9px;left:9px;right:-9px;bottom:-9px;opacity:.75;
+    box-shadow:0 10px 20px -12px rgba(10,34,64,.12);}
+  .ghost-card.g2{top:18px;left:18px;right:-18px;bottom:-18px;opacity:.45;
+    box-shadow:0 14px 24px -14px rgba(10,34,64,.10);}
+  .card{
+    position:relative;min-height:340px;border-radius:16px;cursor:pointer;
+    transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1);
+    z-index:2;
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;
+    padding:28px 26px;display:flex;flex-direction:column;
+    border:1px solid var(--border);
+    transition:box-shadow .2s ease;
+  }
+  .card-frame:hover .face-front{
+    box-shadow:0 2px 6px rgba(10,34,64,.08),0 16px 32px -8px rgba(10,34,64,.14);
+  }
+  .face-front{
+    background:var(--white);
+    box-shadow:0 1px 3px rgba(10,34,64,.06),0 8px 24px rgba(10,34,64,.05);
+  }
+  .face-back{
+    background:var(--navy);color:var(--white);
+    transform:rotateY(180deg);
+    border-color:var(--navy-mid);
+  }
+  .area-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:4px;
+  }
+  .face-back .area-tag{color:var(--accent-mid);}
+  .cite-tag{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.04em;
+    color:var(--text-mid);margin-bottom:16px;
+    border:1px dashed var(--border);border-radius:6px;
+    padding:5px 10px;
+  }
+  .cite-tag .cite-k{color:var(--accent);font-weight:600;letter-spacing:.1em;}
+  .face-back .cite-tag{color:var(--accent-mid);opacity:.9;border-color:rgba(255,255,255,.25);}
+  .face-back .cite-tag .cite-k{color:var(--accent-mid);}
+  .prompt-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-lt);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;
+  }
+  .prompt{
+    font-family:'Newsreader',serif;font-size:1.42rem;line-height:1.32;color:var(--navy);letter-spacing:-.01em;
+    flex:1;
+  }
+  .tap-hint{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-lt);
+    text-align:right;margin-top:12px;
+  }
+  .answer{
+    font-size:.98rem;line-height:1.55;margin:0 0 16px;
+  }
+  .ready-box{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    border-radius:10px;padding:14px 16px;margin-top:auto;
+  }
+  .ready-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--review-dark);margin-bottom:6px;
+  }
+  .ready-text{font-size:.88rem;line-height:1.5;color:var(--accent-pale);}
+  .ready-text ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;}
+  .ready-text li{
+    font-size:.88rem;line-height:1.45;color:var(--accent-pale);
+    padding-left:18px;position:relative;
+  }
+  .ready-text li::before{
+    content:"";position:absolute;left:0;top:5px;width:8px;height:8px;
+    border:1.5px solid var(--accent-mid);border-radius:2px;
+  }
+
+  /* nav arrows */
+  .nav-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:16px 0 8px;}
+  .arrow-btn{
+    background:var(--white);border:1px solid var(--border);width:38px;height:38px;
+    border-radius:50%;font-size:1.1rem;color:var(--navy);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:.15s;
+  }
+  .arrow-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .nav-index{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--text-mid);min-width:70px;text-align:center;}
+
+  /* rate buttons */
+  .rate-row{display:flex;gap:10px;margin:18px 0;}
+  .rate-btn{
+    flex:1;padding:13px 10px;border-radius:10px;border:1px solid var(--border);
+    font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;
+    background:var(--white);color:var(--navy);transition:.15s;
+  }
+  .rate-btn.review{color:var(--review-dark);}
+  .rate-btn.review:hover{background:var(--review-pale);border-color:var(--review);}
+  .rate-btn.mastered{color:var(--accent-dark);}
+  .rate-btn.mastered:hover{background:var(--accent-pale);border-color:var(--accent);}
+
+  .util-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .util-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.03em;
+    padding:9px 16px;border-radius:8px;border:1px solid var(--border);
+    background:var(--white);color:var(--text-mid);cursor:pointer;transition:.15s;
+  }
+  .util-btn:hover{border-color:var(--navy);color:var(--navy);}
+  .util-btn.danger:hover{border-color:#c0392b;color:#c0392b;}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--text-mid);
+  }
+  .empty-state h3{margin:0 0 8px;font-size:1.2rem;}
+
+  /* checklist view */
+  #checklistView{display:none;}
+  .cl-summary{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-bottom:18px;flex-wrap:wrap;
+  }
+  .cl-count{
+    font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--text-mid);
+  }
+  .cl-count b{color:var(--accent-dark);font-weight:600;}
+  .cl-group{
+    background:var(--white);border:1px solid var(--border);border-radius:12px;
+    margin-bottom:14px;overflow:hidden;
+  }
+  .cl-head{
+    padding:14px 18px 12px;border-bottom:1px solid var(--border);
+    display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  }
+  .cl-area{
+    font-family:'Newsreader',serif;font-size:1.05rem;font-weight:600;color:var(--navy);
+  }
+  .cl-cite{
+    font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.04em;color:var(--text-lt);
+  }
+  .cl-item{
+    display:flex;align-items:flex-start;gap:11px;padding:11px 18px;
+    border-top:1px solid var(--off-white);cursor:pointer;
+  }
+  .cl-item:first-of-type{border-top:none;}
+  .cl-item:hover{background:var(--off-white);}
+  .cl-item input[type=checkbox]{
+    width:17px;height:17px;margin:2px 0 0;accent-color:var(--accent);cursor:pointer;flex-shrink:0;
+  }
+  .cl-item label{
+    font-size:.9rem;line-height:1.5;color:var(--navy);cursor:pointer;
+  }
+  .cl-item.done label{color:var(--text-lt);}
+  .print-note{display:none;}
+
+  .about{
+    margin-top:44px;padding-top:24px;border-top:1px solid var(--border);
+    font-size:.86rem;line-height:1.6;color:var(--text-mid);
+  }
+  .about strong{color:var(--navy);}
+
+  footer{
+    max-width:720px;margin:0 auto;padding:0 20px 40px;
+    font-size:.8rem;color:var(--text-lt);
+  }
+  footer a{color:var(--accent);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .privacy-note{margin-top:6px;font-size:.76rem;color:var(--text-lt);}
+
+  /* print: evidence checklist only */
+  @media print{
+    header, .progress-wrap, .view-toggle, .filters, #cardsView, .about, footer,
+    .cl-summary .util-btn{display:none !important;}
+    body{background:#fff;}
+    main{padding:0;max-width:100%;}
+    #checklistView{display:block !important;}
+    .cl-group{break-inside:avoid;border-color:#bbb;}
+    .cl-item{border-top-color:#eee;}
+    .print-note{
+      display:block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+      color:#555;margin-bottom:14px;
+    }
+  }
+
+  @media (max-width:520px){
+    h1.title{font-size:1.6rem;}
+    .title-block{width:22px;height:22px;border-width:2px;}
+    .card{min-height:380px;}
+    .prompt{font-size:1.12rem;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="back-link" href="https://www.cnpsuite.com">
+      <svg class="brand-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="8" height="8" rx="2" fill="#3475b4"/>
+        <rect x="11" y="1" width="8" height="8" rx="2" fill="#32533d"/>
+        <rect x="1" y="11" width="8" height="8" rx="2" fill="#bd8d29"/>
+        <rect x="11.75" y="11.75" width="6.5" height="6.5" rx="1.3" fill="none" stroke="#94a7bb" stroke-width="1.5"/>
+      </svg>
+      <span class="wordmark">CNPSuite</span>
+    </a>
+    <span class="brand-group">
+      <span class="brand">Readiness Deck</span>
+      <span class="program-badge">SFSP</span>
+      <span class="program-switch">
+        <a href="https://www.cnpsuite.com/nslp-rdeck">NSLP</a>
+        <span class="sep">·</span>
+        <a href="https://www.cnpsuite.com/cacfp-rdeck">CACFP</a>
+      </span>
+    </span>
+  </div>
+</header>
+
+<main>
+  <p class="eyebrow"><span class="sec">§</span> State Agency Prep Tool</p>
+  <div class="title-row">
+    <span class="title-block"></span>
+    <h1 class="title">SFSP Management Evaluation</h1>
+  </div>
+  <p class="subtitle">Built for state agency staff preparing for a federal Management Evaluation of SFSP administration. Study the questions a reviewer probes, then work the evidence checklist so every document is on hand before the review begins.</p>
+
+  <div class="progress-wrap">
+    <div class="progress-row">
+      <span class="progress-label">Readiness</span>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="seg-mastered" id="segMastered" style="width:0%"></div>
+      <div class="seg-review" id="segReview" style="width:0%"></div>
+    </div>
+    <div class="progress-legend">
+      <span><span class="legend-dot dot-mastered"></span><span id="countMastered">0</span> mastered</span>
+      <span><span class="legend-dot dot-review"></span><span id="countReview">0</span> to review</span>
+      <span><span class="legend-dot dot-untouched"></span><span id="countUntouched">0</span> left to review</span>
+    </div>
+    <div class="completion-banner" id="completionBanner" hidden>✓ Deck mastered — ready for the real review.</div>
+  </div>
+
+  <div class="view-toggle">
+    <button class="view-btn active" id="viewCards">Study cards</button>
+    <button class="view-btn" id="viewChecklist">Evidence checklist</button>
+  </div>
+
+  <div id="cardsView">
+    <div class="filters">
+      <button class="pill active" data-filter="all">All cards</button>
+      <button class="pill" data-filter="review">To review</button>
+      <button class="pill" data-filter="mastered">Mastered</button>
+    </div>
+
+    <div class="stage">
+      <div class="card-count" id="cardCount">Card 1 / 20</div>
+      <div class="card-frame">
+        <div class="ghost-card g2" id="ghost2"></div>
+        <div class="ghost-card g1" id="ghost1"></div>
+        <div class="card" id="card">
+          <div class="face face-front">
+            <div class="area-tag" id="areaFront">Area</div>
+            <div class="cite-tag" id="citeFront">CITE —</div>
+            <div class="prompt-label">Tap to reveal</div>
+            <div class="prompt" id="promptFront">Loading…</div>
+            <div class="tap-hint">Flip ›</div>
+          </div>
+          <div class="face face-back">
+            <div class="area-tag" id="areaBack">Area</div>
+            <div class="cite-tag" id="citeBack">CITE —</div>
+            <div class="answer" id="answerBack"></div>
+            <div class="ready-box">
+              <div class="ready-label">Have ready for the reviewer</div>
+              <div class="ready-text" id="readyBack"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="arrow-btn" id="prevBtn" aria-label="Previous card">‹</button>
+      <span class="nav-index" id="navIndex">1 / 20</span>
+      <button class="arrow-btn" id="nextBtn" aria-label="Next card">›</button>
+    </div>
+
+    <div class="rate-row">
+      <button class="rate-btn review" id="reviewBtn">Review again</button>
+      <button class="rate-btn mastered" id="masteredBtn">Got it</button>
+    </div>
+
+    <div class="util-row">
+      <button class="util-btn" id="flipBtn">Flip</button>
+      <button class="util-btn" id="shuffleBtn">Shuffle</button>
+      <button class="util-btn danger" id="resetBtn">Reset progress</button>
+    </div>
+  </div>
+
+  <div id="checklistView">
+    <p class="print-note">SFSP Management Evaluation — Evidence Checklist · CNPSuite Readiness Deck</p>
+    <div class="cl-summary">
+      <span class="cl-count"><b id="clDone">0</b> of <b id="clTotal">0</b> evidence items ready</span>
+      <span>
+        <button class="util-btn" id="printBtn">Print checklist</button>
+        <button class="util-btn danger" id="clResetBtn">Reset checklist</button>
+      </span>
+    </div>
+    <div id="clGroups"></div>
+  </div>
+
+  <div class="about">
+    <p><strong>About this deck.</strong> Written from the state agency’s seat: each card covers what a federal reviewer probes about SA administration of the Summer Food Service Program, drafted from 7 CFR Part 225, FNS Instruction 796-4 Rev. 4, FNS Instruction 113-1, and the 2022 SFSP integrity final rule. As of June 1, 2026, FNS is the Food and Nutrition Administration (FNA), so newer source documents may carry the new name. This is a study aid — confirm every item against your FNA regional office’s ME guidance, the current eCFR, and your agency’s own procedures before relying on it in a review.</p>
+  </div>
+</main>
+
+<footer>
+  <div>Part of <a href="https://www.cnpsuite.com">CNPSuite</a> · a study tool by <a href="https://www.lsdigitalsolutions.com">LS Digital Solutions</a></div>
+  <div class="privacy-note">Your progress is saved on your own device. This tool sets no cookies and uses no tracking, analytics, or personal-data collection.</div>
+</footer>
+
+<script>
+const CARDS = [
+  {
+    "area": "Sponsor Application Approval",
+    "cite": "7 CFR 225.6(b), (d)",
+    "prompt": "What must the state agency verify before approving an SFSP sponsor application?",
+    "answer": "That the sponsor meets the performance standards — financial viability, administrative capability, and program accountability — with an approvable management plan and administrative budget, and no disqualifying history.",
+    "ready": [
+      "Approval files showing performance-standard determinations",
+      "Approved management plans and budgets",
+      "Application timeliness records"
+    ]
+  },
+  {
+    "area": "Sponsor Application Approval",
+    "cite": "7 CFR 225.6",
+    "prompt": "What must the SA check about a sponsor's history before approval?",
+    "answer": "That the sponsor and its principals are not currently disqualified from SFSP or other Child Nutrition Programs, and that prior-year performance problems have been resolved before renewal.",
+    "ready": [
+      "Disqualification screening records",
+      "Prior-year problem/resolution documentation"
+    ]
+  },
+  {
+    "area": "Site Approval & Eligibility",
+    "cite": "7 CFR 225.6(c)",
+    "prompt": "What must the SA verify when approving an open site?",
+    "answer": "Current area eligibility — school or census data showing at least 50% of children in the area qualify for free or reduced-price meals — documented in the site approval file.",
+    "ready": [
+      "Site approval files with area eligibility data attached",
+      "Data source and effective dates for each determination"
+    ]
+  },
+  {
+    "area": "Site Approval & Eligibility",
+    "cite": "7 CFR 225.6",
+    "prompt": "How do closed-enrolled sites and camps establish eligibility, and what must the SA hold?",
+    "answer": "Closed-enrolled sites qualify through enrolled children's individual eligibility or area data; camps are reimbursed only for individually eligible children — the SA must verify the documentation basis at approval and during reviews.",
+    "ready": [
+      "Closed-enrolled/camp eligibility documentation samples",
+      "Review findings confirming camps claim only eligible children"
+    ]
+  },
+  {
+    "area": "Site Approval & Eligibility",
+    "cite": "7 CFR 225.6(h)",
+    "prompt": "What must the SA consider before approving multiple sites serving the same area?",
+    "answer": "Site proximity and overlapping populations — assessing duplicate-claim risk using distance, density, and each site's intended population before approval.",
+    "ready": [
+      "Proximity analysis for newly approved sites",
+      "Documentation of duplicate-service determinations"
+    ]
+  },
+  {
+    "area": "Non-Congregate Oversight",
+    "cite": "7 CFR 225.6 / 225.16(i)",
+    "prompt": "What must the SA validate for sites using non-congregate meal service?",
+    "answer": "That sponsor procedures ensure meals reach only eligible children without duplication, and that site caps rest on defensible data (school or census figures) rather than inflated estimates.",
+    "ready": [
+      "Approved non-congregate procedures",
+      "Site cap justifications with source data"
+    ]
+  },
+  {
+    "area": "Pre-Approval Visits",
+    "cite": "7 CFR 225.7(d)",
+    "prompt": "Which sponsors and sites must the SA visit before program operations begin?",
+    "answer": "Sponsors new to the program and those with prior operational problems, plus sites flagged by the SA's risk criteria — with each visit documented before approval.",
+    "ready": [
+      "Pre-approval visit schedule and completed forms",
+      "Risk criteria used for site selection"
+    ]
+  },
+  {
+    "area": "Training",
+    "cite": "7 CFR 225.7(a)",
+    "prompt": "What training must the SA deliver before each summer's operations?",
+    "answer": "Annual training for all sponsors before program operations begin, covering program duties — with the SA verifying sponsors then train their own administrative and site staff.",
+    "ready": [
+      "SA training agendas and attendance rosters",
+      "Verification that sponsors completed staff training before operating"
+    ]
+  },
+  {
+    "area": "SA Reviews & Monitoring",
+    "cite": "7 CFR 225.7(e)",
+    "prompt": "How many of a sponsor's sites must the SA review during a sponsor review?",
+    "answer": "At least 10 percent of the sponsor's sites, or one site, whichever is greater — selected on criteria such as meal volume, vended versus self-prep status, time since last review, and prior findings.",
+    "ready": [
+      "Site sample lists with selection rationale",
+      "Completed site review instruments"
+    ]
+  },
+  {
+    "area": "SA Reviews & Monitoring",
+    "cite": "7 CFR 225.7(e) / 225.15(d)",
+    "prompt": "How does the SA verify sponsors performed their own required monitoring?",
+    "answer": "By checking during reviews that sponsors completed initial site visits within the first two weeks and full food service reviews within the first four weeks, with deficiencies corrected and documented.",
+    "ready": [
+      "Sponsor monitoring documentation sampled in review files",
+      "Findings and corrective action where visits were missed"
+    ]
+  },
+  {
+    "area": "Claims & Payments",
+    "cite": "7 CFR 225.9",
+    "prompt": "What must the SA do before paying a sponsor's claim?",
+    "answer": "Apply edit checks comparing claimed meals to approved site caps, operating days, and meal service data; resolve discrepancies; and pay valid claims within required timeframes.",
+    "ready": [
+      "SA edit-check procedures",
+      "Discrepancy resolution records",
+      "Payment timeliness data"
+    ]
+  },
+  {
+    "area": "Claims & Payments",
+    "cite": "7 CFR 225.12",
+    "prompt": "When must the SA disallow costs or recover payments from a sponsor?",
+    "answer": "When reviews, audits, or claim validation identify unallowable costs or overclaims — the SA must disallow, demand recovery, and document collections or approved repayment arrangements.",
+    "ready": [
+      "Fiscal action calculations",
+      "Demand letters and recovery records"
+    ]
+  },
+  {
+    "area": "Serious Deficiency & Termination",
+    "cite": "7 CFR 225.11",
+    "prompt": "What must the SA's files show when a sponsor is seriously deficient?",
+    "answer": "Written notice of the deficiencies, an opportunity for corrective action with deadlines, and termination of the agreement where correction fails — every step on the regulatory timeline.",
+    "ready": [
+      "Serious deficiency notices with dates",
+      "Corrective action evaluations",
+      "Termination records and timeline log"
+    ]
+  },
+  {
+    "area": "Appeals",
+    "cite": "7 CFR 225.13",
+    "prompt": "What appeal procedure must the SA maintain for adverse actions?",
+    "answer": "A published procedure offering sponsors a fair hearing on appealable actions — denials, terminations, claim recoveries — with notice of rights, an independent official, and timely decisions.",
+    "ready": [
+      "Written appeal procedures",
+      "Appeal case files demonstrating timelines met"
+    ]
+  },
+  {
+    "area": "Financial Management",
+    "cite": "FNS Instruction 796-4 Rev. 4",
+    "prompt": "How does the SA oversee sponsor budgets and costs?",
+    "answer": "Through budget approval tied to projected reimbursement and site counts, monitoring costs for allowability (necessary, reasonable, authorized), and documenting prior approvals where required.",
+    "ready": [
+      "Approved budgets with projections",
+      "Cost allowability review notes",
+      "Prior-approval documentation"
+    ]
+  },
+  {
+    "area": "Audits & Audit Resolution",
+    "cite": "2 CFR 200 Subpart F",
+    "prompt": "What are the SA's audit oversight duties for SFSP sponsors?",
+    "answer": "Ensuring sponsors above the expenditure threshold obtain single audits, tracking findings to documented resolution, and pursuing recovery of disallowed costs.",
+    "ready": [
+      "Audit tracking log",
+      "Resolution correspondence",
+      "Recovery documentation"
+    ]
+  },
+  {
+    "area": "Civil Rights",
+    "cite": "FNS Instruction 113-1",
+    "prompt": "How does the SA demonstrate civil rights compliance and oversight?",
+    "answer": "Annual civil rights training for SA staff and sponsors, complaint procedures with a log and referral path, required data collection, and review verification of posters and the nondiscrimination statement.",
+    "ready": [
+      "SA staff training records",
+      "Complaint log and procedure",
+      "Review checklists covering civil rights items"
+    ]
+  },
+  {
+    "area": "Meal Pattern Oversight",
+    "cite": "7 CFR 225.16",
+    "prompt": "How does the SA verify meals meet the SFSP meal pattern?",
+    "answer": "Through meal service observations during site reviews, menu and production or vendor record checks, corrective action for violations, and meal disallowance where patterns aren't met.",
+    "ready": [
+      "Meal observation forms",
+      "Menu/production or vendor record findings",
+      "Disallowance documentation"
+    ]
+  },
+  {
+    "area": "Outreach",
+    "cite": "7 CFR 225.7",
+    "prompt": "What outreach must the SA perform each year?",
+    "answer": "Actively publicizing the program and encouraging participation in underserved areas — including outreach to potential new sponsors and sites before the summer season.",
+    "ready": [
+      "Annual outreach plan or records",
+      "Evidence of publicity and sponsor recruitment efforts"
+    ]
+  },
+  {
+    "area": "Records & Federal Reporting",
+    "cite": "7 CFR 225.8 / FNS-418 / FNS-777",
+    "prompt": "What records and federal reports must the SA maintain and submit?",
+    "answer": "Program records retained three years plus the current year (longer if issues are unresolved), and accurate, timely federal reports — the FNS-418 program report and FNS-777 financial status report, reconciled to source records.",
+    "ready": [
+      "Retention policy and access to prior three FYs",
+      "Recent FNS-418 and FNS-777 submissions",
+      "Reconciliation worksheets"
+    ]
+  }
+];
+
+const STORAGE_KEY = "sfsp-readiness-progress-v1";
+const CL_KEY = "sfsp-checklist-v1";
+let progress = {}; // {index: 'mastered'|'review'}
+let clState = {};  // {itemId: true}
+let order = CARDS.map((_,i)=>i);
+let currentPos = 0;
+let flipped = false;
+let filter = "all";
+
+function loadJSON(key){
+  try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveJSON(key, obj){
+  try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(e){}
+}
+
+function filteredOrder(){
+  return order.filter(i=>{
+    if(filter==="all") return true;
+    if(filter==="review") return progress[i]==="review";
+    if(filter==="mastered") return progress[i]==="mastered";
+  });
+}
+
+function render(){
+  const list = filteredOrder();
+  const stageEl = document.querySelector(".stage");
+  const cardCountEl = document.getElementById("cardCount");
+
+  if(list.length===0){
+    stageEl.innerHTML = `<div class="empty-state"><h3>Nothing here yet</h3><p>Cards you mark will show up in this filter.</p></div>`;
+    document.getElementById("navIndex").textContent = "0 / 0";
+    updateProgressBar();
+    return;
+  }
+
+  if(!document.getElementById("card")){
+    location.reload();
+    return;
+  }
+
+  if(currentPos >= list.length) currentPos = 0;
+  const idx = list[currentPos];
+  const c = CARDS[idx];
+
+  document.getElementById("areaFront").textContent = c.area;
+  document.getElementById("citeFront").innerHTML = `<span class="cite-k">CITE</span>${c.cite}`;
+  document.getElementById("promptFront").textContent = c.prompt;
+  document.getElementById("areaBack").textContent = c.area;
+  document.getElementById("citeBack").innerHTML = `<span class="cite-k">CITE</span>${c.cite}`;
+  document.getElementById("answerBack").textContent = c.answer;
+  document.getElementById("readyBack").innerHTML = "<ul>" + c.ready.map(r=>`<li>${r}</li>`).join("") + "</ul>";
+
+  const g1 = document.getElementById("ghost1"), g2 = document.getElementById("ghost2");
+  if(g1) g1.style.display = list.length>1 ? "" : "none";
+  if(g2) g2.style.display = list.length>2 ? "" : "none";
+
+  cardCountEl.textContent = `Card ${currentPos+1} / ${list.length}`;
+  document.getElementById("navIndex").textContent = `${currentPos+1} / ${list.length}`;
+
+  flipped = false;
+  document.getElementById("card").classList.remove("flipped");
+
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = CARDS.length;
+  let mastered=0, review=0;
+  CARDS.forEach((_,i)=>{
+    if(progress[i]==="mastered") mastered++;
+    else if(progress[i]==="review") review++;
+  });
+  const untouched = total - mastered - review;
+  const pct = Math.round((mastered/total)*100);
+
+  document.getElementById("progressPct").textContent = pct+"%";
+  document.getElementById("segMastered").style.width = (mastered/total*100)+"%";
+  document.getElementById("segReview").style.width = (review/total*100)+"%";
+  document.getElementById("countMastered").textContent = mastered;
+  document.getElementById("countReview").textContent = review;
+  document.getElementById("countUntouched").textContent = untouched;
+
+  const banner = document.getElementById("completionBanner");
+  if(banner) banner.hidden = pct < 100;
+}
+
+function goTo(delta){
+  const list = filteredOrder();
+  if(list.length===0) return;
+  currentPos = (currentPos + delta + list.length) % list.length;
+  render();
+}
+
+function flip(){
+  const list = filteredOrder();
+  if(list.length===0) return;
+  flipped = !flipped;
+  document.getElementById("card").classList.toggle("flipped", flipped);
+}
+
+function rate(status){
+  const list = filteredOrder();
+  if(list.length===0) return;
+  const idx = list[currentPos];
+  progress[idx] = status;
+  saveJSON(STORAGE_KEY, progress);
+  const newList = filteredOrder();
+  if(newList.length===0){ render(); return; }
+  if(currentPos >= newList.length) currentPos = 0;
+  render();
+}
+
+function shuffle(){
+  for(let i=order.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [order[i],order[j]] = [order[j],order[i]];
+  }
+  currentPos = 0;
+  render();
+}
+
+function resetProgress(){
+  if(!confirm("Reset all card progress on this device? This can't be undone.")) return;
+  progress = {};
+  saveJSON(STORAGE_KEY, progress);
+  render();
+}
+
+/* ---- checklist ---- */
+function buildChecklist(){
+  const wrap = document.getElementById("clGroups");
+  wrap.innerHTML = "";
+  // group by area, preserving first-seen order
+  const groups = [];
+  const byArea = {};
+  CARDS.forEach((c,ci)=>{
+    if(!byArea[c.area]){ byArea[c.area] = {area:c.area, cites:new Set(), items:[]}; groups.push(byArea[c.area]); }
+    byArea[c.area].cites.add(c.cite);
+    c.ready.forEach((r,ri)=>{
+      byArea[c.area].items.push({id:`${ci}-${ri}`, text:r});
+    });
+  });
+
+  groups.forEach(g=>{
+    const div = document.createElement("div");
+    div.className = "cl-group";
+    const head = document.createElement("div");
+    head.className = "cl-head";
+    head.innerHTML = `<span class="cl-area">${g.area}</span><span class="cl-cite">${[...g.cites].join(" · ")}</span>`;
+    div.appendChild(head);
+    g.items.forEach(item=>{
+      const row = document.createElement("div");
+      row.className = "cl-item" + (clState[item.id] ? " done" : "");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.id = "cl-"+item.id;
+      cb.checked = !!clState[item.id];
+      const label = document.createElement("label");
+      label.htmlFor = cb.id;
+      label.textContent = item.text;
+      cb.addEventListener("change", ()=>{
+        if(cb.checked) clState[item.id] = true; else delete clState[item.id];
+        row.classList.toggle("done", cb.checked);
+        saveJSON(CL_KEY, clState);
+        updateClCount();
+      });
+      row.appendChild(cb);
+      row.appendChild(label);
+      div.appendChild(row);
+    });
+    wrap.appendChild(div);
+  });
+  updateClCount();
+}
+
+function updateClCount(){
+  const total = CARDS.reduce((n,c)=>n+c.ready.length, 0);
+  const done = Object.keys(clState).length;
+  document.getElementById("clDone").textContent = done;
+  document.getElementById("clTotal").textContent = total;
+}
+
+function setView(which){
+  const cards = which==="cards";
+  document.getElementById("cardsView").style.display = cards ? "" : "none";
+  document.getElementById("checklistView").style.display = cards ? "none" : "block";
+  document.getElementById("viewCards").classList.toggle("active", cards);
+  document.getElementById("viewChecklist").classList.toggle("active", !cards);
+}
+
+document.getElementById("card").addEventListener("click", flip);
+document.getElementById("flipBtn").addEventListener("click", flip);
+document.getElementById("prevBtn").addEventListener("click", ()=>goTo(-1));
+document.getElementById("nextBtn").addEventListener("click", ()=>goTo(1));
+document.getElementById("reviewBtn").addEventListener("click", ()=>rate("review"));
+document.getElementById("masteredBtn").addEventListener("click", ()=>rate("mastered"));
+document.getElementById("shuffleBtn").addEventListener("click", shuffle);
+document.getElementById("resetBtn").addEventListener("click", resetProgress);
+document.getElementById("viewCards").addEventListener("click", ()=>setView("cards"));
+document.getElementById("viewChecklist").addEventListener("click", ()=>setView("checklist"));
+document.getElementById("printBtn").addEventListener("click", ()=>window.print());
+document.getElementById("clResetBtn").addEventListener("click", ()=>{
+  if(!confirm("Clear all checklist checkmarks on this device?")) return;
+  clState = {};
+  saveJSON(CL_KEY, clState);
+  buildChecklist();
+});
+
+document.querySelectorAll(".filters .pill").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".filters .pill").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    filter = btn.dataset.filter;
+    currentPos = 0;
+    render();
+  });
+});
+
+document.addEventListener("keydown",(e)=>{
+  if(e.key==="ArrowLeft") goTo(-1);
+  if(e.key==="ArrowRight") goTo(1);
+  if(e.key===" " && document.getElementById("cardsView").style.display!=="none"){ e.preventDefault(); flip(); }
+});
+
+progress = loadJSON(STORAGE_KEY);
+clState = loadJSON(CL_KEY);
+buildChecklist();
+render();
+</script>
+
+</body>
+</html>
