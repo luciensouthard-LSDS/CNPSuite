@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiscal Year Reporting Calendar — CNPSuite</title>
+<meta name="description" content="Every FNS reporting deadline for Child Nutrition Program State agencies (FNS Memo SP 21-2016) as a single reference list, plus a downloadable/subscribable calendar file.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23001E3C'/%3E%3Crect x='22' y='22' width='24' height='24' rx='5' fill='%230077B6'/%3E%3Crect x='54' y='22' width='24' height='24' rx='5' fill='%2325543C'/%3E%3Crect x='22' y='54' width='24' height='24' rx='5' fill='%23C68A1E'/%3E%3Crect x='54' y='54' width='24' height='24' rx='5' fill='none' stroke='%238FA8BC' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#001E3C; --navy-deep:#00152A; --navy-2:#002A4F;
+    --cerulean:#0077B6; --cerulean-ink:#025E94; --sky:#7FB7DE;
+    --pine:#25543C; --amber:#C68A1E; --slate-ink:#5E7283;
+    --paper:#F4F8FB; --ink:#152532; --slate:#5E7283; --line:#DBE6EF; --white:#fff;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.55}
+  a{color:inherit}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase}
+  header.nav{background:var(--navy);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
+  header.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+  .brandmark{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff;font-weight:700;font-size:18px}
+  .brandmark svg{width:26px;height:26px}
+  .brandmark .suite{font-family:var(--serif);font-weight:600}
+  .back{margin-left:auto;font-size:14px;font-weight:600;color:#bcd0e1;text-decoration:none;padding:8px 12px;border-radius:8px}
+  .back:hover{color:#fff;background:rgba(255,255,255,.07)}
+  .pagehero{background:radial-gradient(120% 130% at 85% -20%, var(--navy-2), var(--navy-deep) 60%);color:#fff}
+  .pagehero .wrap{padding:52px 24px 44px}
+  .pagehero .eyebrow{color:var(--sky)}
+  .pagehero h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4.6vw,44px);line-height:1.08;letter-spacing:-.01em;margin:8px 0 0;max-width:22ch}
+  .pagehero p{font-size:15.5px;color:rgba(232,241,248,.82);max-width:64ch;margin:16px 0 0}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .btn{font-family:var(--sans);font-weight:700;font-size:14.5px;text-decoration:none;border-radius:10px;padding:12px 20px;display:inline-flex;align-items:center;gap:9px;border:1px solid transparent;cursor:pointer}
+  .btn.primary{background:var(--cerulean);color:#fff}
+  .btn.primary:hover{background:#0a8ad0}
+  .btn.ghost{background:transparent;color:#dbe8f2;border-color:rgba(255,255,255,.28)}
+  .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5)}
+  .pagehero .fineprint{margin-top:18px;font-family:var(--mono);font-size:11.5px;color:#86a8c4}
+  .pagehero .fineprint a{color:var(--sky);text-decoration:underline}
+
+  section{padding:52px 0}
+  .sec-head{margin-bottom:22px}
+  .sec-head .eyebrow{color:var(--cerulean-ink)}
+  .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(21px,3vw,27px);letter-spacing:-.01em;margin:6px 0 0;color:var(--navy)}
+  .sec-head p.note{font-size:13.5px;color:var(--slate);margin:8px 0 0;max-width:70ch}
+
+  .month-block{margin-bottom:6px}
+  .month-block h3{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:#e9f1f7;display:inline-block;padding:5px 11px;border-radius:6px;margin:26px 0 4px}
+
+  .row{display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start;padding:16px 6px;border-bottom:1px solid var(--line)}
+  .row .when{font-family:var(--mono);font-size:12.5px;color:var(--slate);padding-top:3px}
+  .row .body{min-width:0}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:5px;padding:3px 8px;margin-right:7px;margin-bottom:6px}
+  .tag.schools{background:rgba(0,119,182,.1);color:var(--cerulean-ink)}
+  .tag.cacfp{background:rgba(37,84,60,.12);color:var(--pine)}
+  .tag.sfsp{background:rgba(198,138,30,.14);color:#8a5e12}
+  .tag.all{background:rgba(94,114,131,.14);color:var(--slate-ink)}
+  .tag.applicable{background:#fdeeee;color:#a13d3d}
+  .row h4{margin:0 0 4px;font-size:15.5px;font-weight:700;color:var(--navy);letter-spacing:-.005em}
+  .row .code{font-family:var(--mono);font-weight:500;color:var(--slate)}
+  .row p{margin:4px 0 0;font-size:13.5px;color:#46596a;max-width:74ch}
+  .row .meta{margin-top:6px;font-size:12px;color:var(--slate)}
+  .row .meta b{color:#334554;font-weight:600}
+
+  .flagged .when{color:#a13d3d}
+
+  footer.site{background:var(--navy-deep);color:#9fb6c8;padding:36px 0;font-size:13px}
+  footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+  footer.site a{color:#bcd0e1;text-decoration:none}
+  footer.site a:hover{color:#fff;text-decoration:underline}
+  footer.site .fine{width:100%;border-top:1px solid rgba(255,255,255,.08);margin-top:14px;padding-top:16px;color:#7f97aa;font-size:12px}
+
+  @media (max-width:620px){
+    .row{grid-template-columns:1fr}
+    .row .when{order:-1;padding-top:0}
+  }
+
+  /* ---- print branding + layout ---- */
+  .print-header,.print-footnote{display:none}
+  @media print{
+    header.nav,.pagehero .actions,.pagehero .fineprint,footer.site{display:none !important}
+    body{background:#fff}
+    .pagehero{background:none;color:var(--ink);padding:0 0 14px}
+    .pagehero .wrap{padding:0}
+    .pagehero .eyebrow{color:var(--slate)}
+    .pagehero h1{color:var(--navy);font-size:24px}
+    .pagehero p{color:#334554}
+    .print-header{
+      display:flex;align-items:center;gap:14px;
+      padding:0 24px 16px;margin-bottom:6px;border-bottom:2px solid var(--navy)
+    }
+    .print-header svg{width:38px;height:38px;flex:0 0 auto}
+    .print-header .word{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--navy)}
+    .print-header .word .suite{font-weight:600}
+    .print-header .sub{font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:3px;letter-spacing:.02em}
+    section{padding:16px 0}
+    .sec-head{margin-bottom:8px}
+    .month-block h3{background:none;padding:4px 0;border-bottom:1px solid var(--line);border-radius:0}
+    .row{break-inside:avoid;page-break-inside:avoid;padding:10px 0}
+    #quarterly{background:none !important;border:none !important;margin:0 !important;padding:16px 24px !important}
+    .print-footnote{
+      display:block;margin:22px 24px 0;padding-top:12px;border-top:1px solid var(--line);
+      font-family:var(--mono);font-size:10px;color:var(--slate)
+    }
+  }
+</style>
+</head>
+<body>
+<div class="print-header">
+  <svg><use href="#suitemark"/></svg>
+  <div>
+    <div class="word">CNP<span class="suite">Suite</span> — Fiscal Year Reporting Calendar</div>
+    <div class="sub">cnpsuite.com/reporting-calendar &nbsp;·&nbsp; Printed <span id="printDate"></span></div>
+  </div>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="suitemark" viewBox="0 0 100 100">
+    <rect x="6" y="6" width="40" height="40" rx="9" fill="#0077B6"/>
+    <rect x="54" y="6" width="40" height="40" rx="9" fill="#25543C"/>
+    <rect x="6" y="54" width="40" height="40" rx="9" fill="#C68A1E"/>
+    <rect x="54" y="54" width="40" height="40" rx="9" fill="none" stroke="#8FA8BC" stroke-width="3.5"/>
+  </symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brandmark" href="/"><svg><use href="#suitemark"/></svg><span>CNP<span class="suite">Suite</span></span></a>
+    <a class="back" href="/">&larr; Back to CNPSuite</a>
+  </div>
+</header>
+
+<section class="pagehero">
+  <div class="wrap">
+    <div class="eyebrow">§ Reference &amp; Calendar</div>
+    <h1>Fiscal Year Reporting Calendar</h1>
+    <p>Every report State agencies commonly submit to FNS for the Child Nutrition Programs (NSLP/SBP/SMP, CACFP, SFSP), organized by due date across the federal fiscal year. Source: USDA FNS Memo SP&nbsp;21-2016, <em>Fiscal Year Reporting Timeline and Reporting Table</em>.</p>
+    <div class="actions">
+      <a class="btn primary" href="/calendars/cnp-fiscal-year-reporting.ics" download>Download calendar (.ics)</a>
+      <button class="btn ghost" type="button" onclick="window.print()">Print this list</button>
+    </div>
+    <div class="fineprint">Free · no account required · the .ics file opens directly in Google, Outlook, or Apple Calendar. Use "Print this list" for a branded, printer-friendly reference sheet.</div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <section id="annual">
+    <div class="sec-head">
+      <div class="eyebrow">§ 01 — Annual Timeline</div>
+      <h2>Annual reports, in fiscal-year order</h2>
+      <p class="note">Federal fiscal year runs October 1 – September 30. Items marked <span class="tag applicable" style="margin:0">AS APPLICABLE</span> only apply to certain State agencies (grant recipients, states using older review processes, etc). Items marked with * have no exact day-of-month in the source memo — confirm with your FNS Regional Office.</p>
+    </div>
+    <div id="annualList"></div>
+  </section>
+
+  <section id="quarterly" style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -24px;padding:52px 24px">
+    <div class="wrap" style="padding:0">
+      <div class="sec-head">
+        <div class="eyebrow">§ 02 — Quarterly Reports</div>
+        <h2>Due 30 days after each quarter ends</h2>
+        <p class="note">FY quarters: Q1 Oct–Dec, Q2 Jan–Mar, Q3 Apr–Jun, Q4 Jul–Sep. That puts quarterly due dates around <b>Jan 30, Apr 30, Jul 30, and Oct 30</b>. Final versions of grant-funded reports are typically due 90 days after the grant period ends — check individual award dates.</p>
+      </div>
+      <div id="quarterlyList"></div>
+    </div>
+  </section>
+
+  <section id="monthly">
+    <div class="sec-head">
+      <div class="eyebrow">§ 03 — Monthly (30/90-Day) Reports</div>
+      <h2>Ongoing, tied to each report month</h2>
+      <p class="note">"Estimated" data is due 30 days after the report month ends; "Actual" data is due 90 days after. These follow each State agency's own operating calendar, not a fixed FY date.</p>
+    </div>
+    <div id="monthlyList"></div>
+  </section>
+
+  <div class="print-footnote">Source: USDA FNS Memo SP 21-2016 (Dec 28, 2015) · fns.usda.gov/forms · Dates subject to change — confirm current-year due dates with your FNS Regional Office. This printed sheet is a planning aid, not a substitute for official FNS guidance. · cnpsuite.com</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>© <span id="yr"></span> LS Digital Solutions, LLC · CNPSuite is an independent tool suite and is not affiliated with or endorsed by the USDA.</div>
+    <div><a href="https://www.fns.usda.gov/forms" target="_blank" rel="noopener">Forms &amp; instructions — fns.usda.gov/forms</a></div>
+    <div class="fine">Dates reflect FNS Memo SP 21-2016 (Dec 28, 2015) and are subject to change. This page is a planning aid, not a substitute for current FNS guidance.</div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   EDIT HERE — reporting deadlines.
+   program: "schools" | "cacfp" | "sfsp" | "all"  (controls tag color)
+   applicable: true -> shows "AS APPLICABLE" tag
+   flagged: true -> "when" text renders in red (date not exact in source memo)
+   ===================================================================== */
+const ANNUAL=[
+  {when:"Oct 31", program:"schools", code:"FNS-13", name:"State Revenue Matching Requirement Report",
+    desc:"Provides data necessary to monitor the State Revenue Matching Requirement.", via:"FPRS"},
+  {when:"Oct *", program:"schools", code:"FNS-10", name:"School Program Operations — Items 10–16",
+    desc:"Annual portion of the School Program Operations report.", via:"FPRS", flagged:true},
+  {when:"Oct *", program:"cacfp", code:"FNS-44", name:"CACFP Report — Part C (1st of 2 annual instances)",
+    desc:"Annual Part C of the Child and Adult Care Food Program report; also filed in March.", via:"FPRS", flagged:true},
+  {when:"Nov 15", program:"schools", code:"—", name:"School Food Safety Inspection Report",
+    desc:"Report of total safety inspections for SFAs in each State agency.", via:"Email · NSLPFoodSafetyInspections@fns.usda.gov"},
+  {when:"Dec 1", program:"schools", code:"FNS-834", name:"State Agency Direct Certification Rate Data Element Report",
+    desc:"Data elements #2 (SNAP) and #3 (NSLP) used for the annual Direct Certification Rate calculation.", via:"FPRS"},
+  {when:"Dec 29", program:"cacfp", code:"SF-425 CN-CACFP-Audit", name:"CACFP Audit Fund Reallocation Report",
+    desc:"Status of reallocated CACFP Audit funds. Annual (1st yr) and Final (2nd yr) both land here.", via:"FPRS", applicable:true},
+  {when:"Dec 29", program:"all", code:"FNS-777 CN", name:"Financial Status Report: Child Nutrition — Final",
+    desc:"Final report, due 90 days after the end of the 4th quarter.", via:"FPRS"},
+  {when:"Jan 31", program:"schools", code:"FNS-828", name:"SFA Paid Lunch Price Report",
+    desc:"Most frequently charged paid lunch price by grade category, per SFA.", via:"Email · paidlunchpricereport@fns.usda.gov"},
+  {when:"Mar 1", program:"schools", code:"FNS-640", name:"Coordinated Review Effort (CRE) Report",
+    desc:"Results of first and follow-up reviews from the preceding school year review period.", via:"Email · cnstatesystems@fns.usda.gov", applicable:true},
+  {when:"Mar 15", program:"schools", code:"FNS-742", name:"SFA Verification Collection Report",
+    desc:"Verification and direct certification data for each SFA participating in NSLP.", via:"FPRS"},
+  {when:"Mar 15", program:"schools", code:"FNS-742A", name:"Second Review of Applications",
+    desc:"Results of the second review of applications for selected SFAs.", via:"Email · cnstatesystems@fns.usda.gov"},
+  {when:"Mar 15", program:"schools", code:"—", name:"Ameliorative Action Report",
+    desc:"Actions taken/planned under the verification reporting requirement, 7 CFR §245.12(i).", via:"Email · cnstatesystems@fns.usda.gov"},
+  {when:"Mar *", program:"cacfp", code:"FNS-44", name:"CACFP Report — Part C (2nd of 2 annual instances)",
+    desc:"Second annual Part C filing; also filed in October.", via:"FPRS", flagged:true},
+  {when:"Apr *", program:"all", code:"FNS-525", name:"State Administrative Expenses Funds Reallocation Report",
+    desc:"Current status of SAE funds; request reallocation or return excess funds. Exact date announced annually.", via:"FNS Regional Office", flagged:true},
+  {when:"May 1", program:"schools", code:"—", name:"CEP Notification and Publication Requirement",
+    desc:"Publish a link to eligible/near-eligible/participating LEAs and schools for the Community Eligibility Provision.", via:"Email · cepnotification@fns.usda.gov"},
+  {when:"Jul *", program:"schools", code:"FNS-10", name:"School Program Operations — Item 17",
+    desc:"Annual Item 17 of the School Program Operations report.", via:"FPRS", flagged:true},
+  {when:"Jul *", program:"sfsp", code:"FNS-418", name:"Summer Food Service Program Report — Parts C & D",
+    desc:"Annual portions of the SFSP report.", via:"FPRS", flagged:true},
+];
+
+const QUARTERLY=[
+  {code:"QTR-SFA-CERT", name:"Quarterly SFA Certification Report", program:"schools",
+    desc:"Identifies SFAs certified to receive performance-based reimbursement.", via:"FPRS", cycle:"Q only"},
+  {code:"FNS-777 CN", name:"Financial Status Report: Child Nutrition", program:"all",
+    desc:"Program/function/activity financial data for CACFP, Summer, and Schools funds.", via:"FPRS", cycle:"Q + Final (90 days after Q4)"},
+  {code:"FNS-777 SAE", name:"Financial Status Report: SAE Funds", program:"all",
+    desc:"Financial data for SAE Funds and CACFP Sponsor Admin Funds; 2-year grant period, up to 7 quarters + Final.", via:"FPRS", cycle:"Q1–Q7 + Final"},
+  {code:"FNS-44 Part B", name:"CACFP Report — Part B", program:"cacfp",
+    desc:"Quarterly portion of the CACFP operations report.", via:"FPRS", cycle:"Q only"},
+  {code:"SF-425 CN-HHFKA-ADM", name:"Federal Financial Report — Section 201 Funds", program:"schools",
+    desc:"Use of Section 201 funds to assist with new meal pattern administration.", via:"FPRS", cycle:"Q + Final (90 days after grant end)"},
+  {code:"SF-425 FFVP", name:"Federal Financial Report — Fresh Fruit &amp; Vegetable Program", program:"schools",
+    desc:"Funding expenditures related to FFVP.", via:"FPRS", cycle:"Q + Final (90 days after grant end)"},
+  {code:"SF-425 NSLPE / NSLPE2", name:"Federal Financial Report — NSLP Equipment Assistance Grants", program:"schools",
+    desc:"Funding expenditures for Equipment Assistance Grants (NSLPE2 = FY2014 second-round funds only).", via:"FPRS", cycle:"Q + Final (90 days after grant end)"},
+  {code:"SF-425 CN-ART / CN-DC", name:"Federal Financial Reports — ART &amp; DC Grants", program:"schools",
+    desc:"Status of Administrative Review Training and Direct Certification Tier I/II grant funds.", via:"FPRS", cycle:"Q + Final (90 days after grant end)", applicable:true},
+  {code:"ART &amp; DC Grants", name:"Progress Reports", program:"schools",
+    desc:"Progress on activities funded by ART and DC grants.", via:"Email · cnstatesystems@fns.usda.gov", cycle:"Q + Final (90 days after grant end)", applicable:true},
+  {code:"NSLP Equipment Grants", name:"Progress Reports", program:"schools",
+    desc:"Progress on activities funded by Equipment Assistance Grants.", via:"FNS Regional Office", cycle:"Q + Final (90 days after grant end)"},
+];
+
+const MONTHLY=[
+  {code:"FNS-10", name:"School Program Operations — Items 5–9", program:"schools",
+    desc:"Meals served, schools/RCCIs participating, children approved for free/reduced-price meals.", via:"FPRS", cycle:"30-day estimate / 90-day actual"},
+  {code:"FNS-44", name:"CACFP Report — Parts A &amp; E", program:"cacfp",
+    desc:"Sponsoring organizations, sites, average daily participation, USDA foods assistance.", via:"FPRS", cycle:"30-day estimate / 90-day actual"},
+  {code:"FNS-44", name:"CACFP Report — Part D", program:"cacfp",
+    desc:"90-day (actual) data only — no 30-day estimate filed for this part.", via:"FPRS", cycle:"90-day actual only"},
+  {code:"FNS-418", name:"Summer Food Service Program Report — Part A", program:"sfsp",
+    desc:"Meals served, participation, and average daily attendance during SFSP operating months.", via:"FPRS", cycle:"30-day estimate / 90-day actual"},
+  {code:"FNS-418", name:"Summer Food Service Program Report — Part B", program:"sfsp",
+    desc:"Filed only for the last operating month of the fiscal year.", via:"FPRS", cycle:"90-day actual, last operating month only"},
+];
+
+const TAGLABEL={schools:"Schools", cacfp:"CACFP", sfsp:"SFSP", all:"All Programs"};
+
+function row(item, whenCol){
+  const tags = `<span class="tag ${item.program}">${TAGLABEL[item.program]}</span>` +
+    (item.applicable ? `<span class="tag applicable">As applicable</span>` : "");
+  return `<div class="row${item.flagged?" flagged":""}">
+    <div class="when">${whenCol}</div>
+    <div class="body">
+      ${tags}
+      <h4>${item.code!=="—" ? `<span class="code">${item.code}</span> — ` : ""}${item.name}</h4>
+      <p>${item.desc}</p>
+      <div class="meta"><b>Submit via:</b> ${item.via}${item.cycle?` &nbsp;·&nbsp; <b>Cycle:</b> ${item.cycle}`:""}</div>
+    </div>
+  </div>`;
+}
+
+document.getElementById("annualList").innerHTML = ANNUAL.map(i=>row(i, i.when)).join("");
+document.getElementById("quarterlyList").innerHTML = QUARTERLY.map(i=>row(i, "Jan 30 · Apr 30 · Jul 30 · Oct 30")).join("");
+document.getElementById("monthlyList").innerHTML = MONTHLY.map(i=>row(i, "Monthly")).join("");
+document.getElementById("yr").textContent = new Date().getFullYear();
+document.getElementById("printDate").textContent = new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
+</script>
+</body>
+</html>
