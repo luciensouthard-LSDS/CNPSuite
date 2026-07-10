@@ -34,7 +34,6 @@
   a{color:inherit}
   .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
   .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase}
-
   /* ---- pinned announcement bar ---- */
   .topbar{background:var(--navy-deep);color:#cfe2f1;font-size:13px;border-bottom:1px solid rgba(255,255,255,.08)}
   .topbar .wrap{display:flex;align-items:center;gap:12px;min-height:42px;padding-top:8px;padding-bottom:8px}
@@ -45,7 +44,6 @@
   .topbar .x{margin-left:auto;background:none;border:0;color:#7e98ac;cursor:pointer;font-size:18px;line-height:1;padding:4px 6px;border-radius:6px;flex:0 0 auto}
   .topbar .x:hover{color:#cfe2f1;background:rgba(255,255,255,.06)}
   .topbar.hide{display:none}
-
   /* ---- nav ---- */
   header.nav{background:var(--navy);color:var(--white);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(255,255,255,.08)}
   header.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
@@ -58,10 +56,9 @@
   nav.links a.cta{background:var(--cerulean);color:#fff;margin-left:6px}
   nav.links a.cta:hover{background:#0a8ad0}
   a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:2px;border-radius:6px}
-
   /* ---- hero ---- */
   .hero{background:radial-gradient(120% 130% at 85% -20%, var(--navy-2), var(--navy-deep) 60%);color:var(--white);position:relative;overflow:hidden}
-  .hero .wrap{padding-top:74px;padding-bottom:72px;position:relative;z-index:1}
+  .hero .wrap{padding-top:40px;padding-bottom:72px;position:relative;z-index:1}
   .hero .mark{width:84px;height:84px;margin-bottom:26px}
   .hero .mark rect.grow{animation:none}
   .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.04;letter-spacing:-.015em;margin:0;max-width:16ch}
@@ -73,10 +70,11 @@
   .btn.primary:hover{background:#0a8ad0;transform:translateY(-1px)}
   .btn.ghost{background:transparent;color:#dbe8f2;border-color:rgba(255,255,255,.28)}
   .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5)}
+  .btn.gold{background:var(--amber);color:var(--navy-deep)}
+  .btn.gold:hover{background:#d69a2e;transform:translateY(-1px)}
   .hero .meta{margin-top:34px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#86a8c4;display:flex;flex-wrap:wrap;gap:8px 18px}
   .hero .meta span{display:inline-flex;align-items:center;gap:8px}
   .hero .meta b{color:var(--sky);font-weight:500}
-
   /* ---- section frame ---- */
   section{padding:74px 0}
   .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:34px}
@@ -85,7 +83,6 @@
   .sec-head .side{font-size:13.5px;color:var(--slate)}
   .sec-head .side a{color:var(--cerulean-ink);font-weight:600;text-decoration:none}
   .sec-head .side a:hover{text-decoration:underline}
-
   /* ---- tools grid ---- */
   #tools{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -106,7 +103,6 @@
   .tool .cta{margin-top:20px;font-weight:700;font-size:14.5px;color:var(--accent,var(--cerulean));text-decoration:none;display:inline-flex;align-items:center;gap:8px}
   .tool .cta:hover{gap:11px}
   .tool .cta.disabled{color:var(--slate);font-weight:600;font-style:italic;pointer-events:none}
-
   /* ---- updates ---- */
   .updates{display:flex;flex-direction:column;border-top:1px solid var(--line)}
   .update{display:grid;grid-template-columns:148px 1fr auto;gap:22px;align-items:start;padding:22px 6px;border-bottom:1px solid var(--line)}
@@ -117,7 +113,6 @@
   .update .go{align-self:center;white-space:nowrap;font-weight:700;font-size:13.5px;color:var(--cerulean-ink);text-decoration:none}
   .update .go:hover{text-decoration:underline}
   .updates .note{font-size:13px;color:var(--slate);padding:18px 6px 0}
-
   /* ---- backed by ---- */
   #about{background:var(--navy);color:var(--white)}
   #about .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
@@ -131,7 +126,6 @@
   #about .link{margin-top:22px;display:inline-flex;align-items:center;gap:9px;color:#fff;font-weight:700;text-decoration:none;font-size:15px}
   #about .link:hover{gap:12px}
   #about .link .u{border-bottom:2px solid var(--cerulean)}
-
   /* ---- footer ---- */
   footer.site{background:var(--navy-deep);color:#9fb6c8;padding:46px 0 36px;font-size:13.5px}
   footer.site .wrap{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between}
@@ -143,16 +137,14 @@
   footer.site a:hover{color:#fff;text-decoration:underline}
   footer.site .fine{width:100%;border-top:1px solid rgba(255,255,255,.08);margin-top:14px;padding-top:18px;color:#7f97aa;font-size:12px;line-height:1.6}
   footer.site .fine .priv{font-family:var(--mono);font-size:11px;color:#6f8a9e;margin-top:6px}
-
   /* ---- reveal ---- */
   .reveal{opacity:0;transform:translateY(12px)}
   .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
-
   @media (max-width:860px){
     .tools{grid-template-columns:1fr;gap:16px}
     #about .wrap{grid-template-columns:1fr;gap:28px}
     section{padding:56px 0}
-    .hero .wrap{padding-top:56px;padding-bottom:56px}
+    .hero .wrap{padding-top:32px;padding-bottom:56px}
   }
   @media (max-width:560px){
     nav.links a:not(.cta){display:none}
@@ -168,7 +160,6 @@
 </style>
 </head>
 <body>
-
 <!-- reusable suite mark -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="suitemark" viewBox="0 0 100 100">
@@ -178,7 +169,6 @@
     <rect x="54" y="54" width="40" height="40" rx="9" fill="none" stroke="#8FA8BC" stroke-width="3.5"/>
   </symbol>
 </svg>
-
 <!-- pinned announcement bar (shows the featured update) -->
 <div class="topbar" id="topbar" role="region" aria-label="Latest announcement">
   <div class="wrap">
@@ -188,7 +178,6 @@
     <button class="x" id="topbarX" aria-label="Dismiss announcement">&times;</button>
   </div>
 </div>
-
 <header class="nav">
   <div class="wrap">
     <a class="brandmark" href="#top"><svg><use href="#suitemark"/></svg><span>CNP<span class="suite">Suite</span></span></a>
@@ -200,7 +189,6 @@
     </nav>
   </div>
 </header>
-
 <main id="top">
   <section class="hero">
     <div class="wrap">
@@ -208,6 +196,23 @@
       <h1>Tools for Child Nutrition Program <em>administration.</em></h1>
       <p class="lede">A growing suite of practical, regulation-grounded tools for the state agency staff who administer USDA Child Nutrition Programs — built and run by LS Digital Solutions.</p>
       <div class="actions">
+        <!-- ============================================================
+             EDIT HERE — Featured button (hero)
+             This button is plain, hand-edited HTML — no script or data
+             file drives it, so nothing else on the page needs to change
+             when you update it.
+               • Text: edit the words inside the <a> tag below.
+                 Recommended ~20-32 characters so it stays close to the
+                 visual weight of "Explore the tools" and "About LS
+                 Digital Solutions" next to it. Longer text still works
+                 (buttons wrap to a new line on narrow screens) but will
+                 look heavier than its neighbors and may wrap to two
+                 lines on its own.
+               • Link: edit href="" below.
+               • To remove it entirely: delete this whole <a class="btn
+                 gold">...</a> element (and this comment block).
+             ============================================================ -->
+        <a class="btn gold" href="/reporting-calendar/">New! USDA Reporting Calendar</a>
         <a class="btn primary" href="#tools">Explore the tools</a>
         <a class="btn ghost" href="https://www.lsdigitalsolutions.com" target="_blank" rel="noopener">About LS Digital Solutions →</a>
       </div>
@@ -218,7 +223,6 @@
       </div>
     </div>
   </section>
-
   <section id="tools">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -231,7 +235,6 @@
       <div class="tools" id="toolGrid"></div>
     </div>
   </section>
-
   <section id="updates" style="background:var(--paper)">
     <div class="wrap">
       <div class="sec-head reveal">
@@ -244,7 +247,6 @@
       <div class="updates" id="updateList"></div>
     </div>
   </section>
-
   <section id="about">
     <div class="wrap">
       <div class="reveal">
@@ -262,7 +264,6 @@
     </div>
   </section>
 </main>
-
 <footer class="site">
   <div class="wrap">
     <div class="col">
@@ -272,7 +273,7 @@
     <div class="col">
       <h5>Tools</h5>
       <a href="https://www.cnpregai.com" target="_blank" rel="noopener">CNPReg AI</a>
-      <a href="#" id="footDeck">Readiness Deck</a>
+      <a href="/reporting-calendar/">Reporting Calendar</a>
       <a href="#updates">What's new</a>
     </div>
     <div class="col">
@@ -286,7 +287,6 @@
     </div>
   </div>
 </footer>
-
 <script>
 /* =====================================================================
    EDIT HERE — TOOLS
@@ -295,15 +295,15 @@
    ===================================================================== */
 const TOOLS=[
   {
-  key:"reporting-calendar", status:"live",
-  accent:"#0077B6", soft:"#e6f1f9",
-  kicker:"Reporting deadlines",
-  name:"Fiscal Year Reporting Calendar",
-  desc:"Every FNS report due from your state agency, organized by due date across the fiscal year — plus a downloadable/subscribable calendar.",
-  badges:["33 reports","Annual · Quarterly · Monthly","Free · no login"],
-  cta:"Open the calendar", url:"/reporting-calendar/",
-  icon:'<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
-},
+    key:"reporting-calendar", status:"live",
+    accent:"#0077B6", soft:"#e6f1f9",
+    kicker:"Reporting deadlines",
+    name:"Fiscal Year Reporting Calendar",
+    desc:"Every FNS report due from your state agency, organized by due date across the fiscal year — plus a downloadable calendar file.",
+    badges:["33 reports","Annual · Quarterly · Monthly","Free · no login"],
+    cta:"Open the calendar", url:"/reporting-calendar/",
+    icon:'<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+  },
   {
     key:"cnpregai", status:"live",
     accent:"#0077B6", soft:"#e6f1f9",
@@ -321,57 +321,58 @@ const TOOLS=[
     name:"NSLP Readiness Deck & Checklist",
     desc:"Drill the items a federal reviewer probes when evaluating your state agency's administration of the National School Lunch Program. Tap a card to reveal the requirement, the citation, and what to have ready.",
     badges:["44 cards","11 ME areas","Saves your progress"],
-    cta:"Open the deck", url:"/nslp-rdeck/",   /* bundled on cnpsuite.com */
+    cta:"Open the deck", url:"/nslp-rdeck/",
     icon:'<rect x="4" y="5" width="13" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 5l11 2-2 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
   },
- {
+  {
     key:"cacfp deck", status:"live",
     accent:"#C68A1E", soft:"#f6ecd9",
     kicker:"CACFP ME Prep & self-accessment",
     name:"CACFP Readiness Deck & Checklist",
     desc:"Built for state agency staff preparing for a federal Management Evaluation of CACFP administration. Study the questions a reviewer probes, then work the evidence checklist so every document is on hand before the review begins.",
     badges:["20+ Prep Cars","Printable Checklist"],
-    cta:"Open the deck", url:"/cacfp-rdeck/", /* bundled on cnpsuite.com */
+    cta:"Open the deck", url:"/cacfp-rdeck/",
     icon:'<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
   },
-   {
+  {
     key:"sfsp deck", status:"live",
     accent:"#C68A1E", soft:"#f6ecd9",
     kicker:"SFSP ME Prep & self-accessment",
     name:"SFSP Readiness Deck & Checklist",
     desc:"Built for state agency staff preparing for a federal Management Evaluation of SFSP administration. Study the questions a reviewer probes, then work the evidence checklist so every document is on hand before the review begins.",
     badges:["20 Cards for review","Online checklist"],
-    cta:"Open the deck", url:"/sfsp-rdeck/", /* bundled on cnpsuite.com */
+    cta:"Open the deck", url:"/sfsp-rdeck/",
     icon:'<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
-  } 
+  }
 ];
-
 /* =====================================================================
-   EDIT HERE — ANNOUNCEMENTS  (newest first)
-   The first item also fills the pinned bar at the top of the page.
-   tag = short label · when = display date · link optional ({label,href}).
+   EDIT HERE — ANNOUNCEMENTS  (feeds the pinned topbar + the Updates list)
+   Order in this array no longer matters — everything is sorted by
+   `date` (YYYY-MM-DD, required) before rendering, newest first. The
+   single newest item drives the pinned topbar, so you only ever edit
+   announcements in one place.
+   tag = short label · when = display date text · link optional ({label,href}).
    ===================================================================== */
 const ANNOUNCEMENTS=[
   {
-    when:"Jun 2026", tag:"USDA · Grant",
-    title:"USDA releases the CACFP Technology Innovation Grant (TIG)",
-    body:"New federal funding to help state agencies modernize CACFP technology, data systems, and program integrity. Review eligibility and application timelines before the window closes.",
-    link:{label:"Read the announcement", href:"/news/"}
+    date:"2026-07-08", when:"Jul 2026", tag:"Tool Update",
+    title:"ME Checklist added to the NSLP Readiness Deck",
+    body:"The NSLP Readiness Deck now has a checklist added.",
+    link:{label:"Open the deck", href:"/nslp-rdeck/"}
   },
   {
-    when:"Jul 2026", tag:"New tool",
+    date:"2026-07-01", when:"Jul 2026", tag:"New tool",
     title:"The CACFP Readiness Deck & Checklist is live",
     body:"Management Evaluation areas, each with the requirement, the citation, and what to have ready for the reviewer.",
     link:{label:"Open the deck", href:"/cacfp-rdeck/"}
   },
   {
-    when:"Jul 2026", tag:"Tool Update",
-    title:"ME Checklist added to the NSLP Readiness Deck",
-    body:"The NSLP Readiness Deck now has a checklist added.",
-    link:{label:"Open the deck", href:"/nslp-rdeck/"}
+    date:"2026-06-02", when:"Jun 2026", tag:"USDA · Grant",
+    title:"USDA releases the CACFP Technology Innovation Grant (TIG)",
+    body:"New federal funding to help state agencies modernize CACFP technology, data systems, and program integrity. Review eligibility and application timelines before the window closes.",
+    link:{label:"Read the announcement", href:"/news/"}
   }
 ];
-
 /* ---------- render tools ---------- */
 function iconSvg(p){return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'+p+'</svg>';}
 function renderTools(){
@@ -394,11 +395,14 @@ function renderTools(){
     </article>`;
   }).join("");
 }
-
+/* ---------- shared: announcements sorted newest-first ---------- */
+function sortedAnnouncements(){
+  return [...ANNOUNCEMENTS].sort((a,b)=> new Date(b.date) - new Date(a.date));
+}
 /* ---------- render announcements ---------- */
 function renderUpdates(){
   const list=document.getElementById("updateList");
-  list.innerHTML=ANNOUNCEMENTS.map(a=>{
+  list.innerHTML=sortedAnnouncements().map(a=>{
     const go=a.link?`<a class="go" href="${a.link.href}"${a.link.href.startsWith("http")?' target="_blank" rel="noopener"':''}>${a.link.label} →</a>`:`<span></span>`;
     return `<div class="update reveal">
       <div class="when">${a.when}</div>
@@ -407,17 +411,15 @@ function renderUpdates(){
     </div>`;
   }).join("")+`<div class="note">More updates as regulations change and tools ship. Bookmark this page to keep current.</div>`;
 }
-
-/* ---------- pinned bar from featured announcement ---------- */
+/* ---------- pinned bar from newest announcement ---------- */
 function renderTopbar(){
-  const a=ANNOUNCEMENTS[0];
+  const a=sortedAnnouncements()[0];
   if(!a){document.getElementById("topbar").classList.add("hide");return;}
   const msg=document.getElementById("topbarMsg");
   msg.textContent=a.title;
-  if(a.link&&a.link.href){msg.setAttribute("href",a.link.href);} 
+  if(a.link&&a.link.href){msg.setAttribute("href",a.link.href);}
   document.getElementById("topbarX").onclick=()=>document.getElementById("topbar").classList.add("hide");
 }
-
 /* ---------- scroll reveal ---------- */
 function setupReveal(){
   const els=[...document.querySelectorAll(".reveal")];
@@ -427,15 +429,12 @@ function setupReveal(){
   },{threshold:.12});
   els.forEach(e=>io.observe(e));
 }
-
 /* ---------- init ---------- */
 renderTools();
 renderUpdates();
 renderTopbar();
 setupReveal();
 document.getElementById("yr").textContent=new Date().getFullYear();
-// keep footer "Readiness Deck" link in sync with the tool's url
-(function(){const d=TOOLS.find(t=>t.key==="deck");if(d&&d.url){document.getElementById("footDeck").setAttribute("href",d.url);}})();
 </script>
 </body>
 </html>
