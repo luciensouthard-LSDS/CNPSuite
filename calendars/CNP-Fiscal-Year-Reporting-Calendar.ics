@@ -1,0 +1,492 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CNPSuite.com//CNP Fiscal Year Reporting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALDESC:Child Nutrition Program reporting deadlines for State agencie
+ s\, based on USDA FNS Memo SP 21-2016 (Fiscal Year Reporting Timeline and 
+ Reporting Table\, Dec 28\, 2015). Recurs annually. Dates are subject to ch
+ ange per current-year FNS guidance -- confirm with your FNS Regional Offic
+ e before relying on any "as applicable" or approximate date. Source: fns.u
+ sda.gov/forms
+X-WR-CALNAME:CNP Fiscal Year Reporting Deadlines (FNS SP 21-2016)
+X-PUBLISHED-TTL:P1W
+BEGIN:VEVENT
+SUMMARY:FNS-13 due: State Revenue Matching Requirement Report
+DTSTART;VALUE=DATE:20251031
+DTEND;VALUE=DATE:20251031
+DTSTAMP;VALUE=DATE:20260709
+UID:2320cd10-579b-4444-b09b-4962955524f7@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-13 | Program: Schools (NSLP/SBP/SMP) | Frequency: An
+ nual\nProvides data necessary to monitor the State Revenue Matching Requir
+ ement.\nSubmit via: FPRS\nDue: October 31.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-13 due: State Revenue Matching Requirement Repor
+ t
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-13 due: State Revenue Matching Requirement Repor
+ t
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-10 Annual due: School Program Operations (Items 10-16)
+DTSTART;VALUE=DATE:20251015
+DTEND;VALUE=DATE:20251015
+DTSTAMP;VALUE=DATE:20260709
+UID:ca7e750c-614d-4db2-8ba6-35600c5a4976@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-10 | Program: Schools (NSLP/SBP/SMP) | Frequency: An
+ nual (October)\nReport of School Program Operations - annual Items 10-16. 
+ Exact day-of-month not specified in source memo\; confirm with FNS.\nSubmi
+ t via: FPRS\nDue: October.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-10 Annual due: School Program Operations (Items 
+ 10-16)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-10 Annual due: School Program Operations (Items 
+ 10-16)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-44 Annual due: CACFP Report\, Part C (Oct instance)
+DTSTART;VALUE=DATE:20251015
+DTEND;VALUE=DATE:20251015
+DTSTAMP;VALUE=DATE:20260709
+UID:a93ad1cf-feef-4443-bc25-148ac6b3f7b3@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-44 | Program: CACFP | Frequency: Annual\, twice/year
+  (October and March)\nReport of the Child and Adult Care Food Program - an
+ nual Part C. Exact day-of-month not specified in source memo\; confirm wit
+ h FNS.\nSubmit via: FPRS\nDue: October (also see March instance).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-44 Annual due: CACFP Report\, Part C (Oct instan
+ ce)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-44 Annual due: CACFP Report\, Part C (Oct instan
+ ce)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:School Food Safety Inspection Report due
+DTSTART;VALUE=DATE:20251115
+DTEND;VALUE=DATE:20251115
+DTSTAMP;VALUE=DATE:20260709
+UID:172f120c-00c5-4801-9137-cecbd440008d@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: School Food Safety Inspection | Program: Schools | Frequ
+ ency: Annual\nReport of total safety inspections for SFAs in each State ag
+ ency.\nSubmit via: Email - NSLPFoodSafetyInspections@fns.usda.gov\nDue: No
+ vember 15.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: School Food Safety Inspection Report due
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: School Food Safety Inspection Report due
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-834 due: Direct Certification Rate Data Element Report
+DTSTART;VALUE=DATE:20251201
+DTEND;VALUE=DATE:20251201
+DTSTAMP;VALUE=DATE:20260709
+UID:04f54bfa-6f62-4869-b6e4-97feb85c2ca7@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-834 | Program: Schools (NSLP/SNAP) | Frequency: Annu
+ al\nData elements #2 (SNAP) and #3 (NSLP) for annual calculation of Direct
+  Certification Rate.\nSubmit via: FPRS\nDue: December 1.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-834 due: Direct Certification Rate Data Element 
+ Report
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-834 due: Direct Certification Rate Data Element 
+ Report
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:SF-425 CN-CACFP-Audit due (as applicable)
+DTSTART;VALUE=DATE:20251229
+DTEND;VALUE=DATE:20251229
+DTSTAMP;VALUE=DATE:20260709
+UID:ade44566-f725-4d7a-bb6c-a61da3f7f245@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: SF-425 CN-CACFP-Audit | Program: CACFP | As applicable: 
+ required by State agencies receiving reallocated CACFP Audit funds.\nFrequ
+ ency: Annual (1st yr) / Final (2nd yr)\nSubmit via: FPRS\nDue: December 29
+  (1st yr)\; December 29 (2nd yr\, Final).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: SF-425 CN-CACFP-Audit due (as applicable)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: SF-425 CN-CACFP-Audit due (as applicable)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-777 CN Final Report due
+DTSTART;VALUE=DATE:20251229
+DTEND;VALUE=DATE:20251229
+DTSTAMP;VALUE=DATE:20260709
+UID:72a92cb0-44ba-49df-a015-abecd33d6abb@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-777 CN | Program: All (CACFP\, Summer\, Schools) | F
+ requency: Quarterly + Final\nFinancial Status Report: Child Nutrition. Fin
+ al due 90 days after end of 4th quarter.\nSubmit via: FPRS\nDue: ~December
+  29 (90 days after Sep 30 FY-end).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-777 CN Final Report due
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-777 CN Final Report due
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Quarterly CNP Reports due (Q1: Oct-Dec)
+DTSTART;VALUE=DATE:20260130
+DTEND;VALUE=DATE:20260130
+DTSTAMP;VALUE=DATE:20260709
+UID:0666c870-8d88-454d-b491-272e6966d353@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:30 days after end of Quarter 1 (Oct-Dec). Forms typically due 
+ on this cycle:\n- QTR-SFA-CERT (Quarterly SFA Certification Report)\n- FNS
+ -777 CN (Financial Status Report: Child Nutrition)\n- FNS-777 SAE (Financi
+ al Status Report: SAE Funds\, Q1-7)\n- SF-425 CN-HHFKA-ADM (Section 201 Fu
+ nds)\n- SF-425 FFVP (Fresh Fruits & Vegetables Program)\n- SF-425 NSLPE / 
+ NSLPE2 (Equipment Assistance Grants)\n- SF-425 CN-ART / CN-DC (as applicab
+ le - grant funding recipients)\n- ART & DC Grants Progress Reports (as app
+ licable)\n- NSLP Equipment Grants Progress Reports\n- FNS-44 Part B (CACFP
+ )\nSubmit via: FPRS (email for progress reports - see Reporting Table)\nVe
+ rify which forms apply to your state/grants.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q1: Oct-Dec)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q1: Oct-Dec)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-828 due: SFA Paid Lunch Price Report
+DTSTART;VALUE=DATE:20260131
+DTEND;VALUE=DATE:20260131
+DTSTAMP;VALUE=DATE:20260709
+UID:732e8f27-7e5b-40ae-8154-5738dd8bbf8d@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-828 | Program: Schools | Frequency: Annual\nReport o
+ f most frequently charged paid lunch price by grade categories in each SFA
+ .\nSubmit via: Email - paidlunchpricereport@fns.usda.gov\nDue: last operat
+ ing day of January.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-828 due: SFA Paid Lunch Price Report
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-828 due: SFA Paid Lunch Price Report
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-640 due: Coordinated Review Effort (as applicable)
+DTSTART;VALUE=DATE:20260301
+DTEND;VALUE=DATE:20260301
+DTSTAMP;VALUE=DATE:20260709
+UID:5292fea7-7c8d-4f75-b049-944286131a5a@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-640 | Program: Schools | As applicable: only for Sta
+ te agencies that have not transitioned to the new Administrative Review pr
+ ocess.\nFrequency: Annual\nReports results of first/follow-up reviews from
+  the preceding school year review period.\nSubmit via: Email - cnstatesyst
+ ems@fns.usda.gov\nDue: March 1.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-640 due: Coordinated Review Effort (as applicabl
+ e)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-640 due: Coordinated Review Effort (as applicabl
+ e)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-742\, FNS-742A & Ameliorative Action Report due
+DTSTART;VALUE=DATE:20260315
+DTEND;VALUE=DATE:20260315
+DTSTAMP;VALUE=DATE:20260709
+UID:8120a29f-2ee2-4c41-9b25-36726c2939f7@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Three items due the same day:\n- FNS-742 (SFA Verification Col
+ lection Report) - Submit via FPRS\n- FNS-742A (Second Review of Applicatio
+ ns) - Submit via Email: cnstatesystems@fns.usda.gov\n- Ameliorative Action
+  Report (7 CFR 245.12(i)) - Submit via Email: cnstatesystems@fns.usda.gov\
+ nProgram: Schools | Frequency: Annual | Due: March 15.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-742\, FNS-742A & Ameliorative Action Report due
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-742\, FNS-742A & Ameliorative Action Report due
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-44 Annual due: CACFP Report\, Part C (Mar instance)
+DTSTART;VALUE=DATE:20260320
+DTEND;VALUE=DATE:20260320
+DTSTAMP;VALUE=DATE:20260709
+UID:c9702a40-0c9e-406b-bf6f-1e9b6e3dc82b@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-44 | Program: CACFP | Frequency: Annual\, twice/year
+  (October and March)\nAnnual Part C. Exact day-of-month not specified in s
+ ource memo\; confirm with FNS.\nSubmit via: FPRS\nDue: March (also see Oct
+ ober instance).
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-44 Annual due: CACFP Report\, Part C (Mar instan
+ ce)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-44 Annual due: CACFP Report\, Part C (Mar instan
+ ce)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-525 due: SAE Funds Reallocation Report
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260401
+DTSTAMP;VALUE=DATE:20260709
+UID:2bdfa85d-4549-492a-a058-847ff4b083bb@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Form: FNS-525 | Program: All | Frequency: Annual\nReport on cu
+ rrent status of SAE funds\; request additional funds through reallocation 
+ or return of excess funds.\nSubmit via: FNS Regional Office\nDue: April\, 
+ per that year's memo - exact date is announced annually. Confirm current d
+ ue date with your FNS Regional Office before the placeholder date above.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-525 due: SAE Funds Reallocation Report
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-525 due: SAE Funds Reallocation Report
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Quarterly CNP Reports due (Q2: Jan-Mar)
+DTSTART;VALUE=DATE:20260430
+DTEND;VALUE=DATE:20260430
+DTSTAMP;VALUE=DATE:20260709
+UID:b8a772bb-85bc-466f-8663-c8faed158eb9@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:30 days after end of Quarter 2 (Jan-Mar). Same form list as th
+ e Q1 reminder (QTR-SFA-CERT\, FNS-777 CN\, FNS-777 SAE\, SF-425 CN-HHFKA-A
+ DM\, SF-425 FFVP\, SF-425 NSLPE/NSLPE2\, SF-425 CN-ART/CN-DC\, ART & DC pr
+ ogress reports\, NSLP Equipment Grants progress reports\, FNS-44 Part B).\
+ nSubmit via: FPRS / Email as applicable - see Reporting Table.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q2: Jan-Mar)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q2: Jan-Mar)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CEP Notification and Publication due
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260501
+DTSTAMP;VALUE=DATE:20260709
+UID:b264d6fe-9a8e-4269-901c-72823e75c526@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Requirement: Community Eligibility Provision (CEP) Annual Noti
+ fication and Publication | Program: Schools | Frequency: Annual\nState age
+ ncies provide a link to a public website listing LEAs/schools eligible\, n
+ ear-eligible for\, or currently participating in CEP.\nSubmit via: Email -
+  cepnotification@fns.usda.gov\nDue: May 1.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: CEP Notification and Publication due
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: CEP Notification and Publication due
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FNS-10 & FNS-418 Annual items due (July)
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260715
+DTSTAMP;VALUE=DATE:20260709
+UID:953435cd-b6b0-4d90-975d-13b49aae4a1a@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Two annual items due in July (exact day-of-month not specified
+  in source memo\; confirm with FNS):\n- FNS-10 Item 17 (School Program Ope
+ rations) - Submit via FPRS\n- FNS-418 Parts C & D (Summer Food Service Pro
+ gram Report) - Submit via FPRS\nProgram: Schools / SFSP | Frequency: Annua
+ l | Due: July.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-10 & FNS-418 Annual items due (July)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: FNS-10 & FNS-418 Annual items due (July)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Quarterly CNP Reports due (Q3: Apr-Jun)
+DTSTART;VALUE=DATE:20260730
+DTEND;VALUE=DATE:20260730
+DTSTAMP;VALUE=DATE:20260709
+UID:3a607f7a-4665-4f01-ab3a-16e1d6ce049c@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:30 days after end of Quarter 3 (Apr-Jun). Same form list as th
+ e Q1 reminder (QTR-SFA-CERT\, FNS-777 CN\, FNS-777 SAE\, SF-425 CN-HHFKA-A
+ DM\, SF-425 FFVP\, SF-425 NSLPE/NSLPE2\, SF-425 CN-ART/CN-DC\, ART & DC pr
+ ogress reports\, NSLP Equipment Grants progress reports\, FNS-44 Part B).\
+ nSubmit via: FPRS / Email as applicable - see Reporting Table.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q3: Apr-Jun)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q3: Apr-Jun)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Quarterly CNP Reports due (Q4: Jul-Sep)
+DTSTART;VALUE=DATE:20251030
+DTEND;VALUE=DATE:20251030
+DTSTAMP;VALUE=DATE:20260709
+UID:e35551d0-79a8-4b4b-aa63-3821b02d8796@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:30 days after end of Quarter 4 (Jul-Sep) - i.e. due in late Oc
+ tober\, at the start of the next fiscal year. Same form list as the Q1 rem
+ inder (QTR-SFA-CERT\, FNS-777 CN\, FNS-777 SAE\, SF-425 CN-HHFKA-ADM\, SF-
+ 425 FFVP\, SF-425 NSLPE/NSLPE2\, SF-425 CN-ART/CN-DC\, ART & DC progress r
+ eports\, NSLP Equipment Grants progress reports\, FNS-44 Part B).\nSubmit 
+ via: FPRS / Email as applicable - see Reporting Table.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q4: Jul-Sep)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Quarterly CNP Reports due (Q4: Jul-Sep)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Review grant-specific FINAL report deadlines (90 days after grant 
+ end)
+DTSTART;VALUE=DATE:20251001
+DTEND;VALUE=DATE:20251001
+DTSTAMP;VALUE=DATE:20260709
+UID:d4348607-b4ac-4b60-9f1d-1c3ff8c8c694@cnpsuite.com
+RRULE:FREQ=YEARLY
+DESCRIPTION:Start-of-fiscal-year reminder: several Federal Financial Repor
+ ts and progress reports have a FINAL submission due 90 days after the end 
+ of their specific grant period\, rather than a fixed FY date:\n- SF-425 CN
+ -HHFKA-ADM (Final: 90 days after end of grant)\n- SF-425 FFVP (Final: 90 d
+ ays after end of grant)\n- SF-425 NSLPE / NSLPE2 (Final: 90 days after end
+  of grant)\n- SF-425 CN-ART / CN-DC (Final: 90 days after end of grant)\n-
+  ART & DC Grants Progress Reports (Final: 90 days after end of grant)\n- N
+ SLP Equipment Grants Progress Reports (Final: 90 days after end of grant)\
+ nCheck each grant's award/end date and add a one-off reminder 90 days out.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Review grant-specific FINAL report deadlines (90 day
+ s after grant end)
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Review grant-specific FINAL report deadlines (90 day
+ s after grant end)
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Monthly CNP Reports: 30-day Estimate / 90-day Actual due
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260101
+DTSTAMP;VALUE=DATE:20260709
+UID:78ff7591-16ba-4624-b81a-527eba4f63c0@cnpsuite.com
+RRULE:FREQ=MONTHLY
+DESCRIPTION:Recurring monthly placeholder for the 'monthly (30/90 day)' re
+ ports. Exact due date depends on each report's operating month\, not the c
+ alendar month of this reminder - adjust to your program's cycle:\n- FNS-10
+  (School Program Operations) - Items 5-9 - Submit via FPRS\n- FNS-44 (CACF
+ P Report) - Parts A & E monthly\; Part D is 90-day only - Submit via FPRS\
+ n- FNS-418 (Summer Food Service Program Report) - Part A\, during operatin
+ g months - Submit via FPRS\nRule: 'Estimated' data is due 30 days after th
+ e report month ends\; 'Actual' data is due 90 days after the report month 
+ ends.
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Monthly CNP 30/90-day report reminder
+TRIGGER:-P14D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Monthly CNP 30/90-day report reminder
+TRIGGER:-P3D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
