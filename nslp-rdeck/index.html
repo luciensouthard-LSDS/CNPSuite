@@ -1119,7 +1119,7 @@ function resetProgress(){
 }
 
 document.addEventListener("click", (e)=>{
-  if(e.target && e.target.id==="card") flip();
+  if(e.target.closest && e.target.closest("#card")) flip();
 });
 document.getElementById("flipBtn").addEventListener("click", flip);
 document.getElementById("prevBtn").addEventListener("click", ()=>goTo(-1));
