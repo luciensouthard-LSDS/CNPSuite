@@ -1,8 +1,162 @@
-<!-- The HTML structure -->
-<div id="news-feed">
-    <h3>USDA Child Nutrition Policy Memos</h3>
-    <ul id="feed-list"></ul>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USDA FNA Newsroom</title>
+<style>
+  :root {
+    --bg:#f4f5f7; --card:#ffffff; --ink:#1a1d21; --muted:#5b6472;
+    --line:#e3e6eb; --accent:#1a4480; --accent2:#2557a7;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  .bar { height:6px; background:var(--accent); }
+  header { max-width:760px; margin:0 auto; padding:28px 20px 8px; }
+  header h1 { font-size:24px; margin:0 0 2px; letter-spacing:-.01em; }
+  header p { margin:0; color:var(--muted); font-size:14px; }
+  main { max-width:760px; margin:0 auto; padding:12px 20px 60px; }
+  #status { color:var(--muted); font-size:14px; padding:14px 0; }
+  #status.error { color:#8a1c1c; }
+  #status button { margin-left:10px; font:inherit; font-size:14px; cursor:pointer;
+    background:var(--accent); color:#fff; border:0; border-radius:6px; padding:6px 12px; }
+  article { background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:18px 20px; margin:0 0 14px; }
+  article time { display:block; color:var(--muted); font-size:13px; margin-bottom:4px;
+    text-transform:uppercase; letter-spacing:.04em; }
+  article h2 { font-size:18px; line-height:1.35; margin:0 0 8px; }
+  article h2 a { color:var(--accent2); text-decoration:none; }
+  article h2 a:hover { text-decoration:underline; }
+  article p { margin:0 0 12px; color:#31363d; }
+  article .more { font-size:14px; color:var(--accent2); text-decoration:none; font-weight:600; }
+  article .more:hover { text-decoration:underline; }
+  footer { max-width:760px; margin:0 auto; padding:0 20px 40px; color:var(--muted); font-size:13px; }
+  footer a { color:var(--accent2); }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<header>
+  <h1>USDA FNA Newsroom</h1>
+  <p>Latest press releases from the Food and Nutrition Administration</p>
+</header>
+<main>
+  <div id="status">Loading latest releases…</div>
+  <div id="list"></div>
+</main>
+<footer>
+  Source: <a href="https://www.fna.usda.gov/newsroom" target="_blank" rel="noopener">fna.usda.gov/newsroom</a>.
+  Official U.S. government releases (public domain).
+</footer>
 
-<!-- Link your JS file at the bottom -->
-<script src="cnpnews.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  // The Newsroom feed. To ship without the proxy, host this page and fetch
+  // server-side instead — then set PROXY = "" .
+  var FEED_URL = "https://www.fna.usda.gov/rss-feeds/newsroom";
+  var PROXY = "https://api.allorigins.win/raw?url="; // runtime dependency (see note in chat)
+
+  var statusEl = document.getElementById("status");
+  var listEl = document.getElementById("list");
+
+  function setStatus(msg, isError, withRetry) {
+    statusEl.className = isError ? "error" : "";
+    statusEl.innerHTML = "";
+    statusEl.appendChild(document.createTextNode(msg));
+    if (withRetry) {
+      var b = document.createElement("button");
+      b.textContent = "Retry";
+      b.onclick = load;
+      statusEl.appendChild(b);
+    }
+  }
+
+  function textOf(node, tag) {
+    var el = node.getElementsByTagName(tag)[0];
+    return el ? el.textContent.trim() : "";
+  }
+
+  // Prefer full content if the feed provides it, else the summary.
+  function bodyOf(item) {
+    var full = item.getElementsByTagName("content:encoded")[0] ||
+               item.getElementsByTagName("encoded")[0];
+    var raw = full ? full.textContent : textOf(item, "description");
+    var tmp = document.createElement("div");
+    tmp.innerHTML = raw;
+    var text = (tmp.textContent || "").replace(/\s+/g, " ").trim();
+    return text.length > 600 ? text.slice(0, 597) + "…" : text;
+  }
+
+  function fmtDate(s) {
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return s || "";
+    return d.toLocaleDateString(undefined, { year:"numeric", month:"long", day:"numeric" });
+  }
+
+  function render(xmlString) {
+    var doc = new DOMParser().parseFromString(xmlString, "application/xml");
+    if (doc.getElementsByTagName("parsererror").length) {
+      setStatus("The feed could not be read right now.", true, true);
+      return;
+    }
+    var items = doc.getElementsByTagName("item");
+    if (!items.length) {
+      setStatus("No releases found in the feed.", true, true);
+      return;
+    }
+    var rows = [];
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      rows.push({
+        title: textOf(it, "title"),
+        link: textOf(it, "link"),
+        date: textOf(it, "pubDate"),
+        ts: Date.parse(textOf(it, "pubDate")) || 0,
+        body: bodyOf(it)
+      });
+    }
+    rows.sort(function (a, b) { return b.ts - a.ts; });
+
+    listEl.innerHTML = "";
+    rows.forEach(function (r) {
+      var art = document.createElement("article");
+      var titleHtml = r.link
+        ? '<a href="' + r.link.replace(/"/g, "&quot;") + '" target="_blank" rel="noopener">' + esc(r.title) + "</a>"
+        : esc(r.title);
+      art.innerHTML =
+        "<time>" + esc(fmtDate(r.date)) + "</time>" +
+        "<h2>" + titleHtml + "</h2>" +
+        (r.body ? "<p>" + esc(r.body) + "</p>" : "") +
+        (r.link ? '<a class="more" href="' + r.link.replace(/"/g, "&quot;") +
+          '" target="_blank" rel="noopener">Read full release →</a>' : "");
+      listEl.appendChild(art);
+    });
+    setStatus(rows.length + " releases · newest first", false, false);
+  }
+
+  function esc(s) {
+    return String(s || "").replace(/[&<>]/g, function (c) {
+      return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;";
+    });
+  }
+
+  function load() {
+    setStatus("Loading latest releases…", false, false);
+    listEl.innerHTML = "";
+    var url = PROXY ? PROXY + encodeURIComponent(FEED_URL) : FEED_URL;
+    fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      .then(render)
+      .catch(function () {
+        setStatus("Couldn't reach the newsroom feed. If you opened this as a file, it needs an internet connection (and the relay service must be up).", true, true);
+      });
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>
