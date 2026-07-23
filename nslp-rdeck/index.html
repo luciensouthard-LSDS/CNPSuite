@@ -484,465 +484,326 @@
 </footer>
 
 <script>
+/* =====================================================================
+   NSLP MANAGEMENT EVALUATION — State-Agency card set
+   Replace the existing `const AREAS = {...}` and `const CARDS = [...]`
+   blocks in nslp-rdeck with the two below. Nothing else changes:
+   the UI, progress, checklist, and print all read from these.
+
+   Framing rule: every card is something the STATE AGENCY must
+   demonstrate to FNS/FNA — not a rule an SFA follows.
+   Verified against current eCFR (title 7, up to date 7/2026) and the
+   FNS integrity rule. Still confirm against your FNA regional office's
+   ME guide before relying on it in a live review.
+   ===================================================================== */
+
 const AREAS = {
-  "cbi": "Certification & Benefit Issuance",
-  "verif": "Verification",
-  "claim": "Meal Counting & Claiming",
-  "pattern": "Meal Pattern & Nutrition",
-  "resource": "Resource Management",
-  "procure": "Procurement",
-  "civil": "Civil Rights",
-  "prof": "Professional Standards",
-  "safety": "Food Safety & Wellness",
-  "admin": "State Agency Administration",
-  "prov": "Special Provisions"
+  "me":      "ME Basics",
+  "monitor": "SFA Monitoring & Reviews",
+  "claims":  "Claims & Fiscal Action",
+  "agree":   "Agreements & Procurement Oversight",
+  "funds":   "Financial Management & SAE",
+  "guide":   "Training, Guidance & Corrective Action",
+  "civil":   "Civil Rights (State Level)",
+  "prov":    "Special Provisions Administration"
 };
 
 const CARDS = [
   {
-    "area": "cbi",
-    "prompt": "Income thresholds for free vs. reduced-price meals?",
-    "answer": "<b>Free:</b> household income at or below <b>130%</b> of the Federal Poverty Guidelines. <b>Reduced-price:</b> above 130% up to <b>185%</b>. Above 185% pays the full (paid) price. Thresholds update each year in the Income Eligibility Guidelines.",
-    "cite": "7 CFR 245.3; annual IEGs",
+    "area": "me",
+    "prompt": "What is a Management Evaluation, and what two things is FNS evaluating?",
+    "answer": "FNS (now FNA) conducts a <b>comprehensive evaluation of the State agency's administration</b> of the NSLP. Two prongs: <b>local compliance</b> — whether the SA has taken steps to ensure its SFAs comply — and <b>State agency compliance</b> — whether the SA has fulfilled its own State-level responsibilities and administers the Program per requirements and good management practices.",
+    "cite": "7 CFR 210.29(a),(c)",
     "ready": [
-      "Current-year IEG table",
-      "Sample of approved and denied applications",
-      "Determining-official records"
+      "Prior ME reports and closure / corrective-action letters",
+      "Your SA policy and procedure manual",
+      "The current FNA ME guide for your region"
     ]
   },
   {
-    "area": "cbi",
-    "prompt": "What is direct certification, and which programs confer categorical eligibility?",
-    "answer": "Certifying a child for free meals through a <b>data match</b> instead of an application. Categorical (free) eligibility comes from <b>SNAP, TANF, and FDPIR</b>; also directly certified are foster, homeless, migrant, runaway, and Head Start children. Benefits extend to all students in the same household.",
-    "cite": "7 CFR 245.6",
+    "area": "me",
+    "prompt": "What sources will FNS draw on to judge your state agency?",
+    "answer": "Your own <b>Administrative Reviews</b> of SFAs, <b>FNS reviews</b> of SFAs and schools, your <b>follow-up actions</b> to correct violations, <b>FNS observations</b> of your reviews, and <b>audit reports</b>.",
+    "cite": "7 CFR 210.29(b)",
     "ready": [
-      "DC match records and match frequency",
-      "Extension-of-benefits documentation",
-      "Source-list agreements"
+      "Completed AR files and the cycle schedule",
+      "Single Audit (2 CFR 200 Subpart F) reports",
+      "Records of corrective action on prior findings"
     ]
   },
   {
-    "area": "cbi",
-    "prompt": "What state-level direct certification result triggers a continuous improvement plan?",
-    "answer": "If the state directly certifies <b>fewer than 95%</b> of children in SNAP households, it must submit and carry out a <b>continuous improvement plan</b> to raise the rate.",
-    "cite": "7 CFR 245.6; HHFKA",
+    "area": "me",
+    "prompt": "Which State-level responsibility areas does the ME assess?",
+    "answer": "Among others: <b>use of Federal funds; reporting and recordkeeping; SFA agreements; FSMC contract review; the claims payment process; monitoring responsibilities; corrective action; overpayment recovery; claim disallowance; withholding of payments; SFA procurement oversight; training and guidance; civil rights; and SAE compliance</b>.",
+    "cite": "7 CFR 210.29(c)(2)",
     "ready": [
-      "Annual DC performance rate",
-      "CIP if below the 95% benchmark"
+      "A crosswalk of each area to where your evidence lives",
+      "A named staff owner for each area"
     ]
   },
   {
-    "area": "cbi",
-    "prompt": "How long does a free/reduced eligibility determination stay valid?",
-    "answer": "A determination is valid for the <b>entire school year</b> it is made. At the start of a new year, prior-year eligibility carries over for up to <b>30 operating days</b> until a new determination is made.",
-    "cite": "7 CFR 245.6(c)",
+    "area": "me",
+    "prompt": "What does the 'local compliance' prong require you to show?",
+    "answer": "That the SA <b>actively takes steps to ensure SFAs comply</b> — through complete reviews, validation of claims, technical assistance, and follow-up — not merely that the requirements exist on paper.",
+    "cite": "7 CFR 210.29(c)(1)",
     "ready": [
-      "Carryover tracking",
-      "Current-year rosters and approvals"
+      "Evidence of completed reviews across the cycle",
+      "Documented TA and follow-up provided to SFAs"
+    ]
+  },
+
+  {
+    "area": "monitor",
+    "prompt": "How often must you review each SFA, and what recently changed?",
+    "answer": "Each SFA at least once every <b>3 years</b> — or on a <b>longer cycle up to 5 years</b> if you identify high-risk SFAs, obtain an <b>FNS-approved plan</b>, and conduct targeted follow-up. A 3-year cycle needs no plan; a longer cycle does.",
+    "cite": "7 CFR 210.18(c)",
+    "ready": [
+      "AR schedule showing full-cycle coverage",
+      "Your FNS-approved high-risk plan (if on a cycle over 3 years)",
+      "Completed AR reports"
     ]
   },
   {
-    "area": "verif",
-    "prompt": "What is the annual verification completion deadline?",
-    "answer": "<b>November 15</b> each school year. The LEA verifies a sample of approved applications and reports results to the state agency by the established date.",
-    "cite": "7 CFR 245.6a",
+    "area": "monitor",
+    "prompt": "On a cycle longer than 3 years, which SFAs are 'high-risk' and what is owed them?",
+    "answer": "At minimum, any SFA with a <b>10% or greater certification &amp; benefit issuance error rate</b>, <b>incomplete verification</b>, or <b>significant/systemic errors</b> at its last AR. Each must receive a <b>targeted follow-up review within 2 years</b> of the initial review.",
+    "cite": "7 CFR 210.18(c)(2)",
     "ready": [
-      "Verification Collection Report",
-      "Notice-to-household and response records"
+      "High-risk criteria in your FNS-approved plan",
+      "List of high-risk SFAs with follow-up dates"
     ]
   },
   {
-    "area": "verif",
-    "prompt": "What is the standard verification sample size and selection basis?",
-    "answer": "The <b>lesser of 3% or 3,000</b> approved household applications, drawn from <b>error-prone</b> applications (income within <b>$100/month or $1,200/year</b> of an eligibility limit), as of <b>October 1</b>.",
-    "cite": "7 CFR 245.6a(c)",
+    "area": "monitor",
+    "prompt": "How often must you review SFAs that use a food service management company?",
+    "answer": "You must review each SFA operating with an FSMC on the <b>same cycle as your AR</b> — every 3 years, or up to 5 on an approved longer cycle. It is a distinct monitoring duty, now aligned to the AR cycle.",
+    "cite": "7 CFR 210.19(a)(5)",
     "ready": [
-      "Sample-size calculation",
-      "Error-prone selection list",
-      "Confirmation-review records"
+      "List of SFAs operating with an FSMC",
+      "Dates and findings of your FSMC reviews"
     ]
   },
   {
-    "area": "verif",
-    "prompt": "What is direct verification?",
-    "answer": "Before contacting households, the LEA may confirm eligibility against <b>SNAP/TANF/Medicaid</b> records (where the state is approved). It reduces household burden by removing already-confirmed applications from the sample.",
-    "cite": "7 CFR 245.6a(b)",
+    "area": "monitor",
+    "prompt": "After an AR finds problems, what must you require and verify?",
+    "answer": "A <b>corrective action plan</b> with timeframes, provide <b>technical assistance</b>, and <b>verify the SFA actually corrected</b> the deficiency — completing fiscal action where required.",
+    "cite": "7 CFR 210.18(l)-(n)",
     "ready": [
-      "Direct-verification source records",
-      "Reduced-sample documentation"
+      "CAPs with due dates",
+      "Follow-up verification evidence",
+      "Fiscal-action records tied to findings"
+    ]
+  },
+
+  {
+    "area": "claims",
+    "prompt": "What is your duty over the claims payment process?",
+    "answer": "You must <b>review and validate</b> SFA claims for reimbursement, ensure edit checks are performed, and confirm meals claimed are supported by point-of-service counts and current eligibility <b>before paying</b>.",
+    "cite": "7 CFR 210.8; 210.19(a)",
+    "ready": [
+      "Your claim-review / validation procedures",
+      "Records of validations and any adjustments",
+      "Edit-check review evidence"
     ]
   },
   {
-    "area": "claim",
-    "prompt": "Where must reimbursable meals be counted?",
-    "answer": "At the <b>point of service</b> — the count must correctly identify each reimbursable meal by category (free / reduced / paid) at the moment it is served, not reconstructed later.",
-    "cite": "7 CFR 210.7, 210.9",
+    "area": "claims",
+    "prompt": "When must the state agency take fiscal action?",
+    "answer": "To <b>recover overclaimed Federal funds</b> for certification, counting/claiming, and meal-pattern errors found in reviews. You may <b>disregard</b> meal-pattern fiscal action only in limited first-time, good-faith situations.",
+    "cite": "7 CFR 210.18(l); 210.19(c)",
     "ready": [
-      "POS counting-system description",
-      "Roster/back-up procedures"
+      "Fiscal-action calculations and determinations",
+      "Documentation supporting any disregard"
     ]
   },
   {
-    "area": "claim",
-    "prompt": "What is the edit-check requirement?",
-    "answer": "Daily category counts are compared against the number of children <b>eligible × an attendance factor</b>; any count exceeding that figure must be investigated and reconciled before the claim is filed.",
-    "cite": "7 CFR 210.8(a)",
+    "area": "claims",
+    "prompt": "What is your responsibility for claims that are not properly payable?",
+    "answer": "You must <b>disallow</b> — not pay — claims that are not properly payable, and <b>recover overpayments</b> already made, documenting the basis for each.",
+    "cite": "7 CFR 210.19(c); 210.29(c)(2)",
     "ready": [
-      "Edit-check worksheets",
-      "Reconciliation of flagged days"
+      "Disallowance determinations",
+      "Overpayment recovery ledger"
     ]
   },
   {
-    "area": "claim",
-    "prompt": "What is the 60-day rule for claims?",
-    "answer": "Original and upward-adjusted claims are generally <b>not paid if received more than 60 days</b> after the last day of the claim month, absent a state-approved exception.",
-    "cite": "7 CFR 210.8(b)–(c)",
+    "area": "claims",
+    "prompt": "When may you withhold Program payments?",
+    "answer": "You may <b>withhold payments</b> from an SFA that fails to meet Program requirements or corrective-action obligations, following the required notice and appeal procedures.",
+    "cite": "7 CFR 210.19(c)",
     "ready": [
-      "Claim submission logs",
-      "Any 60-day exception requests"
+      "Withholding actions and notices issued",
+      "Appeal / hearing records where applicable"
+    ]
+  },
+
+  {
+    "area": "agree",
+    "prompt": "What is the state–SFA agreement, and why does the ME care?",
+    "answer": "A <b>permanent (continuing) written agreement</b> is the condition of an SFA's participation; it binds the SFA to all Program requirements and is the legal basis for your oversight. FNS checks that current, signed agreements are on file.",
+    "cite": "7 CFR 210.9(b)",
+    "ready": [
+      "Current signed SFA agreements",
+      "Policy statements on file"
     ]
   },
   {
-    "area": "claim",
-    "prompt": "What is the state agency's claim-validation duty?",
-    "answer": "The state must <b>review and validate</b> SFA claims and edit checks and reconcile them, ensuring meals claimed are supported by point-of-service counts and current eligibility.",
-    "cite": "7 CFR 210.8, 210.18",
-    "ready": [
-      "State claim-review procedures",
-      "Validation results and any recoveries"
-    ]
-  },
-  {
-    "area": "pattern",
-    "prompt": "What components make up the NSLP lunch meal pattern?",
-    "answer": "Five components: <b>fruits, vegetables</b> (with weekly subgroups), <b>grains</b> (whole-grain-rich requirement), <b>meats/meat alternates</b>, and <b>fluid milk</b> — in the quantities set for each age/grade group.",
-    "cite": "7 CFR 210.10",
-    "ready": [
-      "Daily production records",
-      "Menu certification documentation"
-    ]
-  },
-  {
-    "area": "pattern",
-    "prompt": "Under Offer vs. Serve at lunch, what must a student take?",
-    "answer": "At least <b>three of the five components</b>, and at least one selection must be a <b>½ cup of fruit or vegetable</b>.",
-    "cite": "7 CFR 210.10(e)",
-    "ready": [
-      "OVS signage at the line",
-      "Cashier/server training records"
-    ]
-  },
-  {
-    "area": "pattern",
-    "prompt": "What dietary specifications must menus meet?",
-    "answer": "Weekly averages for <b>calories</b> (by age/grade), <b>saturated fat</b>, and <b>sodium</b>, plus <b>zero grams added trans fat</b> — averaged over the school week, not per meal.",
-    "cite": "7 CFR 210.10(f)",
-    "ready": [
-      "Nutrient analysis or menu certification",
-      "Product nutrition documentation"
-    ]
-  },
-  {
-    "area": "pattern",
-    "prompt": "What documentation proves meal-pattern compliance?",
-    "answer": "<b>Production records</b> showing foods offered, portion sizes, and quantities for each serving day, supported by standardized recipes and <b>CN labels or product formulation statements</b>.",
-    "cite": "7 CFR 210.10",
-    "ready": [
-      "Production records",
-      "Standardized recipes",
-      "CN labels / PFS"
-    ]
-  },
-  {
-    "area": "resource",
-    "prompt": "What is the nonprofit school food service account requirement?",
-    "answer": "All revenue from the food service operation must be used <b>solely to operate or improve the food service</b>, for the benefit of children — not diverted to other purposes.",
-    "cite": "7 CFR 210.14(a)",
-    "ready": [
-      "Food service financial statements",
-      "Revenue and expenditure ledgers"
-    ]
-  },
-  {
-    "area": "resource",
-    "prompt": "What is the limit on net cash resources?",
-    "answer": "Net cash resources may not exceed <b>three months'</b> average operating expenditures. If exceeded, the state may require a <b>spend-down plan</b>.",
-    "cite": "7 CFR 210.9(b), 210.19(a)",
-    "ready": [
-      "Net-cash-resource calculation",
-      "Spend-down plan if over limit"
-    ]
-  },
-  {
-    "area": "resource",
-    "prompt": "What is Paid Lunch Equity (PLE)?",
-    "answer": "SFAs must show paid-lunch revenue (or non-federal contributions) is adequate by comparing the average paid price to the <b>free-minus-paid reimbursement gap</b>, using the PLE tool — subject to any current-year waiver.",
-    "cite": "7 CFR 210.14(e)",
-    "ready": [
-      "PLE tool calculation",
-      "Board-approved pricing records"
-    ]
-  },
-  {
-    "area": "resource",
-    "prompt": "What is required for revenue from nonprogram foods?",
-    "answer": "Revenue from <b>nonprogram foods</b> (à la carte, adult meals, vended items) must at least be proportional to their food cost: nonprogram revenue ÷ total revenue ≥ nonprogram food cost ÷ total food cost.",
-    "cite": "7 CFR 210.14(f)",
-    "ready": [
-      "Nonprogram food revenue tool",
-      "Cost and revenue data for nonprogram items"
-    ]
-  },
-  {
-    "area": "resource",
-    "prompt": "What must be demonstrated for indirect costs?",
-    "answer": "Only <b>allowable</b> indirect costs charged to the food service account, supported by an <b>approved indirect cost rate</b> and consistent treatment of direct vs. indirect costs.",
-    "cite": "2 CFR 200.414; 7 CFR 210.14",
-    "ready": [
-      "Approved indirect cost rate agreement",
-      "Cost-allocation records"
-    ]
-  },
-  {
-    "area": "procure",
-    "prompt": "Which procurement standards apply to NSLP purchases?",
-    "answer": "The federal uniform standards in <b>2 CFR 200.317–200.327</b> plus NSLP-specific rules — applying the <b>most restrictive</b> of federal, state, or local requirements.",
-    "cite": "7 CFR 210.21; 2 CFR 200",
-    "ready": [
-      "Written procurement procedures",
-      "Code of conduct / conflict-of-interest policy"
-    ]
-  },
-  {
-    "area": "procure",
-    "prompt": "What are the federal micro-purchase and simplified-acquisition thresholds?",
-    "answer": "<b>Micro-purchase:</b> up to <b>$10,000</b> (no competitive quotes if price is reasonable). <b>Simplified acquisition (small purchase):</b> up to <b>$250,000</b> with informal quotes; above that requires formal bidding. State/local limits may be lower.",
-    "cite": "2 CFR 200.1, 200.320",
-    "ready": [
-      "Quote and bid documentation by method",
-      "Procurement thresholds in policy"
-    ]
-  },
-  {
-    "area": "procure",
-    "prompt": "Geographic preference vs. Buy American — what's the difference?",
-    "answer": "<b>Geographic preference</b> is an <b>optional</b> scoring advantage for local unprocessed foods. <b>Buy American</b> is a <b>mandatory</b> requirement to buy domestic commodities and products to the maximum extent practicable.",
-    "cite": "7 CFR 210.21(d), (g)",
-    "ready": [
-      "Buy American monitoring",
-      "Documentation for any non-domestic exception"
-    ]
-  },
-  {
-    "area": "procure",
-    "prompt": "Key oversight points for a Food Service Management Company (FSMC) contract?",
-    "answer": "<b>Competitively procured</b>, uses the state-prototype contract, returns all <b>credits/discounts/rebates</b> to the nonprofit account, and observes term limits (initial year plus up to four renewals).",
+    "area": "agree",
+    "prompt": "What must you review in an SFA's FSMC contract?",
+    "answer": "That it was <b>competitively procured</b>, uses your <b>state-prototype contract</b>, returns all <b>credits/discounts/rebates</b> to the nonprofit account, and observes term limits (initial year plus up to four one-year renewals).",
     "cite": "7 CFR 210.16; 2 CFR 200",
     "ready": [
-      "FSMC contract and amendments",
-      "Cost reconciliation and rebate documentation"
+      "Your FSMC prototype and approval records",
+      "Reviewed FSMC contracts and cost reconciliations"
     ]
   },
   {
+    "area": "agree",
+    "prompt": "What is your oversight role over SFA procurement?",
+    "answer": "You must <b>ensure SFAs procure</b> per 2 CFR 200.317–200.327 and NSLP rules (applying the most restrictive of federal/state/local), and review procurement during the AR — including geographic preference and mandatory <b>Buy American</b>.",
+    "cite": "7 CFR 210.21; 2 CFR 200",
+    "ready": [
+      "Your procurement-review procedures / checklist",
+      "Buy American monitoring evidence from reviews"
+    ]
+  },
+
+  {
+    "area": "funds",
+    "prompt": "How does FNS assess your 'use of Federal funds'?",
+    "answer": "Whether Federal reimbursement and <b>USDA Foods entitlement</b> are used properly, claims reflect performance-based rates, and funds flow to SFAs' <b>nonprofit school food service accounts</b> for the benefit of children.",
+    "cite": "7 CFR 210.4; 210.29(c)(2)",
+    "ready": [
+      "Reimbursement and USDA Foods entitlement records",
+      "Documentation that funds reach the nonprofit account"
+    ]
+  },
+  {
+    "area": "funds",
+    "prompt": "What SAE obligations will FNS check?",
+    "answer": "That <b>State Administrative Expense funds</b> pay only <b>allowable state administrative costs</b> (staffing, monitoring, training, TA), that you meet any <b>matching / maintenance-of-effort</b> requirement, and that carryover and reallocation rules are followed.",
+    "cite": "7 CFR 235",
+    "ready": [
+      "SAE budget and expenditure detail",
+      "MOE / matching documentation",
+      "SAE plan and any amendments"
+    ]
+  },
+  {
+    "area": "funds",
+    "prompt": "What reporting and recordkeeping does the ME examine?",
+    "answer": "Timely, accurate required reports — e.g., the <b>FNS-742 Verification Summary</b> and <b>FNS-834 direct certification rate</b> — and record retention for the <b>current year plus 3 prior years</b> (longer if an audit or action is pending).",
+    "cite": "7 CFR 210.15; 210.20",
+    "ready": [
+      "Submitted FNS-742 and FNS-834 reports",
+      "Record-retention policy and sample files"
+    ]
+  },
+  {
+    "area": "funds",
+    "prompt": "What must you monitor about SFA financial health?",
+    "answer": "That each SFA maintains a <b>nonprofit school food service account</b> using revenue solely for the food service, and that <b>net cash resources</b> do not exceed <b>3 months'</b> average operating expenditures — requiring a spend-down plan if they do.",
+    "cite": "7 CFR 210.9(b); 210.14; 210.19(a)",
+    "ready": [
+      "Net-cash-resource monitoring records",
+      "Spend-down plans required of any SFA over the limit"
+    ]
+  },
+
+  {
+    "area": "guide",
+    "prompt": "How is your 'training and guidance' activity evaluated?",
+    "answer": "Whether you provide SFAs the <b>training, technical assistance, and written guidance</b> needed to administer the Program correctly — and can show it reached them.",
+    "cite": "7 CFR 210.19(a); 210.29(c)(2)",
+    "ready": [
+      "Training calendars, agendas, attendance",
+      "Guidance / memos issued to SFAs",
+      "Technical-assistance logs"
+    ]
+  },
+  {
+    "area": "guide",
+    "prompt": "What is your responsibility for corrective action across the state?",
+    "answer": "To <b>initiate and complete corrective action</b> — of SFA findings, and of any State-level deficiencies FNS identifies — tracking each to closure with verification.",
+    "cite": "7 CFR 210.18(m)-(n); 210.29(c)(2)",
+    "ready": [
+      "CAP tracking log to closure",
+      "Evidence of State-level corrective action on prior ME findings"
+    ]
+  },
+  {
+    "area": "guide",
+    "prompt": "What professional-standards duties sit with the state agency?",
+    "answer": "Ensuring SFAs meet <b>hiring and annual training standards</b> (directors 12 hrs, managers 10, staff 6, part-time 4 each school year), and meeting the qualification standards for your <b>State director</b> role.",
+    "cite": "7 CFR 210.30; 235.11(h)",
+    "ready": [
+      "Your monitoring of SFA training tracking",
+      "State-director qualification records"
+    ]
+  },
+
+  {
     "area": "civil",
-    "prompt": "What are the core civil rights compliance elements for NSLP?",
-    "answer": "Public notification, the <b>“And Justice for All”</b> poster displayed, the <b>current nondiscrimination statement</b> on materials, complaint procedures, reasonable accommodations, and meaningful language assistance.",
+    "prompt": "What civil rights compliance will FNS check at the state level?",
+    "answer": "That you carry out <b>public notification</b>, use the <b>current nondiscrimination statement</b>, display <b>“And Justice for All”</b> posters, provide language assistance, and <b>ensure SFA civil rights compliance</b> through your reviews.",
     "cite": "FNS Instruction 113-1; Title VI",
     "ready": [
-      "Poster placement",
-      "Nondiscrimination statement on documents",
-      "Public-notice records"
+      "Public-notification records",
+      "Civil rights review procedures for SFAs",
+      "Nondiscrimination statement on materials"
     ]
   },
   {
     "area": "civil",
     "prompt": "How must civil rights complaints be handled?",
-    "answer": "Accept and forward <b>all</b> discrimination complaints, verbal or written; the USDA Program Discrimination Complaint Form is <b>AD-3027</b>; keep a complaint log <b>even if none</b> are received.",
+    "answer": "Accept and <b>forward all</b> discrimination complaints (verbal or written); make the <b>AD-3027</b> form available; keep a <b>complaint log even if none</b> are received; refer to USDA's civil rights office as required.",
     "cite": "FNS Instruction 113-1",
     "ready": [
       "Complaint log",
       "AD-3027 availability",
-      "Referral procedure"
+      "Referral procedure to USDA OASCR"
     ]
   },
   {
     "area": "civil",
-    "prompt": "What is the current expectation for race/ethnicity data collection?",
-    "answer": "Collect participant racial/ethnic data by approved methods. <b>Visual identification / observation is no longer allowable</b> as a collection method.",
-    "cite": "FNS Instruction 113-1 (updated)",
+    "prompt": "What civil rights data and review duties apply?",
+    "answer": "Collect and maintain <b>racial/ethnic participation data</b> by currently approved methods, and include <b>civil rights compliance</b> in your reviews of SFAs. <b>Confirm the current data-collection method with FNA before the ME</b> — this area has been changing.",
+    "cite": "FNS Instruction 113-1",
     "ready": [
       "Data-collection method statement",
-      "Aggregated participation data"
+      "Civil rights findings from SFA reviews"
     ]
   },
+
   {
-    "area": "prof",
-    "prompt": "How many annual training hours are required by role?",
-    "answer": "<b>Directors 12</b>, <b>managers 10</b>, <b>staff (≥20 hrs/wk) 6</b>, <b>part-time (&lt;20 hrs/wk) 4</b> — each school year. Excess hours may be carried across two school years.",
-    "cite": "7 CFR 210.30(c)–(f)",
+    "area": "prov",
+    "prompt": "What CEP notification and publication deadlines fall on the state agency?",
+    "answer": "By <b>April 15</b>, notify each LEA of district-wide eligibility; by <b>May 1</b>, <b>publish</b> lists of eligible and <b>near-eligible</b> LEAs/schools on your website and give FNS a link. Near-eligible = ISP within 10 points below the threshold (currently <b>15%–24.99%</b>).",
+    "cite": "7 CFR 245.9(f)(6)-(7)",
     "ready": [
-      "Training tracking records",
-      "Certificates / agendas / sign-in sheets"
-    ]
-  },
-  {
-    "area": "prof",
-    "prompt": "What is the food-safety training requirement for directors?",
-    "answer": "New directors complete at least <b>8 hours of food-safety training</b> in their first year; <b>all</b> directors complete 8 hours of food-safety training <b>every 5 years</b>.",
-    "cite": "7 CFR 210.30(b)",
-    "ready": [
-      "Food-safety training records by director"
-    ]
-  },
-  {
-    "area": "prof",
-    "prompt": "Who must meet director hiring standards, and from when?",
-    "answer": "SFA directors <b>hired on or after July 1, 2015</b> must meet minimum education/experience standards that scale with LEA enrollment; directors hired earlier are <b>grandfathered</b>.",
-    "cite": "7 CFR 210.30(b)(1)",
-    "ready": [
-      "New-director hiring documentation",
-      "Degree/experience verification"
-    ]
-  },
-  {
-    "area": "safety",
-    "prompt": "What is the food-safety inspection requirement?",
-    "answer": "Each school obtains <b>two</b> health-department food-safety inspections per school year (or documents the requests made) and <b>posts</b> the most recent report.",
-    "cite": "7 CFR 210.13(b)",
-    "ready": [
-      "Inspection reports",
-      "Posting at the site",
-      "Request records if fewer than two"
-    ]
-  },
-  {
-    "area": "safety",
-    "prompt": "What food-safety program must an SFA maintain?",
-    "answer": "A <b>written food-safety program based on HACCP principles</b> covering every site where food is stored, prepared, or served.",
-    "cite": "7 CFR 210.13(c)",
-    "ready": [
-      "Written HACCP-based plan",
-      "Monitoring/temperature logs"
-    ]
-  },
-  {
-    "area": "safety",
-    "prompt": "What must a Local School Wellness Policy include?",
-    "answer": "Goals for nutrition promotion/education, physical activity, and wellness; nutrition standards for all foods sold/provided; public involvement; and a <b>triennial assessment</b> with public updates.",
-    "cite": "7 CFR 210.31",
-    "ready": [
-      "Adopted policy",
-      "Triennial assessment",
-      "Public-notification records"
-    ]
-  },
-  {
-    "area": "safety",
-    "prompt": "What do Smart Snacks (competitive food) standards cover?",
-    "answer": "<b>All foods and beverages sold to students on campus during the school day</b> outside the reimbursable meal must meet the competitive-food nutrition standards.",
-    "cite": "7 CFR 210.11",
-    "ready": [
-      "Product compliance documentation",
-      "Fundraiser-exemption tracking"
-    ]
-  },
-  {
-    "area": "admin",
-    "prompt": "How often must the state review each SFA?",
-    "answer": "At least once every <b>three years</b> through the Administrative Review (a longer cycle only under an approved waiver), covering the established performance standards.",
-    "cite": "7 CFR 210.18(c)",
-    "ready": [
-      "AR schedule and completed reviews",
-      "Any approved cycle waiver"
-    ]
-  },
-  {
-    "area": "admin",
-    "prompt": "What are the two performance standards assessed in an Administrative Review?",
-    "answer": "<b>PS 1 — Access to reimbursement:</b> certification & benefit issuance and meal counting & claiming. <b>PS 2 — Meal pattern:</b> meal components/quantities and dietary specifications.",
-    "cite": "7 CFR 210.18(g)–(h)",
-    "ready": [
-      "AR findings sorted by performance standard"
-    ]
-  },
-  {
-    "area": "admin",
-    "prompt": "What is fiscal action, and when is it required?",
-    "answer": "Recovery of <b>overclaimed federal funds</b> — required for certification, counting/claiming, and meal-pattern errors. The state may <b>disregard</b> meal-pattern fiscal action in limited first-time, good-faith situations.",
-    "cite": "7 CFR 210.18(l), 210.19(c)",
-    "ready": [
-      "Fiscal-action calculations",
-      "Corrective-action records"
-    ]
-  },
-  {
-    "area": "admin",
-    "prompt": "What must the state require when a review finds noncompliance?",
-    "answer": "A <b>corrective action plan</b> with timeframes, <b>technical assistance</b>, and <b>follow-up</b> to verify the SFA actually fixed the deficiency.",
-    "cite": "7 CFR 210.18(m)–(n)",
-    "ready": [
-      "CAP documentation",
-      "Follow-up verification evidence"
-    ]
-  },
-  {
-    "area": "admin",
-    "prompt": "What is the role of the state–SFA written agreement?",
-    "answer": "A <b>permanent (continuing) written agreement</b> is the condition of participation; it binds the SFA to all program requirements and is the basis for the state's oversight authority.",
-    "cite": "7 CFR 210.9(b)",
-    "ready": [
-      "Current signed agreements",
-      "Policy statements on file"
-    ]
-  },
-  {
-    "area": "admin",
-    "prompt": "What are State Administrative Expense (SAE) funds for?",
-    "answer": "Federal SAE funds support <b>state administration</b> — staffing, monitoring, training, and technical assistance — and must be spent on allowable administrative costs, with maintenance-of-effort/matching where applicable.",
-    "cite": "7 CFR 235",
-    "ready": [
-      "SAE budget and expenditures",
-      "Maintenance-of-effort documentation"
+      "Dated notification records to LEAs",
+      "Published eligibility / near-eligible lists",
+      "Link provided to FNS"
     ]
   },
   {
     "area": "prov",
-    "prompt": "What is the minimum ISP and the multiplier for CEP?",
-    "answer": "Minimum identified student percentage is <b>25%</b> (lowered from 40% in 2023). Free claiming percentage = <b>ISP × 1.6</b>; the rest is reimbursed at the paid rate. <b>15%–24.99%</b> is “near-eligible.”",
-    "cite": "7 CFR 245.9(f)",
+    "prompt": "What must you verify about an SFA's CEP eligibility and claiming?",
+    "answer": "That the <b>identified student percentage</b> is accurately calculated as of <b>April 1</b>, meets the <b>25%</b> minimum, and drives reimbursement via <b>ISP × 1.6</b> over a <b>4-year</b> cycle.",
+    "cite": "7 CFR 245.9(f)(3)-(4)",
     "ready": [
-      "ISP calculation as of April 1",
-      "CEP election records"
+      "ISP calculations and source data",
+      "CEP election and cycle records"
     ]
   },
   {
     "area": "prov",
-    "prompt": "What CEP notification and publication deadlines apply to the state?",
-    "answer": "By <b>April 15</b> the state notifies LEAs of district-wide eligibility; by <b>May 1</b> it <b>publishes</b> lists of eligible and near-eligible LEAs/schools on its website.",
-    "cite": "7 CFR 245.9(f)(6)–(7)",
+    "prompt": "What direct certification performance must you demonstrate?",
+    "answer": "Your statewide <b>DC rate</b> (reported on the FNS-834); if you directly certify <b>fewer than 95%</b> of SNAP-eligible children, you must submit and carry out a <b>continuous improvement plan</b>.",
+    "cite": "7 CFR 245.6; HHFKA",
     "ready": [
-      "Notification letters",
-      "Published eligibility lists with dates"
-    ]
-  },
-  {
-    "area": "prov",
-    "prompt": "How long is a CEP cycle, and when is ISP recalculated?",
-    "answer": "A <b>four-year</b> cycle. ISP may be locked for up to four years, with <b>optional annual recalculation</b> using the latest April 1 data and <b>required</b> recalculation on certain mid-cycle events.",
-    "cite": "7 CFR 245.9(f)",
-    "ready": [
-      "Cycle start dates",
-      "Recalculation records"
-    ]
-  },
-  {
-    "area": "prov",
-    "prompt": "How does Provision 2 reduce administrative work?",
-    "answer": "It sets claiming percentages in a <b>base year</b>, then serves all meals at no charge and claims on those percentages for the next <b>three years</b> (extendable) — ending annual applications and daily category counts in non-base years.",
-    "cite": "7 CFR 245.9(b)–(d)",
-    "ready": [
-      "Base-year records",
-      "Extension approvals"
+      "Annual DC performance rate (FNS-834)",
+      "Continuous improvement plan if below the 95% benchmark"
     ]
   }
 ];
