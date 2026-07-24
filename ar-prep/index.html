@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Readiness Deck — NSLP State Agency Administrative Review</title>
-<meta name="description" content="Drill the items a federal reviewer probes when evaluating a state agency's administration of the National School Lunch Program. Part of CNPSuite.">
+<title>Administrative Review Prep — NSLP · CNPSuite</title>
+<meta name="description" content="A preparation aid for School Food Authorities getting ready for their NSLP Administrative Review. Provided through CNPSuite.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -365,8 +365,8 @@
       <span class="wordmark">CNPSuite</span>
     </a>
     <span class="brand-group">
-      <span class="brand">Readiness Deck</span>
-      <span class="program-badge">NSLP</span>
+      <span class="brand">Review Prep</span>
+      <span class="program-badge">NSLP · AR</span>
       <span class="program-switch">
         <a href="https://www.cnpsuite.com/sfsp-rdeck">SFSP</a>
         <span class="sep">·</span>
@@ -418,7 +418,7 @@
   </div>
 
   <div class="stage">
-    <div class="card-count" id="cardCount">Card 1 / 44</div>
+    <div class="card-count" id="cardCount">Card 1 / 41</div>
     <div class="card-frame">
       <div class="ghost-card g2" id="ghost2"></div>
       <div class="ghost-card g1" id="ghost1"></div>
@@ -445,7 +445,7 @@
 
   <div class="nav-row">
     <button class="arrow-btn" id="prevBtn" aria-label="Previous card">‹</button>
-    <span class="nav-index" id="navIndex">1 / 44</span>
+    <span class="nav-index" id="navIndex">1 / 41</span>
     <button class="arrow-btn" id="nextBtn" aria-label="Next card">›</button>
   </div>
 
@@ -462,7 +462,7 @@
   </div>
 
   <div id="checklistView">
-    <p class="print-note">NSLP Management Evaluation — Evidence Checklist · CNPSuite Readiness Deck</p>
+    <p class="print-note">NSLP Administrative Review — Evidence Checklist · CNPSuite</p>
     <div class="cl-summary">
       <span class="cl-count"><b id="clDone">0</b> of <b id="clTotal">0</b> evidence items ready</span>
       <span>
@@ -474,7 +474,7 @@
   </div>
 
   <div class="about">
-    <p><strong>About this deck.</strong>A preparation aid for SFAs, drafted from current federal Administrative Review requirements. It is <strong>not a substitute for your State agency's official review guidance</strong> and not a guarantee of any review outcome. Confirm every item against your state's procedures and the current eCFR..</p>
+    <p><strong>About this deck.</strong> A preparation aid for SFAs, drafted from current federal Administrative Review requirements. It is <strong>not a substitute for your State agency's official review guidance</strong> and not a guarantee of any review outcome. Confirm every item against your state's procedures and the current eCFR.</p>
   </div>
 </main>
 
@@ -486,11 +486,7 @@
 <script>
 /* =====================================================================
    ADMINISTRATIVE REVIEW PREP — SFA-facing card set
-   For the /ar-prep/ deck. Voice: speaks to the SFA who is studying
-   ("what your reviewer checks, what to have ready"). The State-Agency
-   pitch lives in the packaging around it, not in these cards.
- 
-   Verified against current eCFR (title 7, 2026) and USDA guidance.
+   Voice: speaks to the SFA who is studying.
    A preparation aid — not a substitute for your state's official AR
    guidance, and not a guarantee of any review outcome.
    ===================================================================== */
@@ -509,7 +505,7 @@ const AREAS = {
   "compete":  "Competitive Foods",
   "prov":     "Special Provisions"
 };
- 
+
 const CARDS = [
   {
     "area": "review",
@@ -539,7 +535,7 @@ const CARDS = [
     "cite": "7 CFR 210.18(l)-(m)",
     "ready": ["Someone ready to respond to findings quickly", "A prior CAP as a template"]
   },
- 
+
   {
     "area": "cert",
     "prompt": "What are the income thresholds for free vs. reduced-price meals?",
@@ -568,7 +564,7 @@ const CARDS = [
     "cite": "7 CFR 245.6",
     "ready": ["Roster-to-determination reconciliation", "Benefit-issuance list matching approvals"]
   },
- 
+
   {
     "area": "verif",
     "prompt": "What is the annual verification completion deadline?",
@@ -590,7 +586,7 @@ const CARDS = [
     "cite": "7 CFR 245.6a(b)",
     "ready": ["Direct-verification source records", "Reduced-sample documentation"]
   },
- 
+
   {
     "area": "claim",
     "prompt": "Where must reimbursable meals be counted?",
@@ -612,7 +608,7 @@ const CARDS = [
     "cite": "7 CFR 210.8(b)-(c)",
     "ready": ["Claim submission logs", "Any 60-day exception requests"]
   },
- 
+
   {
     "area": "pattern",
     "prompt": "What components make up the NSLP lunch meal pattern?",
@@ -641,7 +637,7 @@ const CARDS = [
     "cite": "7 CFR 210.10",
     "ready": ["Production records", "Standardized recipes", "CN labels / product formulation statements"]
   },
- 
+
   {
     "area": "resource",
     "prompt": "What is the nonprofit school food service account requirement?",
@@ -670,7 +666,7 @@ const CARDS = [
     "cite": "7 CFR 210.14(f)",
     "ready": ["Nonprogram food revenue tool", "Cost and revenue data for nonprogram items"]
   },
- 
+
   {
     "area": "procure",
     "prompt": "Which procurement standards apply to your NSLP purchases?",
@@ -699,11 +695,11 @@ const CARDS = [
     "cite": "7 CFR 210.16; 2 CFR 200",
     "ready": ["FSMC contract and amendments", "Cost reconciliation and rebate documentation"]
   },
- 
+
   {
     "area": "civil",
     "prompt": "What are the core civil rights compliance elements?",
-    "answer": "Public notification, the <b>"And Justice for All"</b> poster displayed, the <b>current nondiscrimination statement</b> on materials, complaint procedures, reasonable accommodations, and meaningful language assistance.",
+    "answer": "Public notification, the <b>&quot;And Justice for All&quot;</b> poster displayed, the <b>current nondiscrimination statement</b> on materials, complaint procedures, reasonable accommodations, and meaningful language assistance.",
     "cite": "FNS Instruction 113-1; Title VI",
     "ready": ["Poster placement", "Nondiscrimination statement on documents", "Public-notice records"]
   },
@@ -721,7 +717,7 @@ const CARDS = [
     "cite": "FNS Instruction 113-1",
     "ready": ["Data-collection method statement", "Aggregated participation data"]
   },
- 
+
   {
     "area": "prof",
     "prompt": "How many annual training hours are required by role?",
@@ -743,7 +739,7 @@ const CARDS = [
     "cite": "7 CFR 210.30(b)(1)",
     "ready": ["New-director hiring documentation", "Degree/experience verification"]
   },
- 
+
   {
     "area": "safety",
     "prompt": "What is the food-safety inspection requirement?",
@@ -772,7 +768,7 @@ const CARDS = [
     "cite": "7 CFR 210.31",
     "ready": ["Adopted policy", "Triennial assessment", "Public-notification records"]
   },
- 
+
   {
     "area": "compete",
     "prompt": "What do Smart Snacks (competitive food) standards cover?",
@@ -787,7 +783,7 @@ const CARDS = [
     "cite": "7 CFR 210.11(b)",
     "ready": ["Fundraiser-exemption tracking", "Your state's exempt-fundraiser limit"]
   },
- 
+
   {
     "area": "prov",
     "prompt": "What is the minimum ISP and the multiplier for CEP?",
@@ -810,9 +806,8 @@ const CARDS = [
     "ready": ["Base-year records", "Extension approvals"]
   }
 ];
-<script>
+
 const STORAGE_KEY = "ar_prep_progress";
-// and the checklist key:
 const CL_KEY = "ar-prep-checklist-v1";
 const mem = {};
 let progress = {}; // {index: 'mastered'|'review'}
@@ -824,7 +819,7 @@ let statusFilter = "all";
 let areaFilter = "all";
 
 function localStorageWorks(){
-  try{ const k="__nslp_test__"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }
+  try{ const k="__ar_test__"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }
   catch(e){ return false; }
 }
 const hasCloud = (typeof window!=="undefined" && window.storage && typeof window.storage.get==="function");
@@ -1011,7 +1006,6 @@ document.addEventListener("keydown",(e)=>{
   if(e.key===" " && document.getElementById("cardsView").style.display!=="none"){ e.preventDefault(); flip(); }
 });
 
-const CL_KEY = "nslp-checklist-v1";
 let clState = {};
 function loadCl(){ try{ const r=localStorage.getItem(CL_KEY); clState=r?JSON.parse(r):{};}catch(e){clState={};} }
 function saveCl(){ try{ localStorage.setItem(CL_KEY, JSON.stringify(clState)); }catch(e){} }
@@ -1079,4 +1073,3 @@ document.getElementById("clResetBtn").addEventListener("click", ()=>{
 
 </body>
 </html>
-
