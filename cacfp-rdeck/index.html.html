@@ -410,7 +410,7 @@
     </div>
 
     <div class="stage">
-      <div class="card-count" id="cardCount">Card 1 / 18</div>
+      <div class="card-count" id="cardCount">Card 1 / 19</div>
       <div class="card-frame">
         <div class="ghost-card g2" id="ghost2"></div>
         <div class="ghost-card g1" id="ghost1"></div>
@@ -437,7 +437,7 @@
 
     <div class="nav-row">
       <button class="arrow-btn" id="prevBtn" aria-label="Previous card">‹</button>
-      <span class="nav-index" id="navIndex">1 / 18</span>
+      <span class="nav-index" id="navIndex">1 / 19</span>
       <button class="arrow-btn" id="nextBtn" aria-label="Next card">›</button>
     </div>
 
@@ -486,7 +486,7 @@ const CARDS = [
   },
   {
     area:"Application Approval & Agreements",
-    cite:"7 CFR 226.6(c)",
+    cite:"7 CFR 226.6(b) / 226.6(c)",
     prompt:"What must the SA check before approving any new institution or responsible principal?",
     answer:"The National Disqualified List — an institution, or any of its responsible principals or individuals, that appears on the NDL cannot be approved until removed from the list.",
     ready:["NDL check documentation tied to each approval","Procedure covering principals and individuals, not just the entity"]
@@ -495,8 +495,8 @@ const CARDS = [
     area:"Institution Reviews & Monitoring",
     cite:"7 CFR 226.6(m)",
     prompt:"How often must the state agency review its institutions?",
-    answer:"On the regulatory cycle: each institution reviewed at least once every three years, with annual coverage targets, early reviews of new institutions, and facility-level samples included in sponsor reviews.",
-    ready:["Three-year review schedule with completion tracking","Annual coverage calculation","Facility sample documentation inside sponsor review files"]
+    answer:"On a tiered cycle: every institution at least once every three years, but at least once every two years for higher-risk institutions — those sponsoring 100+ facilities (pre-existing), plus those engaged in non-CACFP activities and those with recent serious findings (both added by the 2023 Integrity Rule). Separately, the SA must annually review the reported CACFP expenditures of sponsoring organizations of unaffiliated centers. Include early reviews of new institutions and facility-level samples inside sponsor reviews.",
+    ready:["Three-year and two-year review schedules with completion tracking","List of institutions on the two-year cycle and the reason each qualifies","Annual expenditure-review records for unaffiliated-center sponsors","Facility sample documentation inside sponsor review files"]
   },
   {
     area:"Institution Reviews & Monitoring",
@@ -535,10 +535,10 @@ const CARDS = [
   },
   {
     area:"Financial Management",
-    cite:"2023 Integrity Rule / 7 CFR 226",
+    cite:"7 CFR 226.7(b) / 226.10(c)",
     prompt:"What annual bank account comparison is now required of state agencies?",
-    answer:"The SA must select at least one month of an institution's bank account activity and compare it against supporting source documents, verifying that expenditures align with CACFP payments and program rules — codified by the 2023 Child Nutrition Program Integrity Final Rule.",
-    ready:["Completed reconciliation worksheets by institution","Bank statements matched to invoices and canceled checks","Findings and follow-up from prior comparisons"]
+    answer:"For each sponsoring organization (not independent centers), the SA must annually select at least one month of CACFP bank account activity and compare it against source documents adequate to show the transactions meet program requirements, verifying expenditures align with CACFP payments. Codified by the 2023 Integrity Rule at 226.7(b) and 226.10(c); compliance date Aug. 23, 2024.",
+    ready:["Completed reconciliation worksheets by sponsoring organization","Bank statements matched to invoices and canceled checks","Findings and follow-up from prior comparisons"]
   },
   {
     area:"Financial Management",
@@ -546,6 +546,13 @@ const CARDS = [
     prompt:"How does the SA oversee institution budgets and administrative costs?",
     answer:"Through annual budget review and approval, monitoring actual costs against the approved budget and allowability rules, enforcing administrative cost limits for sponsoring organizations, and documenting any specific prior approvals.",
     ready:["Approved budgets with admin/operating split","Specific prior-approval letters","Cost allowability review notes"]
+  },
+  {
+    area:"State Administrative Expense (SAE) Funds",
+    cite:"7 CFR Part 235 / FNS-777 SAE",
+    prompt:"How does the SA account for its own State Administrative Expense (SAE) funds, and what does a reviewer check?",
+    answer:"Through an approved SAE plan and budget, spending within its allocation and the allowable-cost rules, meeting any applicable state matching requirement, and reporting on the FNS-777 SAE financial status report — reconciled to actual expenditures. SAE funds cover SA administrative costs across the child nutrition programs, so the reviewer checks the CACFP share is properly allocated.",
+    ready:["Approved SAE plan and budget","FNS-777 SAE reports reconciled to expenditures","Documentation of any required state match","Cost-allocation basis for splitting SAE across programs"]
   },
   {
     area:"Audits & Audit Resolution",
@@ -556,7 +563,7 @@ const CARDS = [
   },
   {
     area:"Training & Technical Assistance",
-    cite:"7 CFR 226.6(c)",
+    cite:"7 CFR 226.6(b) / 226.6(m)",
     prompt:"What training and TA must the SA provide its institutions?",
     answer:"Training on program requirements before new institutions begin operating and on an ongoing basis afterward, plus documented technical assistance — typically delivered and recorded during reviews.",
     ready:["Training schedules, agendas, and attendance records","TA documentation inside review files"]
@@ -591,10 +598,10 @@ const CARDS = [
   },
   {
     area:"Records & Federal Reporting",
-    cite:"7 CFR 226.10(d) / FNS-44 / FNS-777",
+    cite:"7 CFR 226.7 / 226.10 / FNS-44 / SF-425",
     prompt:"What records and federal reports must the SA maintain and submit?",
-    answer:"Program records retained three years plus the current year (longer if issues are unresolved), plus accurate and timely federal reporting — the FNS-44 program report and FNS-777 financial status report, reconciled to payment and expenditure records.",
-    ready:["Retention policy and access to prior three FYs of records","Recent FNS-44 and FNS-777 submissions","Reconciliation worksheets supporting reported figures"]
+    answer:"Program records retained three years after the end of the fiscal year plus the current year (longer if audits, claims, or litigation are unresolved), plus accurate and timely federal reporting — the FNS-44 CACFP program (meals) report and the SF-425 financial status report (submitted via FPRS, using the FNS-778/778A worksheet), each reconciled to payment and expenditure records. (State Administrative Expense funds report separately on the FNS-777 SAE — see the SAE card.)",
+    ready:["Retention policy and access to prior three FYs of records","Recent FNS-44 and SF-425 submissions in FPRS","Reconciliation worksheets supporting reported figures"]
   },
   {
     area:"Program Integrity",
@@ -670,6 +677,20 @@ function render(){
   document.getElementById("card").classList.remove("flipped");
 
   updateProgressBar();
+  fitCardHeight();
+}
+
+function fitCardHeight(){
+  const card = document.getElementById("card");
+  if(!card) return;
+  const front = card.querySelector(".face-front");
+  const back = card.querySelector(".face-back");
+  if(!front || !back) return;
+  // Faces are absolutely positioned, so the card won't grow on its own.
+  // Collapse to the CSS min-height, then size the card to the taller face.
+  card.style.height = "auto";
+  const h = Math.max(front.scrollHeight, back.scrollHeight);
+  card.style.height = (h + 2) + "px"; // small buffer against sub-pixel clipping
 }
 
 function updateProgressBar(){
@@ -835,6 +856,12 @@ progress = loadJSON(STORAGE_KEY);
 clState = loadJSON(CL_KEY);
 buildChecklist();
 render();
+
+// Content height depends on text wrapping, which changes with width and with
+// late-loading web fonts — re-fit in both cases so no face overflows the card.
+let _fitTimer;
+window.addEventListener("resize", ()=>{ clearTimeout(_fitTimer); _fitTimer = setTimeout(fitCardHeight, 120); });
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitCardHeight); }
 </script>
 
 </body>
