@@ -131,6 +131,19 @@
   .status.live{background:rgba(0,119,182,.1);color:var(--cerulean-ink)}
   .status.coming{background:rgba(198,138,30,.14);color:#8a5e12}
   .tool .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--accent,var(--cerulean));text-transform:uppercase}
+  .audience-chip{
+    font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:4px 9px;border-radius:5px;display:inline-block;margin-bottom:10px;
+  }
+  .audience-chip.sa{background:#eef1f4;color:var(--navy)}
+  .audience-chip.sponsor{background:#fbe9e4;color:#93401f}
+  .tools-section-label{
+    grid-column:1/-1;display:flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--slate);margin:8px 0 -2px;
+  }
+  .tools-section-label:first-child{margin-top:0}
+  .tools-section-label::after{content:"";flex:1;height:1px;background:var(--line)}
   .tool h3{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.01em;margin:4px 0 0;color:var(--navy)}
   .tool p{font-size:14.5px;color:#43586a;margin:11px 0 0;flex:1 1 auto}
   .tool .badges{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 0}
@@ -335,7 +348,7 @@
    ===================================================================== */
 const TOOLS=[
   {
-    key:"reporting-calendar", status:"live",
+    key:"reporting-calendar", status:"live", audience:"general",
     accent:"#0077B6", soft:"#e6f1f9",
     kicker:"Reporting deadlines",
     name:"Fiscal Year Reporting Calendar",
@@ -345,7 +358,7 @@ const TOOLS=[
     icon:'<rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
   },
   {
-    key:"cnpregai", status:"live",
+    key:"cnpregai", status:"live", audience:"general",
     accent:"#0077B6", soft:"#e6f1f9",
     kicker:"Regulatory intelligence",
     name:"CNPReg AI",
@@ -355,7 +368,7 @@ const TOOLS=[
     icon:'<path d="M4 5h16v11H7l-3 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10h8M8 13h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
   },
   {
-    key:"nslp deck", status:"live",
+    key:"nslp deck", status:"live", audience:"sa",
     accent:"#25543C", soft:"#e7efe9",
     kicker:"NSLP ME prep & Checklist",
     name:"NSLP Readiness Deck & Checklist",
@@ -365,7 +378,7 @@ const TOOLS=[
     icon:'<rect x="4" y="5" width="13" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 5l11 2-2 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
   },
   {
-    key:"cacfp deck", status:"live",
+    key:"cacfp deck", status:"live", audience:"sa",
     accent:"#C68A1E", soft:"#f6ecd9",
     kicker:"CACFP ME Prep & Self-Assessment",
     name:"CACFP Readiness Deck & Checklist",
@@ -375,7 +388,7 @@ const TOOLS=[
     icon:'<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
   },
   {
-    key:"cacfp ar deck", status:"live",
+    key:"cacfp ar deck", status:"live", audience:"sponsor",
     accent:"#32533D", soft:"#e7efe9",
     kicker:"For Sponsors · Review Prep",
     name:"CACFP Review Prep — For Sponsors",
@@ -386,7 +399,7 @@ const TOOLS=[
     icon:'<path d="M9 6l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
   },
   {
-    key:"sfsp deck", status:"live",
+    key:"sfsp deck", status:"live", audience:"sa",
     accent:"#C68A1E", soft:"#f6ecd9",
     kicker:"SFSP ME Prep & Self-Assessment",
     name:"SFSP Readiness Deck & Checklist",
@@ -396,7 +409,7 @@ const TOOLS=[
     icon:'<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
   },
   {
-  key:"ar-prep", status:"live", accent:"#25543C", soft:"#e7efe9",
+  key:"ar-prep", status:"live", audience:"sponsor", accent:"#25543C", soft:"#e7efe9",
   kicker:"Provide to your SFAs",
   name:"SFA Administrative Review Prep Deck",
   desc:"Give the SFAs on your review schedule a structured way to get ready. Better-prepared SFAs mean fewer findings, less fiscal action, and less follow-up for your team — and cleaner reviews strengthen your own ME record.",
@@ -441,27 +454,43 @@ const ANNOUNCEMENTS=[
 ];
 /* ---------- render tools ---------- */
 function iconSvg(p){return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'+p+'</svg>';}
-function renderTools(){
-  const grid=document.getElementById("toolGrid");
-  grid.innerHTML=TOOLS.map(t=>{
-    const live=t.status==="live";
-    const cta = (live && t.url)
-      ? `<a class="cta" href="${t.url}"${t.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.cta} →</a>`
-      : `<span class="cta disabled">${t.cta}</span>`;
-    const secondary = (live && t.secondary && t.secondary.url)
-      ? `<a class="cta-secondary" href="${t.secondary.url}"${t.secondary.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.secondary.label}</a>`
-      : "";
-    return `<article class="tool ${t.status} reveal" style="--accent:${t.accent};--accent-soft:${t.soft}">
+const AUDIENCE_GROUPS=[
+  {key:"general", label:null},
+  {key:"sa",      label:"For State Agencies — Management Evaluation Prep"},
+  {key:"sponsor", label:"For Sponsors &amp; SFAs — Review Prep"}
+];
+const AUDIENCE_CHIP={sa:"State Agency", sponsor:"For Sponsors"};
+function toolCard(t){
+  const live=t.status==="live";
+  const cta = (live && t.url)
+    ? `<a class="cta" href="${t.url}"${t.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.cta} →</a>`
+    : `<span class="cta disabled">${t.cta}</span>`;
+  const secondary = (live && t.secondary && t.secondary.url)
+    ? `<a class="cta-secondary" href="${t.secondary.url}"${t.secondary.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.secondary.label}</a>`
+    : "";
+  const chip = AUDIENCE_CHIP[t.audience]
+    ? `<span class="audience-chip ${t.audience}">${AUDIENCE_CHIP[t.audience]}</span>`
+    : "";
+  return `<article class="tool ${t.status} reveal" style="--accent:${t.accent};--accent-soft:${t.soft}">
       <div class="topline">
         <span class="tmark">${iconSvg(t.icon)}</span>
         <span class="status ${t.status}">${live?"Live · Free":"Coming"}</span>
       </div>
+      ${chip}
       <div class="kicker">${t.kicker}</div>
       <h3>${t.name}</h3>
       <p>${t.desc}</p>
       <div class="badges">${t.badges.map(b=>`<span>${b}</span>`).join("")}</div>
       <div class="cta-row">${cta}${secondary}</div>
     </article>`;
+}
+function renderTools(){
+  const grid=document.getElementById("toolGrid");
+  grid.innerHTML=AUDIENCE_GROUPS.map(g=>{
+    const items=TOOLS.filter(t=>(t.audience||"general")===g.key);
+    if(items.length===0) return "";
+    const label=g.label ? `<div class="tools-section-label">${g.label}</div>` : "";
+    return label + items.map(toolCard).join("");
   }).join("");
 }
 /* ---------- shared: announcements sorted newest-first ---------- */
