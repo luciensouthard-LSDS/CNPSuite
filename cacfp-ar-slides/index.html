@@ -1,1 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CACFP Review Guide — Step by Step · CNPSuite</title>
+<meta name="description" content="A simple, one-screen-at-a-time walkthrough for CACFP sponsors getting ready for their state agency review. Provided through CNPSuite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a2240;
+    --navy-mid:#0d2d52;
+    --accent:#32533d;
+    --accent-pale:#eaf2ec;
+    --accent-mid:#8fc1a0;
+    --accent-dark:#223a2a;
+    --off-white:#f5f8fa;
+    --border:#d6e4ec;
+    --text-mid:#3d5a73;
+    --text-lt:#6b8fa8;
+    --white:#fff;
+    --ctr:#3475b4;
+    --dch:#bd8d29;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--off-white);
+    color:var(--navy);
+    font-family:'Public Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+  h1,h2,h3,.serif{font-family:'Newsreader',serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
 
+  header{
+    background:var(--navy);color:var(--white);
+    border-bottom:3px solid var(--accent);
+    flex-shrink:0;
+  }
+  .header-inner{
+    max-width:760px;margin:0 auto;padding:12px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .back-link{display:inline-flex;align-items:center;gap:7px;text-decoration:none;}
+  .brand-icon{width:19px;height:19px;flex-shrink:0;}
+  .back-link .wordmark{font-family:'Public Sans',sans-serif;font-weight:700;font-size:.92rem;color:var(--white);}
+  .header-right{display:flex;align-items:center;gap:10px;}
+  .switch-link{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.03em;
+    color:rgba(255,255,255,.65);text-decoration:none;
+  }
+  .switch-link:hover{color:#fff;}
+
+  .progress-outer{background:rgba(255,255,255,.12);height:5px;}
+  .progress-inner{background:var(--accent-mid);height:100%;width:0%;transition:width .25s ease;}
+
+  main{
+    flex:1;max-width:760px;margin:0 auto;width:100%;
+    padding:0 18px;display:flex;flex-direction:column;
+  }
+
+  /* ---- TOC screen ---- */
+  #tocScreen{padding:28px 0 40px;}
+  .toc-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 8px;
+  }
+  #tocScreen h1{font-size:1.9rem;margin:0 0 10px;line-height:1.2;}
+  .toc-intro{color:var(--text-mid);font-size:1rem;line-height:1.6;margin:0 0 22px;max-width:56ch;}
+  .toc-start{
+    display:block;width:100%;text-align:center;
+    background:var(--accent);color:#fff;border:none;border-radius:12px;
+    font-family:'Public Sans',sans-serif;font-weight:700;font-size:1.05rem;
+    padding:18px 20px;cursor:pointer;margin-bottom:28px;transition:.15s;
+  }
+  .toc-start:hover{background:var(--accent-dark);}
+  .toc-resume{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--text-mid);
+    text-align:center;margin:-16px 0 26px;
+  }
+  .toc-list-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-lt);margin:0 0 12px;
+  }
+  .toc-grid{display:grid;gap:10px;margin-bottom:20px;}
+  .toc-item{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--white);border:1px solid var(--border);border-radius:12px;
+    padding:16px 18px;cursor:pointer;text-align:left;font-family:'Public Sans',sans-serif;
+    transition:.15s;
+  }
+  .toc-item:hover{border-color:var(--accent);}
+  .toc-item-title{font-weight:600;font-size:1rem;color:var(--navy);}
+  .toc-item-count{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--text-lt);white-space:nowrap;}
+  .toc-tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+    letter-spacing:.04em;font-weight:600;color:#fff;border-radius:5px;
+    padding:2px 7px;margin-left:8px;vertical-align:middle;
+  }
+  .toc-tag.ctr{background:var(--ctr);}
+  .toc-tag.dch{background:var(--dch);}
+  .toc-legend{font-size:.82rem;color:var(--text-lt);line-height:1.6;margin-bottom:8px;}
+
+  /* ---- Slide screen ---- */
+  #slideScreen{display:none;flex:1;flex-direction:column;padding:22px 0 24px;}
+  .slide-meta{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    margin-bottom:16px;flex-wrap:wrap;
+  }
+  .slide-area{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);
+  }
+  .slide-tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+    letter-spacing:.04em;font-weight:600;color:#fff;border-radius:5px;
+    padding:2px 7px;margin-left:8px;
+  }
+  .slide-tag.ctr{background:var(--ctr);}
+  .slide-tag.dch{background:var(--dch);}
+  .slide-count{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--text-lt);}
+
+  .slide-card{
+    background:var(--white);border:1px solid var(--border);border-radius:18px;
+    padding:30px 26px;box-shadow:0 1px 3px rgba(10,34,64,.06),0 8px 24px rgba(10,34,64,.05);
+    flex:1;display:flex;flex-direction:column;
+  }
+  .slide-question{
+    font-family:'Newsreader',serif;font-size:1.5rem;line-height:1.32;color:var(--navy);
+    margin:0 0 18px;letter-spacing:-.01em;
+  }
+  .slide-answer{font-size:1.08rem;line-height:1.65;color:var(--navy);margin:0 0 20px;}
+  .slide-answer b{color:var(--accent-dark);}
+  .slide-ready{
+    background:var(--accent-pale);border:1px solid var(--accent-mid);border-radius:12px;
+    padding:16px 18px;margin-top:auto;
+  }
+  .slide-ready-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;font-weight:600;
+  }
+  .slide-ready ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;}
+  .slide-ready li{
+    font-size:.92rem;line-height:1.5;color:var(--accent-dark);padding-left:20px;position:relative;
+  }
+  .slide-ready li::before{
+    content:"";position:absolute;left:0;top:6px;width:9px;height:9px;
+    border:2px solid var(--accent);border-radius:2px;
+  }
+  .slide-cite{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-lt);
+    margin-top:14px;
+  }
+  .speak-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:.76rem;
+    background:var(--white);border:1px solid var(--border);border-radius:20px;
+    padding:7px 14px;color:var(--text-mid);cursor:pointer;margin-bottom:16px;
+    align-self:flex-start;transition:.15s;
+  }
+  .speak-btn:hover{border-color:var(--accent);color:var(--navy);}
+  .speak-btn.speaking{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+  /* ---- bottom nav ---- */
+  .bottom-nav{
+    position:sticky;bottom:0;background:var(--off-white);
+    border-top:1px solid var(--border);
+    padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+    display:flex;gap:10px;align-items:center;flex-shrink:0;
+  }
+  .bottom-nav-inner{max-width:760px;margin:0 auto;width:100%;display:flex;gap:10px;align-items:center;}
+  .nav-btn{
+    flex:1;min-height:56px;border-radius:12px;border:1px solid var(--border);
+    font-family:'Public Sans',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;
+    background:var(--white);color:var(--navy);transition:.15s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .nav-btn:hover{border-color:var(--accent);}
+  .nav-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .nav-btn.primary:hover{background:var(--accent-dark);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .nav-btn.icon-only{flex:0 0 56px;}
+
+  .toc-jump-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--text-mid);
+    background:none;border:none;cursor:pointer;text-decoration:underline;
+    padding:0;margin:0 0 18px;align-self:flex-start;
+  }
+
+  .done-screen{padding:40px 0 60px;text-align:center;}
+  .done-screen .check{font-size:3rem;margin-bottom:10px;}
+  .done-screen h2{font-size:1.6rem;margin:0 0 10px;}
+  .done-screen p{color:var(--text-mid);font-size:1rem;line-height:1.6;max-width:48ch;margin:0 auto 24px;}
+
+  footer{
+    max-width:760px;margin:0 auto;padding:16px 18px 28px;
+    font-size:.78rem;color:var(--text-lt);text-align:center;
+  }
+  footer a{color:var(--accent);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media (max-width:480px){
+    #tocScreen h1{font-size:1.55rem;}
+    .slide-question{font-size:1.28rem;}
+    .slide-answer{font-size:1rem;}
+    .slide-card{padding:24px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="back-link" href="https://www.cnpsuite.com">
+      <svg class="brand-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="8" height="8" rx="2" fill="#3475b4"/>
+        <rect x="11" y="1" width="8" height="8" rx="2" fill="#32533d"/>
+        <rect x="1" y="11" width="8" height="8" rx="2" fill="#bd8d29"/>
+        <rect x="11.75" y="11.75" width="6.5" height="6.5" rx="1.3" fill="none" stroke="#94a7bb" stroke-width="1.5"/>
+      </svg>
+      <span class="wordmark">CNPSuite</span>
+    </a>
+    <div class="header-right">
+      <a class="switch-link" href="https://www.cnpsuite.com/cacfp-ar-deck">Full study-cards version →</a>
+    </div>
+  </div>
+  <div class="progress-outer"><div class="progress-inner" id="progressBar"></div></div>
+</header>
+
+<main>
+
+  <!-- TOC / welcome screen -->
+  <div id="tocScreen">
+    <p class="toc-eyebrow">§ CACFP Review Guide</p>
+    <h1>Getting ready for your review — one step at a time</h1>
+    <p class="toc-intro">This walks through what your state agency will check, one topic per screen, in plain language. Tap <strong>Next</strong> to move forward, or jump straight to the part that applies to you below. Your place is saved automatically on this device.</p>
+    <button class="toc-start" id="startAllBtn">Start from the beginning</button>
+    <p class="toc-resume" id="resumeNote" hidden></p>
+
+    <p class="toc-list-label">Or jump to a topic</p>
+    <p class="toc-legend"><span class="toc-tag ctr">CTR</span> center sponsors &nbsp; <span class="toc-tag dch">DCH</span> day care home sponsors &nbsp; no tag = applies to everyone</p>
+    <div class="toc-grid" id="tocGrid"></div>
+  </div>
+
+  <!-- Slide screen -->
+  <div id="slideScreen">
+    <div class="slide-meta">
+      <span class="slide-area" id="slideArea">Area</span>
+      <span class="slide-count" id="slideCount">1 / 39</span>
+    </div>
+    <button class="toc-jump-btn" id="backToTocBtn">← Back to topic list</button>
+    <div class="slide-card">
+      <button class="speak-btn" id="speakBtn">🔊 Read this screen aloud</button>
+      <div class="slide-question" id="slideQuestion"></div>
+      <div class="slide-answer" id="slideAnswer"></div>
+      <div class="slide-ready">
+        <div class="slide-ready-label">Have ready for the reviewer</div>
+        <ul id="slideReady"></ul>
+      </div>
+      <div class="slide-cite" id="slideCite"></div>
+    </div>
+  </div>
+
+  <!-- Done screen -->
+  <div id="doneScreen" style="display:none;">
+    <div class="done-screen">
+      <div class="check">✓</div>
+      <h2>You've been through the whole guide.</h2>
+      <p>Use the full study-cards version to drill weak spots, mark items mastered, and print the evidence checklist for your files.</p>
+    </div>
+  </div>
+
+</main>
+
+<div class="bottom-nav" id="bottomNav" style="display:none;">
+  <div class="bottom-nav-inner">
+    <button class="nav-btn icon-only" id="prevBtn" aria-label="Back">‹</button>
+    <button class="nav-btn primary" id="nextBtn">Next</button>
+  </div>
+</div>
+
+<footer>
+  Part of <a href="https://www.cnpsuite.com">CNPSuite</a> · a study tool by <a href="https://www.lsdigitalsolutions.com">LS Digital Solutions</a><br>
+  Your place is saved on your own device only. No cookies, no tracking. This is a study aid, not a substitute for your state agency's official guidance.
+</footer>
+
+<script>
+/* =====================================================================
+   CACFP REVIEW GUIDE — linear walkthrough
+   Same content as cacfp-ar-deck, restructured as one topic per screen
+   with no flip interaction and no dual filters — built for sponsors
+   who find the study-cards format harder to navigate.
+   ===================================================================== */
+
+const AREAS = {
+  "review":      "The Review Itself",
+  "agree":       "Approval & Your Agreement",
+  "monitorctr":  "Monitoring Centers",
+  "monitordch":  "Monitoring Day Care Homes",
+  "claims":      "Meal Counts & Claiming",
+  "pattern":     "Meal Pattern",
+  "tiering":     "Tiering & Area Eligibility",
+  "afterschool": "At-Risk Afterschool",
+  "adultday":    "Adult Day Care Centers",
+  "financial":   "Financial Management",
+  "procure":     "Procurement",
+  "civil":       "Civil Rights",
+  "training":    "Training You Provide",
+  "seriousdef":  "Serious Deficiency",
+  "records":     "Records & Reporting"
+};
+const AREA_TAGS = {
+  "monitorctr":"ctr", "monitordch":"dch", "tiering":"dch",
+  "afterschool":"ctr", "adultday":"ctr"
+};
+
+const CARDS = [
+  {"area":"review","prompt":"How often will your state agency review you, and what decides the cycle?","answer":"Every institution is reviewed at least once every <b>3 years</b> — but you move to a <b>2-year</b> cycle if you sponsor 100+ facilities, engage in non-CACFP activities, or have a recent serious finding (the last two added by the 2023 Integrity Rule).","cite":"7 CFR 226.6(m)","ready":["Your last review's completion date and current cycle status","Documentation of any 2-year-cycle trigger, if one applies to you"]},
+  {"area":"review","prompt":"What does the review actually look at?","answer":"Your approval/VCA file, claims and meal counts, monitoring records, financial and budget records, civil rights compliance, and training — plus a sample of your facilities, with meal service observation where applicable.","cite":"7 CFR 226.6(m)","ready":["Files organized by area so nothing is hunted for on review day","A point person ready to walk the reviewer through each area"]},
+  {"area":"review","prompt":"What happens if the review finds problems?","answer":"Written findings and a <b>corrective action plan (CAP)</b> with regulatory deadlines, then follow-up verifying the fix actually happened. Findings that go uncorrected — or are serious enough on their own — can escalate into your own serious deficiency process.","cite":"7 CFR 226.6(m); 226.6(c)","ready":["A team ready to turn around a CAP quickly","A prior CAP as a template, if you have one"]},
+  {"area":"agree","prompt":"What must you demonstrate to keep your sponsor agreement in force?","answer":"Continued <b>financial viability, administrative capability, and accountability (VCA)</b>, backed by a current, approvable management plan and budget. Your state agency can require an update whenever a finding, audit, or complaint signals elevated risk.","cite":"7 CFR 226.6(b); 2023 Integrity Rule","ready":["Current management plan and budget on file","Documentation of any VCA reassessment tied to a recent finding or audit"]},
+  {"area":"agree","prompt":"What must you check before signing up a new facility or key staff person?","answer":"The <b>National Disqualified List (NDL)</b> — a facility, or any of its principals or individuals, that appears on the NDL cannot be approved until removed from the list.","cite":"7 CFR 226.6(c)","ready":["NDL check records for every facility and key-staff addition"]},
+  {"area":"agree","prompt":"What must you renew on a regular cycle, and what can trigger an out-of-cycle update?","answer":"Your management plan, budget, and permanent agreement information are renewed on your state agency's set cycle; a review finding, audit result, or complaint can trigger a VCA reassessment outside that cycle.","cite":"7 CFR 226.6(b)","ready":["Renewal file with current signatures and dates","Any out-of-cycle reassessment documentation"]},
+  {"area":"monitorctr","prompt":"How many times a year must you review each center, and how many must be unannounced?","answer":"<b>Three</b> reviews per year, with at least <b>two of the three unannounced</b> — and the timing varied so visits aren't predictable.","cite":"7 CFR 226.16(d)(4)(iii)","ready":["Three completed reviews per center for the current year","Unannounced-visit log showing varied timing"]},
+  {"area":"monitorctr","prompt":"What must a center monitoring review actually check?","answer":"Compliance across the <b>meal pattern, licensing/approval status, staff attendance at required training, meal counts, menu/production records, and enrollment forms</b>. At least one unannounced review must include meal service observation.","cite":"7 CFR 226.16(d)(4)(i)","ready":["Completed review instruments per center","Meal observation documentation from at least one unannounced visit"]},
+  {"area":"monitorctr","prompt":"What reconciliation must every monitoring visit include?","answer":"Comparing the facility's recorded meal counts for <b>five consecutive days</b> against its enrollment and attendance records, to catch overclaims early.","cite":"7 CFR 226.16(d)(4)(ii)","ready":["Five-day meal-count reconciliation worksheet per review"]},
+  {"area":"monitordch","prompt":"Does the visit frequency differ for day care homes?","answer":"No — the same standard applies: <b>three visits a year, at least two unannounced</b>, plus the five-day meal-count reconciliation against enrollment and attendance.","cite":"7 CFR 226.16(d)(4)(iii)","ready":["Three completed home visits per provider for the current year","Five-day reconciliation on file for each"]},
+  {"area":"monitordch","prompt":"What monitoring staff capacity must you maintain for day care homes?","answer":"Monitoring staff sized to your home count — generally in the range of <b>one full-time monitor for every 50 to 150 homes</b> sponsored, with your state agency setting the specific ratio.","cite":"7 CFR 226.16(b)","ready":["Staffing plan showing your monitor-to-home ratio","Monitor caseload records"]},
+  {"area":"claims","prompt":"Where must reimbursable meals be counted?","answer":"At the <b>point of service</b> — correctly identifying each meal's eligibility category the moment it's served, not reconstructed afterward.","cite":"7 CFR 226.10","ready":["Point-of-service counting procedure description","Back-up/roster count procedures"]},
+  {"area":"claims","prompt":"What must you do before submitting a claim?","answer":"Apply <b>edit checks</b> comparing claimed meals against enrollment, attendance, and capacity; investigate and resolve anything flagged; and submit within your state agency's claim deadline — commonly <b>60 days</b> after the claim month absent an approved exception.","cite":"7 CFR 226.10","ready":["Edit-check worksheets","Resolution records for flagged days","Claim submission timeline"]},
+  {"area":"pattern","prompt":"Does the meal pattern vary by age group?","answer":"Yes — <b>infants</b> follow their own progression (breast milk/formula plus age-appropriate solids), <b>children</b> follow the standard components (milk, meat/alternate, fruit, vegetable, whole-grain-rich grains), and <b>adults</b> follow a similar pattern with adjusted portions and an added vegetable/fruit component at some meals.","cite":"7 CFR 226.20","ready":["Menus and production records broken out by age group served"]},
+  {"area":"pattern","prompt":"Is Offer versus Serve (OVS) available in CACFP?","answer":"<b>No.</b> OVS is an NSLP/SBP option, not a CACFP one — every required component and quantity must be served. Don't let staff trained on school-meal rules assume they can apply OVS here.","cite":"7 CFR 226.20 (contrast 210.10(e), NSLP-only)","ready":["Staff trained that full components are required, not OVS"]},
+  {"area":"pattern","prompt":"What documentation proves meal pattern compliance at a facility?","answer":"Daily <b>production records</b> showing what was offered and in what quantity, supported by standardized recipes and <b>CN labels or product formulation statements</b> for combination or processed foods.","cite":"7 CFR 226.20","ready":["Production records","Standardized recipes","CN labels / product formulation statements"]},
+  {"area":"tiering","prompt":"What's the difference between a Tier I and Tier II day care home?","answer":"<b>Tier I</b> homes qualify by area eligibility (school or census data showing a high concentration of low-income households) or by the provider's own household income; <b>Tier II</b> homes are everyone else, reimbursed at a lower rate unless an individual enrolled child qualifies for Tier I rates by household income.","cite":"7 CFR 226.2 (definitions); 226.15","ready":["Area-eligibility source data or provider income documentation for each Tier I determination","List of Tier II homes claiming Tier I rates for individual children, with supporting income forms"]},
+  {"area":"tiering","prompt":"How current must your area eligibility data be?","answer":"It has a shelf life your state agency sets, commonly tied to the school- or census-data update cycle — <b>using stale data is a common review finding</b>.","cite":"FNS area eligibility guidance","ready":["Documentation of the vintage and source of the data used"]},
+  {"area":"tiering","prompt":"Are income-based Tier I determinations permanent once made?","answer":"No — they follow the same annual application/income-documentation cycle as other CACFP eligibility determinations, so <b>stale income paperwork</b> is a common review target.","cite":"7 CFR 226.15","ready":["Current-cycle income documentation for every income-based Tier I determination"]},
+  {"area":"afterschool","prompt":"What makes a site eligible for At-Risk Afterschool meals?","answer":"The site sits in an area where at least <b>50%</b> of children are eligible for free or reduced-price meals (by school attendance area or census data), offers <b>educational or enrichment activities</b> during the meal service, and operates on eligible days.","cite":"7 CFR 226.17a","ready":["Site area-eligibility documentation","Activity schedule showing enrichment programming"]},
+  {"area":"afterschool","prompt":"What records prove an At-Risk site is actually earning its meals?","answer":"Attendance and activity records tying each claimed meal to a supervised enrichment activity that day — a site claiming meals with no documented activity is a common finding.","cite":"7 CFR 226.17a","ready":["Daily activity logs matched to meal claims"]},
+  {"area":"adultday","prompt":"Who is an eligible participant at an adult day care center?","answer":"Adults who are <b>60 or older</b>, or <b>functionally impaired adults</b> enrolled for care, meeting your state's nonresidential adult day care definition.","cite":"7 CFR 226.2 (definitions); 226.20","ready":["Enrollment/eligibility documentation showing the age or functional-impairment basis"]},
+  {"area":"adultday","prompt":"How does the adult meal pattern differ from the child meal pattern?","answer":"Similar components, but <b>adult-sized portions</b>, and some meals require an <b>additional vegetable or fruit</b> serving beyond the child pattern.","cite":"7 CFR 226.20","ready":["Adult-specific production records and portion documentation"]},
+  {"area":"financial","prompt":"What's the administrative cost cap for center sponsors — and does it apply to day care home sponsors too?","answer":"Center sponsors may not charge more than <b>15%</b> of estimated or actual meal reimbursements to administrative costs. There's <b>no equivalent flat percentage cap for day care home sponsors</b>, though ordinary cost-allowability rules still apply to both.","cite":"7 CFR 226.16(b)(1); 2 CFR 200 Subpart E","ready":["Admin-cost calculation against the 15% cap (center sponsors)","Cost-allowability documentation regardless of sponsor type"]},
+  {"area":"financial","prompt":"What must your financial management system demonstrate?","answer":"That CACFP funds are properly accounted for, separately identifiable, and used solely for allowable program purposes — reconcilable to your claims and your approved budget.","cite":"7 CFR 226.7","ready":["Financial statements and ledgers reconciled to claims","Approved budget on file"]},
+  {"area":"financial","prompt":"How quickly must you pass reimbursement through to your facilities?","answer":"Within the regulatory timeframe after you receive funds from the state agency — commonly <b>five working days</b>.","cite":"7 CFR 226.16(g)-(h)","ready":["Disbursement timing records showing the pass-through deadline was met"]},
+  {"area":"procure","prompt":"What procurement standards apply to your CACFP purchases?","answer":"The federal uniform standards at <b>2 CFR Part 200, Subpart D</b>, applying whichever is most restrictive among federal, state, and local requirements.","cite":"7 CFR 226.22","ready":["Written procurement procedures","Conflict-of-interest / code-of-conduct policy"]},
+  {"area":"procure","prompt":"What are the micro-purchase and simplified-acquisition thresholds?","answer":"<b>Micro-purchase:</b> up to $10,000 (no competitive quotes needed if the price is reasonable). <b>Simplified acquisition:</b> up to $250,000 with informal quotes; above that, formal competitive bidding is required. State or local limits may be lower.","cite":"2 CFR 200.1, 200.320","ready":["Quote/bid documentation matched to the method used","Your procurement policy's stated thresholds"]},
+  {"area":"procure","prompt":"Does Buy American apply to CACFP, and what about geographic preference?","answer":"<b>Buy American does not apply to CACFP</b> — it's an NSLP/SBP-specific requirement. <b>Geographic preference is available</b>: you may give preference to unprocessed, locally grown or raised agricultural products, defining \"local\" yourself.","cite":"7 CFR 226.22 (geographic preference); contrast 210.21(d) (Buy American, NSLP-only)","ready":["Clarity in your procurement policy on whether domestic sourcing is a state/local add-on, not a federal CACFP mandate","Geographic-preference documentation if you use it"]},
+  {"area":"civil","prompt":"What are the core civil rights compliance elements a reviewer checks?","answer":"The <b>\"And Justice for All\"</b> poster displayed, the <b>current nondiscrimination statement</b> on public materials, a working complaint procedure, reasonable accommodations, and language assistance where needed.","cite":"FNS Instruction 113-1; Title VI","ready":["Poster placement at every site","Current nondiscrimination statement on forms/materials"]},
+  {"area":"civil","prompt":"How must civil rights complaints be handled?","answer":"Accept and forward <b>every</b> discrimination complaint, verbal or written, using form <b>AD-3027</b>; keep a complaint log <b>even if you've received none</b>.","cite":"FNS Instruction 113-1","ready":["Complaint log (even if empty)","AD-3027 availability and referral procedure"]},
+  {"area":"civil","prompt":"What civil rights training do you owe your own staff?","answer":"Annual training for staff who interact with applicants or participants, covering the same nondiscrimination and complaint-handling obligations you enforce at your facilities.","cite":"FNS Instruction 113-1","ready":["Staff training records"]},
+  {"area":"training","prompt":"What must you train facility staff on before they start, and how often after that?","answer":"Training on program duties <b>before operations begin</b> — meal patterns, meal counts, claims submission, and recordkeeping — plus additional mandatory sessions <b>at least annually</b> after that.","cite":"7 CFR 226.16(d)(2)-(3)","ready":["Pre-operational training records for new facilities","Annual training agendas, sign-in sheets, and materials"]},
+  {"area":"training","prompt":"Who at your own organization needs training beyond the facility-level basics?","answer":"The people <b>approving applications, reviewing claims, and conducting monitoring</b> at your organization need program-requirements training too — not just the facilities you sponsor.","cite":"7 CFR 226.16(d)(2)","ready":["Training records for your own review, claims, and monitoring staff"]},
+  {"area":"seriousdef","prompt":"What must you do if you determine a facility you sponsor is seriously deficient?","answer":"<b>Initiate action to terminate</b> that facility's agreement for cause — this isn't discretionary once you've made the determination.","cite":"7 CFR 226.16(l)(1)","ready":["SD determination documentation per facility","Termination-for-cause action records"]},
+  {"area":"seriousdef","prompt":"What happens if your state agency determines that you — the sponsor — are seriously deficient?","answer":"A written SD notice, a corrective action plan evaluated against regulatory deadlines, and — if uncorrected — proposed termination, disqualification, and referral to the National Disqualified List.","cite":"7 CFR 226.6(c)","ready":["Any current SD notice and your CAP response","Timeline log against regulatory deadlines"]},
+  {"area":"seriousdef","prompt":"What appeal rights do your facilities have when you terminate them for cause?","answer":"The same kind of fair-hearing protection you'd expect from your own state agency: <b>written notice</b> of the action and appeal rights, and a hearing process before termination is final.","cite":"7 CFR 226.16(l)","ready":["Written notice procedures for facility terminations","Hearing/appeal records for contested terminations"]},
+  {"area":"records","prompt":"How long must you retain CACFP records?","answer":"Generally <b>three years</b> after the end of the fiscal year to which they pertain, plus the current year — longer if an audit, claim, or litigation is unresolved.","cite":"7 CFR 226.10(d); 2 CFR 200.334","ready":["Retention policy and access to the required prior years of records"]},
+  {"area":"records","prompt":"What reconciliation should be ready before the review?","answer":"Your submitted claims reconciled to underlying meal-count and enrollment records, and — if your state agency reviews this annually — your reported expenditures reconciled to your bank and budget records.","cite":"7 CFR 226.10; 226.7","ready":["Claim-to-source reconciliation worksheets","Expenditure reconciliation, if applicable"]}
+];
+
+const STORAGE_KEY = "cacfp-guide-pos-v1";
+let pos = 0; // 0-based index into CARDS
+let speaking = false;
+
+function saveJSON(v){ try{ localStorage.setItem(STORAGE_KEY, String(v)); }catch(e){} }
+function loadPos(){ try{ const v = localStorage.getItem(STORAGE_KEY); return v ? parseInt(v,10) : null; }catch(e){ return null; } }
+
+// area start indices, in CARDS order
+function areaStarts(){
+  const starts = {};
+  CARDS.forEach((c,i)=>{ if(!(c.area in starts)) starts[c.area] = i; });
+  return starts;
+}
+function areaCounts(){
+  const counts = {};
+  CARDS.forEach(c=>{ counts[c.area] = (counts[c.area]||0) + 1; });
+  return counts;
+}
+
+function buildTOC(){
+  const grid = document.getElementById("tocGrid");
+  const starts = areaStarts();
+  const counts = areaCounts();
+  grid.innerHTML = "";
+  for(const key in AREAS){
+    const btn = document.createElement("button");
+    btn.className = "toc-item";
+    const tag = AREA_TAGS[key];
+    btn.innerHTML = `<span class="toc-item-title">${AREAS[key]}${tag?`<span class="toc-tag ${tag}">${tag.toUpperCase()}</span>`:""}</span><span class="toc-item-count">${counts[key]} screen${counts[key]>1?"s":""} ›</span>`;
+    btn.addEventListener("click", ()=>{ pos = starts[key]; showSlide(); });
+    grid.appendChild(btn);
+  }
+
+  const saved = loadPos();
+  if(saved !== null && saved > 0 && saved < CARDS.length){
+    const note = document.getElementById("resumeNote");
+    note.hidden = false;
+    note.innerHTML = `You were on screen ${saved+1} of ${CARDS.length}. <a href="#" id="resumeLink" style="color:var(--accent);">Resume there →</a>`;
+    document.getElementById("resumeLink").addEventListener("click",(e)=>{
+      e.preventDefault(); pos = saved; showSlide();
+    });
+  }
+}
+
+function showTOC(){
+  document.getElementById("tocScreen").style.display = "block";
+  document.getElementById("slideScreen").style.display = "none";
+  document.getElementById("doneScreen").style.display = "none";
+  document.getElementById("bottomNav").style.display = "none";
+  document.getElementById("progressBar").style.width = "0%";
+  stopSpeaking();
+}
+
+function showDone(){
+  document.getElementById("tocScreen").style.display = "none";
+  document.getElementById("slideScreen").style.display = "none";
+  document.getElementById("doneScreen").style.display = "block";
+  document.getElementById("bottomNav").style.display = "none";
+  document.getElementById("progressBar").style.width = "100%";
+  stopSpeaking();
+}
+
+function showSlide(){
+  if(pos >= CARDS.length){ showDone(); return; }
+  stopSpeaking();
+  document.getElementById("tocScreen").style.display = "none";
+  document.getElementById("doneScreen").style.display = "none";
+  document.getElementById("slideScreen").style.display = "flex";
+  document.getElementById("bottomNav").style.display = "flex";
+
+  const c = CARDS[pos];
+  const tag = AREA_TAGS[c.area];
+  document.getElementById("slideArea").innerHTML = AREAS[c.area] + (tag ? `<span class="slide-tag ${tag}">${tag.toUpperCase()}</span>` : "");
+  document.getElementById("slideCount").textContent = `${pos+1} / ${CARDS.length}`;
+  document.getElementById("slideQuestion").textContent = c.prompt;
+  document.getElementById("slideAnswer").innerHTML = c.answer;
+  document.getElementById("slideReady").innerHTML = c.ready.map(r=>`<li>${r}</li>`).join("");
+  document.getElementById("slideCite").textContent = "Citation: " + c.cite;
+
+  document.getElementById("progressBar").style.width = ((pos+1)/CARDS.length*100) + "%";
+  document.getElementById("prevBtn").disabled = false;
+  document.getElementById("nextBtn").textContent = (pos === CARDS.length-1) ? "Finish" : "Next";
+
+  saveJSON(pos);
+  window.scrollTo(0,0);
+}
+
+function next(){
+  pos++;
+  if(pos >= CARDS.length){ saveJSON(0); showDone(); return; }
+  showSlide();
+}
+function prev(){
+  if(pos <= 0){ showTOC(); return; }
+  pos--;
+  showSlide();
+}
+
+function stopSpeaking(){
+  if('speechSynthesis' in window){ window.speechSynthesis.cancel(); }
+  speaking = false;
+  const btn = document.getElementById("speakBtn");
+  if(btn){ btn.classList.remove("speaking"); btn.textContent = "🔊 Read this screen aloud"; }
+}
+
+function toggleSpeak(){
+  if(!('speechSynthesis' in window)){
+    alert("Your browser doesn't support read-aloud. Try a recent version of Chrome, Edge, or Safari.");
+    return;
+  }
+  const btn = document.getElementById("speakBtn");
+  if(speaking){ stopSpeaking(); return; }
+  const c = CARDS[pos];
+  const text = c.prompt + ". " + c.answer.replace(/<[^>]+>/g,"") + ". Have ready: " + c.ready.join(". ");
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = 0.95;
+  utter.onend = stopSpeaking;
+  utter.onerror = stopSpeaking;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+  speaking = true;
+  btn.classList.add("speaking");
+  btn.textContent = "⏹ Stop reading";
+}
+
+document.getElementById("startAllBtn").addEventListener("click", ()=>{ pos = 0; showSlide(); });
+document.getElementById("backToTocBtn").addEventListener("click", showTOC);
+document.getElementById("prevBtn").addEventListener("click", prev);
+document.getElementById("nextBtn").addEventListener("click", next);
+document.getElementById("speakBtn").addEventListener("click", toggleSpeak);
+
+document.addEventListener("keydown",(e)=>{
+  if(document.getElementById("slideScreen").style.display === "none") return;
+  if(e.key === "ArrowRight") next();
+  if(e.key === "ArrowLeft") prev();
+});
+
+// simple swipe support
+let touchX = null;
+document.addEventListener("touchstart",(e)=>{ touchX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener("touchend",(e)=>{
+  if(touchX===null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(document.getElementById("slideScreen").style.display !== "none"){
+    if(dx < -60) next();
+    if(dx > 60) prev();
+  }
+  touchX = null;
+}, {passive:true});
+
+buildTOC();
+showTOC();
+</script>
+
+</body>
+</html>
