@@ -1,1 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CACFP Review Prep — Sponsor Study Cards · CNPSuite</title>
+<meta name="description" content="A preparation aid for CACFP sponsors of centers and day care homes getting ready for their state agency review. Provided through CNPSuite.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a2240;
+    --navy-mid:#0d2d52;
+    --teal:#00a6c8;
+    --teal-pale:#e6f7fb;
+    --teal-mid:#b3e3ef;
+    --accent:#32533d;
+    --accent-pale:#eaf2ec;
+    --accent-mid:#8fc1a0;
+    --accent-dark:#223a2a;
+    --off-white:#f5f8fa;
+    --border:#d6e4ec;
+    --text-mid:#3d5a73;
+    --text-lt:#6b8fa8;
+    --gold:#f0a500;
+    --review:#94a7bb;
+    --review-pale:#eef2f5;
+    --review-dark:#4a6178;
+    --white:#fff;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--off-white);
+    color:var(--navy);
+    font-family:'Public Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Newsreader',serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;}
 
+  header{
+    background:var(--navy);
+    color:var(--white);
+    position:sticky;top:0;z-index:20;
+    border-bottom:3px solid var(--accent);
+  }
+  .header-inner{
+    max-width:920px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .back-link{
+    display:inline-flex;align-items:center;gap:7px;
+    text-decoration:none;transition:opacity .15s;
+  }
+  .back-link:hover{opacity:.82;}
+  .brand-icon{width:19px;height:19px;flex-shrink:0;}
+  .back-link .wordmark{
+    font-family:'Public Sans',sans-serif;font-weight:700;font-size:.92rem;
+    letter-spacing:.005em;color:var(--white);
+  }
+  .brand-group{display:flex;align-items:center;}
+  .program-switch{
+    margin-left:10px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.04em;
+  }
+  .program-switch a{color:rgba(255,255,255,.55);text-decoration:none;transition:.15s;}
+  .program-switch a:hover{color:#fff;}
+  .program-switch .sep{color:rgba(255,255,255,.28);margin:0 4px;}
+  .brand{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;
+    color:var(--accent-mid);text-transform:uppercase;
+  }
+  .program-badge{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+    color:#ffffff;background:var(--accent);border-radius:5px;
+    padding:3px 8px;margin-left:10px;font-weight:600;
+  }
+
+  main{max-width:720px;margin:0 auto;padding:32px 20px 80px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 6px;
+  }
+  .eyebrow .sec{color:var(--accent);margin-right:4px;}
+  .title-row{display:flex;align-items:center;gap:12px;}
+  .title-block{
+    width:28px;height:28px;border:3px solid var(--accent);border-radius:6px;
+    flex-shrink:0;
+  }
+  h1.title{
+    font-size:2rem;font-weight:600;margin:0 0 6px;color:var(--navy);
+    line-height:1.15;
+  }
+  .subtitle{color:var(--text-mid);font-size:.98rem;line-height:1.55;margin:0 0 10px;max-width:56ch;}
+  .audience-note{
+    font-size:.84rem;line-height:1.5;color:var(--text-lt);margin:0 0 24px;max-width:56ch;
+  }
+  .audience-note a{color:var(--accent);text-decoration:none;}
+  .audience-note a:hover{text-decoration:underline;}
+
+  .progress-wrap{margin-bottom:22px;}
+  .progress-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;}
+  .progress-label{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--text-lt);letter-spacing:.06em;text-transform:uppercase;}
+  .progress-pct{font-family:'Newsreader',serif;font-size:1.4rem;font-weight:600;color:var(--navy);}
+  .progress-bar{
+    height:8px;border-radius:5px;background:var(--border);overflow:hidden;display:flex;
+  }
+  .progress-bar .seg-mastered{background:var(--accent);height:100%;}
+  .progress-bar .seg-review{background:var(--review);height:100%;}
+  .progress-legend{display:flex;gap:16px;margin-top:8px;font-size:.78rem;color:var(--text-mid);}
+  .completion-banner{
+    margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    color:var(--accent-dark);background:var(--accent-pale);border:1px solid var(--accent-mid);
+    border-radius:8px;padding:9px 13px;display:flex;align-items:center;gap:6px;
+    animation:pop-in .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .completion-banner[hidden]{display:none;}
+  @keyframes pop-in{from{opacity:0;transform:translateY(-4px) scale(.98);}to{opacity:1;transform:none;}}
+  .legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .dot-mastered{background:var(--accent);}
+  .dot-review{background:var(--review);}
+  .dot-untouched{background:var(--border);}
+
+  .filters{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+  .pill{
+    font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.03em;
+    padding:7px 14px;border-radius:20px;border:1px solid var(--border);
+    background:var(--white);color:var(--text-mid);cursor:pointer;transition:.15s;
+  }
+  .pill:hover{border-color:var(--accent);color:var(--navy);}
+  .pill.active{background:var(--navy);border-color:var(--navy);color:var(--white);}
+
+  .stage{position:relative;margin-bottom:18px;}
+  .card-count{
+    text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+    color:var(--text-lt);margin-bottom:10px;
+  }
+  .card-frame{perspective:1600px;position:relative;transition:transform .3s ease;}
+  .card-frame:hover{transform:translateY(-2px);}
+  .ghost-card{
+    position:absolute;border-radius:16px;background:var(--white);
+    border:1px solid var(--border);z-index:0;pointer-events:none;
+  }
+  .ghost-card.g1{top:9px;left:9px;right:-9px;bottom:-9px;opacity:.75;
+    box-shadow:0 10px 20px -12px rgba(10,34,64,.12);}
+  .ghost-card.g2{top:18px;left:18px;right:-18px;bottom:-18px;opacity:.45;
+    box-shadow:0 14px 24px -14px rgba(10,34,64,.10);}
+  .card{
+    position:relative;min-height:340px;border-radius:16px;cursor:pointer;
+    transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1);
+    z-index:2;
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;
+    padding:28px 26px;display:flex;flex-direction:column;
+    border:1px solid var(--border);
+    transition:box-shadow .2s ease;
+  }
+  .card-frame:hover .face-front{
+    box-shadow:0 2px 6px rgba(10,34,64,.08),0 16px 32px -8px rgba(10,34,64,.14);
+  }
+  .face-front{
+    background:var(--white);
+    box-shadow:0 1px 3px rgba(10,34,64,.06),0 8px 24px rgba(10,34,64,.05);
+  }
+  .face-back{
+    background:var(--navy);color:var(--white);
+    transform:rotateY(180deg);
+    border-color:var(--navy-mid);
+  }
+  .area-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:4px;
+  }
+  .face-back .area-tag{color:var(--accent-mid);}
+  .cite-tag{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.04em;
+    color:var(--text-mid);margin-bottom:16px;
+    border:1px dashed var(--border);border-radius:6px;
+    padding:5px 10px;
+  }
+  .cite-tag .cite-k{color:var(--accent);font-weight:600;letter-spacing:.1em;}
+  .face-back .cite-tag{color:var(--accent-mid);opacity:.9;border-color:rgba(255,255,255,.25);}
+  .face-back .cite-tag .cite-k{color:var(--accent-mid);}
+  .prompt-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-lt);
+    text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;
+  }
+  .prompt{
+    font-family:'Newsreader',serif;font-size:1.42rem;line-height:1.32;color:var(--navy);letter-spacing:-.01em;
+    flex:1;
+  }
+  .tap-hint{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-lt);
+    text-align:right;margin-top:12px;
+  }
+  .answer{
+    font-size:.98rem;line-height:1.55;margin:0 0 16px;
+  }
+  .answer b{font-weight:700;color:#fff;}
+  .ready-box{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    border-radius:10px;padding:14px 16px;margin-top:auto;
+  }
+  .ready-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--review-dark);margin-bottom:6px;
+  }
+  .ready-text{font-size:.88rem;line-height:1.5;color:var(--accent-pale);}
+  .ready-text ul{margin:0;padding:0;list-style:none;display:grid;gap:7px;}
+  .ready-text li{
+    font-size:.88rem;line-height:1.45;color:var(--accent-pale);
+    padding-left:18px;position:relative;
+  }
+  .ready-text li::before{
+    content:"";position:absolute;left:0;top:5px;width:8px;height:8px;
+    border:1.5px solid var(--accent-mid);border-radius:2px;
+  }
+
+  .nav-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:16px 0 8px;}
+  .arrow-btn{
+    background:var(--white);border:1px solid var(--border);width:38px;height:38px;
+    border-radius:50%;font-size:1.1rem;color:var(--navy);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:.15s;
+  }
+  .arrow-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .nav-index{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--text-mid);min-width:70px;text-align:center;}
+
+  .rate-row{display:flex;gap:10px;margin:18px 0;}
+  .rate-btn{
+    flex:1;padding:13px 10px;border-radius:10px;border:1px solid var(--border);
+    font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;
+    background:var(--white);color:var(--navy);transition:.15s;
+  }
+  .rate-btn.review{color:var(--review-dark);}
+  .rate-btn.review:hover{background:var(--review-pale);border-color:var(--review);}
+  .rate-btn.mastered{color:var(--accent-dark);}
+  .rate-btn.mastered:hover{background:var(--accent-pale);border-color:var(--accent);}
+
+  .util-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .util-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.03em;
+    padding:9px 16px;border-radius:8px;border:1px solid var(--border);
+    background:var(--white);color:var(--text-mid);cursor:pointer;transition:.15s;
+  }
+  .util-btn:hover{border-color:var(--navy);color:var(--navy);}
+  .util-btn.danger:hover{border-color:#c0392b;color:#c0392b;}
+
+  .area-filters-wrap{margin-bottom:10px;}
+  .area-filters-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--text-lt);margin:0 0 8px;
+  }
+  .area-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;}
+  .area-pill{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.02em;
+    padding:5px 11px;border-radius:16px;border:1px solid var(--border);
+    background:var(--white);color:var(--text-mid);cursor:pointer;transition:.15s;
+  }
+  .area-pill:hover{border-color:var(--accent);color:var(--navy);}
+  .area-pill.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .area-pill.tag-ctr.active{background:#3475b4;border-color:#3475b4;}
+  .area-pill.tag-dch.active{background:#bd8d29;border-color:#bd8d29;}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--text-mid);
+  }
+  .empty-state h3{margin:0 0 8px;font-size:1.2rem;}
+
+  .view-toggle{
+    display:flex;gap:0;margin-bottom:22px;border:1px solid var(--border);
+    border-radius:10px;overflow:hidden;width:fit-content;background:var(--white);
+  }
+  .view-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.03em;
+    padding:10px 18px;border:none;background:transparent;color:var(--text-mid);
+    cursor:pointer;transition:.15s;
+  }
+  .view-btn.active{background:var(--navy);color:#fff;}
+  .view-btn:not(.active):hover{color:var(--navy);}
+
+  #checklistView{display:none;}
+  .cl-summary{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    margin-bottom:18px;flex-wrap:wrap;
+  }
+  .cl-count{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--text-mid);}
+  .cl-count b{color:var(--accent-dark);font-weight:600;}
+  .cl-group{
+    background:var(--white);border:1px solid var(--border);border-radius:12px;
+    margin-bottom:14px;overflow:hidden;
+  }
+  .cl-head{
+    padding:14px 18px 12px;border-bottom:1px solid var(--border);
+    display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  }
+  .cl-area{font-family:'Newsreader',serif;font-size:1.05rem;font-weight:600;color:var(--navy);}
+  .cl-cite{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.04em;color:var(--text-lt);}
+  .cl-item{
+    display:flex;align-items:flex-start;gap:11px;padding:11px 18px;
+    border-top:1px solid var(--off-white);cursor:pointer;
+  }
+  .cl-item:first-of-type{border-top:none;}
+  .cl-item:hover{background:var(--off-white);}
+  .cl-item input[type=checkbox]{
+    width:17px;height:17px;margin:2px 0 0;accent-color:var(--accent);cursor:pointer;flex-shrink:0;
+  }
+  .cl-item label{font-size:.9rem;line-height:1.5;color:var(--navy);cursor:pointer;}
+  .cl-item.done label{color:var(--text-lt);}
+  .print-note{display:none;}
+
+  @media print{
+    header, .progress-wrap, .view-toggle, .filters, .area-filters-wrap, #cardsView, .about, footer,
+    .cl-summary .util-btn{display:none !important;}
+    body{background:#fff;}
+    main{padding:0;max-width:100%;}
+    #checklistView{display:block !important;}
+    .cl-group{break-inside:avoid;border-color:#bbb;}
+    .cl-item{border-top-color:#eee;}
+    .print-note{
+      display:block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+      color:#555;margin-bottom:14px;
+    }
+  }
+
+  .about{
+    margin-top:44px;padding-top:24px;border-top:1px solid var(--border);
+    font-size:.86rem;line-height:1.6;color:var(--text-mid);
+  }
+  .about strong{color:var(--navy);}
+
+  footer{
+    max-width:720px;margin:0 auto;padding:0 20px 40px;
+    font-size:.8rem;color:var(--text-lt);
+  }
+  footer a{color:var(--accent);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .privacy-note{margin-top:6px;font-size:.76rem;color:var(--text-lt);}
+
+  @media (max-width:520px){
+    h1.title{font-size:1.6rem;}
+    .title-block{width:22px;height:22px;border-width:2px;}
+    .card{min-height:400px;}
+    .prompt{font-size:1.12rem;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="back-link" href="https://www.cnpsuite.com">
+      <svg class="brand-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="8" height="8" rx="2" fill="#3475b4"/>
+        <rect x="11" y="1" width="8" height="8" rx="2" fill="#32533d"/>
+        <rect x="1" y="11" width="8" height="8" rx="2" fill="#bd8d29"/>
+        <rect x="11.75" y="11.75" width="6.5" height="6.5" rx="1.3" fill="none" stroke="#94a7bb" stroke-width="1.5"/>
+      </svg>
+      <span class="wordmark">CNPSuite</span>
+    </a>
+    <span class="brand-group">
+      <span class="brand">Review Prep</span>
+      <span class="program-badge">CACFP</span>
+      <span class="program-switch">
+        <a href="https://www.cnpsuite.com/ar-deck">NSLP</a>
+      </span>
+    </span>
+  </div>
+</header>
+
+<main>
+  <p class="eyebrow"><span class="sec">§</span> Sponsor Study Tool</p>
+  <div class="title-row">
+    <span class="title-block"></span>
+    <h1 class="title">CACFP Review Prep</h1>
+  </div>
+  <p class="subtitle">Your state agency's CACFP review is coming. Drill what your reviewer will check and what to have ready — by area, with the citation and the evidence to pull. For sponsors of centers, at-risk afterschool sites, adult day care centers, and day care homes.</p>
+  <p class="audience-note">Preparing the <strong>state agency's own</strong> federal review instead of a sponsor's? See the <a href="https://www.cnpsuite.com/cacfp-rdeck">CACFP Management Evaluation deck</a>.</p>
+  <p class="audience-note">Prefer a simpler, one-screen-at-a-time version with no flipping or filters? Try the <a href="https://www.cnpsuite.com/cacfp-ar-slides">guided walkthrough</a>.</p>
+
+  <div class="progress-wrap">
+    <div class="progress-row">
+      <span class="progress-label">Readiness</span>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="seg-mastered" id="segMastered" style="width:0%"></div>
+      <div class="seg-review" id="segReview" style="width:0%"></div>
+    </div>
+    <div class="progress-legend">
+      <span><span class="legend-dot dot-mastered"></span><span id="countMastered">0</span> mastered</span>
+      <span><span class="legend-dot dot-review"></span><span id="countReview">0</span> to review</span>
+      <span><span class="legend-dot dot-untouched"></span><span id="countUntouched">0</span> left to review</span>
+    </div>
+    <div class="completion-banner" id="completionBanner" hidden>✓ Deck mastered — ready for the real review.</div>
+  </div>
+
+  <div class="view-toggle">
+    <button class="view-btn active" id="viewCards">Study cards</button>
+    <button class="view-btn" id="viewChecklist">Evidence checklist</button>
+  </div>
+
+  <div id="cardsView">
+    <div class="filters">
+      <button class="pill active" data-filter="all">All cards</button>
+      <button class="pill" data-filter="review">To review</button>
+      <button class="pill" data-filter="mastered">Mastered</button>
+    </div>
+
+    <div class="area-filters-wrap">
+      <p class="area-filters-label">Filter by area — orange tag = day care home specific, blue tag = center specific</p>
+      <div class="area-filters" id="areaFilters"></div>
+    </div>
+
+    <div class="stage">
+      <div class="card-count" id="cardCount">Card 1 / 39</div>
+      <div class="card-frame">
+        <div class="ghost-card g2" id="ghost2"></div>
+        <div class="ghost-card g1" id="ghost1"></div>
+        <div class="card" id="card">
+          <div class="face face-front">
+            <div class="area-tag" id="areaFront">Area</div>
+            <div class="cite-tag" id="citeFront">CITE —</div>
+            <div class="prompt-label">Tap to reveal</div>
+            <div class="prompt" id="promptFront">Loading…</div>
+            <div class="tap-hint">Flip ›</div>
+          </div>
+          <div class="face face-back">
+            <div class="area-tag" id="areaBack">Area</div>
+            <div class="cite-tag" id="citeBack">CITE —</div>
+            <div class="answer" id="answerBack"></div>
+            <div class="ready-box">
+              <div class="ready-label">Have ready for the reviewer</div>
+              <div class="ready-text" id="readyBack"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="arrow-btn" id="prevBtn" aria-label="Previous card">‹</button>
+      <span class="nav-index" id="navIndex">1 / 39</span>
+      <button class="arrow-btn" id="nextBtn" aria-label="Next card">›</button>
+    </div>
+
+    <div class="rate-row">
+      <button class="rate-btn review" id="reviewBtn">Review again</button>
+      <button class="rate-btn mastered" id="masteredBtn">Got it</button>
+    </div>
+
+    <div class="util-row">
+      <button class="util-btn" id="flipBtn">Flip</button>
+      <button class="util-btn" id="shuffleBtn">Shuffle</button>
+      <button class="util-btn danger" id="resetBtn">Reset progress</button>
+    </div>
+  </div>
+
+  <div id="checklistView">
+    <p class="print-note">CACFP Review Prep — Evidence Checklist · CNPSuite</p>
+    <div class="cl-summary">
+      <span class="cl-count"><b id="clDone">0</b> of <b id="clTotal">0</b> evidence items ready</span>
+      <span>
+        <button class="util-btn" id="printBtn">Print checklist</button>
+        <button class="util-btn danger" id="clResetBtn">Reset checklist</button>
+      </span>
+    </div>
+    <div id="clGroups"></div>
+  </div>
+
+  <div class="about">
+    <p><strong>About this deck.</strong> Written from the sponsor's seat: each card covers what a state agency reviewer probes about a sponsor's own operation under 7 CFR Part 226, plus FNS Instruction 113-1 (civil rights) and 2 CFR Part 200 (procurement and cost principles). As of June 1, 2026, FNS is the Food and Nutrition Administration (FNA), so newer source documents may carry the new name. This is a study aid — it is <strong>not a substitute for your state agency's official review guidance</strong> and not a guarantee of any review outcome. Confirm every item against your FNA regional office's guidance, the current eCFR, and your state agency's own procedures before relying on it in a review.</p>
+  </div>
+</main>
+
+<footer>
+  <div>Part of <a href="https://www.cnpsuite.com">CNPSuite</a> · a study tool by <a href="https://www.lsdigitalsolutions.com">LS Digital Solutions</a></div>
+  <div class="privacy-note">Your progress is saved on your own device. This tool sets no cookies and uses no tracking, analytics, or personal-data collection.</div>
+</footer>
+
+<script>
+/* =====================================================================
+   CACFP REVIEW PREP — Sponsor-facing card set (centers + day care homes)
+   Voice: speaks to the sponsor who is studying.
+   A preparation aid — not a substitute for the state agency's official
+   review guidance, and not a guarantee of any review outcome.
+   ===================================================================== */
+
+const AREAS = {
+  "review":      "The Review Itself",
+  "agree":       "Approval & Your Agreement",
+  "monitorctr":  "Monitoring Centers",
+  "monitordch":  "Monitoring Day Care Homes",
+  "claims":      "Meal Counts & Claiming",
+  "pattern":     "Meal Pattern",
+  "tiering":     "Tiering & Area Eligibility",
+  "afterschool": "At-Risk Afterschool",
+  "adultday":    "Adult Day Care Centers",
+  "financial":   "Financial Management",
+  "procure":     "Procurement",
+  "civil":       "Civil Rights",
+  "training":    "Training You Provide",
+  "seriousdef":  "Serious Deficiency",
+  "records":     "Records & Reporting"
+};
+
+// Areas that apply only to one sponsor type get a tag shown on the filter pill.
+const AREA_TAGS = {
+  "monitorctr":  "ctr",
+  "monitordch":  "dch",
+  "tiering":     "dch",
+  "afterschool": "ctr",
+  "adultday":    "ctr"
+};
+
+const CARDS = [
+  {
+    "area": "review",
+    "prompt": "How often will your state agency review you, and what decides the cycle?",
+    "answer": "Every institution is reviewed at least once every <b>3 years</b> — but you move to a <b>2-year</b> cycle if you sponsor 100+ facilities, engage in non-CACFP activities, or have a recent serious finding (the last two added by the 2023 Integrity Rule).",
+    "cite": "7 CFR 226.6(m)",
+    "ready": ["Your last review's completion date and current cycle status", "Documentation of any 2-year-cycle trigger, if one applies to you"]
+  },
+  {
+    "area": "review",
+    "prompt": "What does the review actually look at?",
+    "answer": "Your approval/VCA file, claims and meal counts, monitoring records, financial and budget records, civil rights compliance, and training — plus a sample of your facilities, with meal service observation where applicable.",
+    "cite": "7 CFR 226.6(m)",
+    "ready": ["Files organized by area so nothing is hunted for on review day", "A point person ready to walk the reviewer through each area"]
+  },
+  {
+    "area": "review",
+    "prompt": "What happens if the review finds problems?",
+    "answer": "Written findings and a <b>corrective action plan (CAP)</b> with regulatory deadlines, then follow-up verifying the fix actually happened. Findings that go uncorrected — or are serious enough on their own — can escalate into your own serious deficiency process.",
+    "cite": "7 CFR 226.6(m); 226.6(c)",
+    "ready": ["A team ready to turn around a CAP quickly", "A prior CAP as a template, if you have one"]
+  },
+  {
+    "area": "agree",
+    "prompt": "What must you demonstrate to keep your sponsor agreement in force?",
+    "answer": "Continued <b>financial viability, administrative capability, and accountability (VCA)</b>, backed by a current, approvable management plan and budget. Your state agency can require an update whenever a finding, audit, or complaint signals elevated risk.",
+    "cite": "7 CFR 226.6(b); 2023 Integrity Rule",
+    "ready": ["Current management plan and budget on file", "Documentation of any VCA reassessment tied to a recent finding or audit"]
+  },
+  {
+    "area": "agree",
+    "prompt": "What must you check before signing up a new facility or key staff person?",
+    "answer": "The <b>National Disqualified List (NDL)</b> — a facility, or any of its principals or individuals, that appears on the NDL cannot be approved until removed from the list.",
+    "cite": "7 CFR 226.6(c)",
+    "ready": ["NDL check records for every facility and key-staff addition"]
+  },
+  {
+    "area": "agree",
+    "prompt": "What must you renew on a regular cycle, and what can trigger an out-of-cycle update?",
+    "answer": "Your management plan, budget, and permanent agreement information are renewed on your state agency's set cycle; a review finding, audit result, or complaint can trigger a VCA reassessment outside that cycle.",
+    "cite": "7 CFR 226.6(b)",
+    "ready": ["Renewal file with current signatures and dates", "Any out-of-cycle reassessment documentation"]
+  },
+  {
+    "area": "monitorctr",
+    "prompt": "How many times a year must you review each center, and how many must be unannounced?",
+    "answer": "<b>Three</b> reviews per year, with at least <b>two of the three unannounced</b> — and the timing varied so visits aren't predictable.",
+    "cite": "7 CFR 226.16(d)(4)(iii)",
+    "ready": ["Three completed reviews per center for the current year", "Unannounced-visit log showing varied timing"]
+  },
+  {
+    "area": "monitorctr",
+    "prompt": "What must a center monitoring review actually check?",
+    "answer": "Compliance across the <b>meal pattern, licensing/approval status, staff attendance at required training, meal counts, menu/production records, and enrollment forms</b>. At least one unannounced review must include meal service observation.",
+    "cite": "7 CFR 226.16(d)(4)(i)",
+    "ready": ["Completed review instruments per center", "Meal observation documentation from at least one unannounced visit"]
+  },
+  {
+    "area": "monitorctr",
+    "prompt": "What reconciliation must every monitoring visit include?",
+    "answer": "Comparing the facility's recorded meal counts for <b>five consecutive days</b> against its enrollment and attendance records, to catch overclaims early.",
+    "cite": "7 CFR 226.16(d)(4)(ii)",
+    "ready": ["Five-day meal-count reconciliation worksheet per review"]
+  },
+  {
+    "area": "monitordch",
+    "prompt": "Does the visit frequency differ for day care homes?",
+    "answer": "No — the same standard applies: <b>three visits a year, at least two unannounced</b>, plus the five-day meal-count reconciliation against enrollment and attendance.",
+    "cite": "7 CFR 226.16(d)(4)(iii)",
+    "ready": ["Three completed home visits per provider for the current year", "Five-day reconciliation on file for each"]
+  },
+  {
+    "area": "monitordch",
+    "prompt": "What monitoring staff capacity must you maintain for day care homes?",
+    "answer": "Monitoring staff sized to your home count — generally in the range of <b>one full-time monitor for every 50 to 150 homes</b> sponsored, with your state agency setting the specific ratio.",
+    "cite": "7 CFR 226.16(b)",
+    "ready": ["Staffing plan showing your monitor-to-home ratio", "Monitor caseload records"]
+  },
+  {
+    "area": "claims",
+    "prompt": "Where must reimbursable meals be counted?",
+    "answer": "At the <b>point of service</b> — correctly identifying each meal's eligibility category the moment it's served, not reconstructed afterward.",
+    "cite": "7 CFR 226.10",
+    "ready": ["Point-of-service counting procedure description", "Back-up/roster count procedures"]
+  },
+  {
+    "area": "claims",
+    "prompt": "What must you do before submitting a claim?",
+    "answer": "Apply <b>edit checks</b> comparing claimed meals against enrollment, attendance, and capacity; investigate and resolve anything flagged; and submit within your state agency's claim deadline — commonly <b>60 days</b> after the claim month absent an approved exception.",
+    "cite": "7 CFR 226.10",
+    "ready": ["Edit-check worksheets", "Resolution records for flagged days", "Claim submission timeline"]
+  },
+  {
+    "area": "pattern",
+    "prompt": "Does the meal pattern vary by age group?",
+    "answer": "Yes — <b>infants</b> follow their own progression (breast milk/formula plus age-appropriate solids), <b>children</b> follow the standard components (milk, meat/alternate, fruit, vegetable, whole-grain-rich grains), and <b>adults</b> follow a similar pattern with adjusted portions and an added vegetable/fruit component at some meals.",
+    "cite": "7 CFR 226.20",
+    "ready": ["Menus and production records broken out by age group served"]
+  },
+  {
+    "area": "pattern",
+    "prompt": "Is Offer versus Serve (OVS) available in CACFP?",
+    "answer": "<b>No.</b> OVS is an NSLP/SBP option, not a CACFP one — every required component and quantity must be served. Don't let staff trained on school-meal rules assume they can apply OVS here.",
+    "cite": "7 CFR 226.20 (contrast 210.10(e), NSLP-only)",
+    "ready": ["Staff trained that full components are required, not OVS"]
+  },
+  {
+    "area": "pattern",
+    "prompt": "What documentation proves meal pattern compliance at a facility?",
+    "answer": "Daily <b>production records</b> showing what was offered and in what quantity, supported by standardized recipes and <b>CN labels or product formulation statements</b> for combination or processed foods.",
+    "cite": "7 CFR 226.20",
+    "ready": ["Production records", "Standardized recipes", "CN labels / product formulation statements"]
+  },
+  {
+    "area": "tiering",
+    "prompt": "What's the difference between a Tier I and Tier II day care home?",
+    "answer": "<b>Tier I</b> homes qualify by area eligibility (school or census data showing a high concentration of low-income households) or by the provider's own household income; <b>Tier II</b> homes are everyone else, reimbursed at a lower rate unless an individual enrolled child qualifies for Tier I rates by household income.",
+    "cite": "7 CFR 226.2 (definitions); 226.15",
+    "ready": ["Area-eligibility source data or provider income documentation for each Tier I determination", "List of Tier II homes claiming Tier I rates for individual children, with supporting income forms"]
+  },
+  {
+    "area": "tiering",
+    "prompt": "How current must your area eligibility data be?",
+    "answer": "It has a shelf life your state agency sets, commonly tied to the school- or census-data update cycle — <b>using stale data is a common review finding</b>.",
+    "cite": "FNS area eligibility guidance",
+    "ready": ["Documentation of the vintage and source of the data used"]
+  },
+  {
+    "area": "tiering",
+    "prompt": "Are income-based Tier I determinations permanent once made?",
+    "answer": "No — they follow the same annual application/income-documentation cycle as other CACFP eligibility determinations, so <b>stale income paperwork</b> is a common review target.",
+    "cite": "7 CFR 226.15",
+    "ready": ["Current-cycle income documentation for every income-based Tier I determination"]
+  },
+  {
+    "area": "afterschool",
+    "prompt": "What makes a site eligible for At-Risk Afterschool meals?",
+    "answer": "The site sits in an area where at least <b>50%</b> of children are eligible for free or reduced-price meals (by school attendance area or census data), offers <b>educational or enrichment activities</b> during the meal service, and operates on eligible days.",
+    "cite": "7 CFR 226.17a",
+    "ready": ["Site area-eligibility documentation", "Activity schedule showing enrichment programming"]
+  },
+  {
+    "area": "afterschool",
+    "prompt": "What records prove an At-Risk site is actually earning its meals?",
+    "answer": "Attendance and activity records tying each claimed meal to a supervised enrichment activity that day — a site claiming meals with no documented activity is a common finding.",
+    "cite": "7 CFR 226.17a",
+    "ready": ["Daily activity logs matched to meal claims"]
+  },
+  {
+    "area": "adultday",
+    "prompt": "Who is an eligible participant at an adult day care center?",
+    "answer": "Adults who are <b>60 or older</b>, or <b>functionally impaired adults</b> enrolled for care, meeting your state's nonresidential adult day care definition.",
+    "cite": "7 CFR 226.2 (definitions); 226.20",
+    "ready": ["Enrollment/eligibility documentation showing the age or functional-impairment basis"]
+  },
+  {
+    "area": "adultday",
+    "prompt": "How does the adult meal pattern differ from the child meal pattern?",
+    "answer": "Similar components, but <b>adult-sized portions</b>, and some meals require an <b>additional vegetable or fruit</b> serving beyond the child pattern.",
+    "cite": "7 CFR 226.20",
+    "ready": ["Adult-specific production records and portion documentation"]
+  },
+  {
+    "area": "financial",
+    "prompt": "What's the administrative cost cap for center sponsors — and does it apply to day care home sponsors too?",
+    "answer": "Center sponsors may not charge more than <b>15%</b> of estimated or actual meal reimbursements to administrative costs. There's <b>no equivalent flat percentage cap for day care home sponsors</b>, though ordinary cost-allowability rules still apply to both.",
+    "cite": "7 CFR 226.16(b)(1); 2 CFR 200 Subpart E",
+    "ready": ["Admin-cost calculation against the 15% cap (center sponsors)", "Cost-allowability documentation regardless of sponsor type"]
+  },
+  {
+    "area": "financial",
+    "prompt": "What must your financial management system demonstrate?",
+    "answer": "That CACFP funds are properly accounted for, separately identifiable, and used solely for allowable program purposes — reconcilable to your claims and your approved budget.",
+    "cite": "7 CFR 226.7",
+    "ready": ["Financial statements and ledgers reconciled to claims", "Approved budget on file"]
+  },
+  {
+    "area": "financial",
+    "prompt": "How quickly must you pass reimbursement through to your facilities?",
+    "answer": "Within the regulatory timeframe after you receive funds from the state agency — commonly <b>five working days</b>.",
+    "cite": "7 CFR 226.16(g)-(h)",
+    "ready": ["Disbursement timing records showing the pass-through deadline was met"]
+  },
+  {
+    "area": "procure",
+    "prompt": "What procurement standards apply to your CACFP purchases?",
+    "answer": "The federal uniform standards at <b>2 CFR Part 200, Subpart D</b>, applying whichever is most restrictive among federal, state, and local requirements.",
+    "cite": "7 CFR 226.22",
+    "ready": ["Written procurement procedures", "Conflict-of-interest / code-of-conduct policy"]
+  },
+  {
+    "area": "procure",
+    "prompt": "What are the micro-purchase and simplified-acquisition thresholds?",
+    "answer": "<b>Micro-purchase:</b> up to $10,000 (no competitive quotes needed if the price is reasonable). <b>Simplified acquisition:</b> up to $250,000 with informal quotes; above that, formal competitive bidding is required. State or local limits may be lower.",
+    "cite": "2 CFR 200.1, 200.320",
+    "ready": ["Quote/bid documentation matched to the method used", "Your procurement policy's stated thresholds"]
+  },
+  {
+    "area": "procure",
+    "prompt": "Does Buy American apply to CACFP, and what about geographic preference?",
+    "answer": "<b>Buy American does not apply to CACFP</b> — it's an NSLP/SBP-specific requirement. <b>Geographic preference is available</b>: you may give preference to unprocessed, locally grown or raised agricultural products, defining \"local\" yourself.",
+    "cite": "7 CFR 226.22 (geographic preference); contrast 210.21(d) (Buy American, NSLP-only)",
+    "ready": ["Clarity in your procurement policy on whether domestic sourcing is a state/local add-on, not a federal CACFP mandate", "Geographic-preference documentation if you use it"]
+  },
+  {
+    "area": "civil",
+    "prompt": "What are the core civil rights compliance elements a reviewer checks?",
+    "answer": "The <b>\"And Justice for All\"</b> poster displayed, the <b>current nondiscrimination statement</b> on public materials, a working complaint procedure, reasonable accommodations, and language assistance where needed.",
+    "cite": "FNS Instruction 113-1; Title VI",
+    "ready": ["Poster placement at every site", "Current nondiscrimination statement on forms/materials"]
+  },
+  {
+    "area": "civil",
+    "prompt": "How must civil rights complaints be handled?",
+    "answer": "Accept and forward <b>every</b> discrimination complaint, verbal or written, using form <b>AD-3027</b>; keep a complaint log <b>even if you've received none</b>.",
+    "cite": "FNS Instruction 113-1",
+    "ready": ["Complaint log (even if empty)", "AD-3027 availability and referral procedure"]
+  },
+  {
+    "area": "civil",
+    "prompt": "What civil rights training do you owe your own staff?",
+    "answer": "Annual training for staff who interact with applicants or participants, covering the same nondiscrimination and complaint-handling obligations you enforce at your facilities.",
+    "cite": "FNS Instruction 113-1",
+    "ready": ["Staff training records"]
+  },
+  {
+    "area": "training",
+    "prompt": "What must you train facility staff on before they start, and how often after that?",
+    "answer": "Training on program duties <b>before operations begin</b> — meal patterns, meal counts, claims submission, and recordkeeping — plus additional mandatory sessions <b>at least annually</b> after that.",
+    "cite": "7 CFR 226.16(d)(2)-(3)",
+    "ready": ["Pre-operational training records for new facilities", "Annual training agendas, sign-in sheets, and materials"]
+  },
+  {
+    "area": "training",
+    "prompt": "Who at your own organization needs training beyond the facility-level basics?",
+    "answer": "The people <b>approving applications, reviewing claims, and conducting monitoring</b> at your organization need program-requirements training too — not just the facilities you sponsor.",
+    "cite": "7 CFR 226.16(d)(2)",
+    "ready": ["Training records for your own review, claims, and monitoring staff"]
+  },
+  {
+    "area": "seriousdef",
+    "prompt": "What must you do if you determine a facility you sponsor is seriously deficient?",
+    "answer": "<b>Initiate action to terminate</b> that facility's agreement for cause — this isn't discretionary once you've made the determination.",
+    "cite": "7 CFR 226.16(l)(1)",
+    "ready": ["SD determination documentation per facility", "Termination-for-cause action records"]
+  },
+  {
+    "area": "seriousdef",
+    "prompt": "What happens if your state agency determines that you — the sponsor — are seriously deficient?",
+    "answer": "A written SD notice, a corrective action plan evaluated against regulatory deadlines, and — if uncorrected — proposed termination, disqualification, and referral to the National Disqualified List.",
+    "cite": "7 CFR 226.6(c)",
+    "ready": ["Any current SD notice and your CAP response", "Timeline log against regulatory deadlines"]
+  },
+  {
+    "area": "seriousdef",
+    "prompt": "What appeal rights do your facilities have when you terminate them for cause?",
+    "answer": "The same kind of fair-hearing protection you'd expect from your own state agency: <b>written notice</b> of the action and appeal rights, and a hearing process before termination is final.",
+    "cite": "7 CFR 226.16(l)",
+    "ready": ["Written notice procedures for facility terminations", "Hearing/appeal records for contested terminations"]
+  },
+  {
+    "area": "records",
+    "prompt": "How long must you retain CACFP records?",
+    "answer": "Generally <b>three years</b> after the end of the fiscal year to which they pertain, plus the current year — longer if an audit, claim, or litigation is unresolved.",
+    "cite": "7 CFR 226.10(d); 2 CFR 200.334",
+    "ready": ["Retention policy and access to the required prior years of records"]
+  },
+  {
+    "area": "records",
+    "prompt": "What reconciliation should be ready before the review?",
+    "answer": "Your submitted claims reconciled to underlying meal-count and enrollment records, and — if your state agency reviews this annually — your reported expenditures reconciled to your bank and budget records.",
+    "cite": "7 CFR 226.10; 226.7",
+    "ready": ["Claim-to-source reconciliation worksheets", "Expenditure reconciliation, if applicable"]
+  }
+];
+
+const STORAGE_KEY = "cacfp-ar-progress-v1";
+const CL_KEY = "cacfp-ar-checklist-v1";
+let progress = {}; // {index: 'mastered'|'review'}
+let clState = {};  // {itemId: true}
+let order = CARDS.map((_,i)=>i);
+let currentPos = 0;
+let flipped = false;
+let statusFilter = "all";
+let areaFilter = "all";
+
+function loadJSON(key){
+  try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveJSON(key, obj){
+  try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(e){}
+}
+
+function buildAreaFilters(){
+  const wrap = document.getElementById("areaFilters");
+  const mk = (key,label,tag)=>{
+    const b = document.createElement("button");
+    b.className = "area-pill" + (tag ? " tag-"+tag : "") + (key===areaFilter ? " active" : "");
+    b.dataset.area = key;
+    b.textContent = label + (tag ? (tag==="ctr" ? " •" : " •") : "");
+    b.addEventListener("click", ()=>{
+      areaFilter = key;
+      document.querySelectorAll(".area-pill").forEach(p=>p.classList.remove("active"));
+      b.classList.add("active");
+      currentPos = 0;
+      render();
+    });
+    return b;
+  };
+  wrap.innerHTML = "";
+  wrap.appendChild(mk("all","All areas"));
+  for(const k in AREAS){ wrap.appendChild(mk(k, AREAS[k], AREA_TAGS[k])); }
+}
+
+function filteredOrder(){
+  return order.filter(i=>{
+    const c = CARDS[i];
+    if(areaFilter!=="all" && c.area!==areaFilter) return false;
+    if(statusFilter==="all") return true;
+    if(statusFilter==="review") return progress[i]==="review";
+    if(statusFilter==="mastered") return progress[i]==="mastered";
+    return true;
+  });
+}
+
+function render(){
+  const list = filteredOrder();
+  const stageEl = document.querySelector(".stage");
+  const cardCountEl = document.getElementById("cardCount");
+
+  if(list.length===0){
+    stageEl.innerHTML = `<div class="empty-state"><h3>Nothing here yet</h3><p>Cards you mark will show up in this filter.</p></div>`;
+    document.getElementById("navIndex").textContent = "0 / 0";
+    updateProgressBar();
+    return;
+  }
+
+  if(!document.getElementById("card")){
+    location.reload();
+    return;
+  }
+
+  if(currentPos >= list.length) currentPos = 0;
+  const idx = list[currentPos];
+  const c = CARDS[idx];
+  const areaLabel = AREAS[c.area];
+
+  document.getElementById("areaFront").textContent = areaLabel;
+  document.getElementById("citeFront").innerHTML = `<span class="cite-k">CITE</span>${c.cite}`;
+  document.getElementById("promptFront").textContent = c.prompt;
+  document.getElementById("areaBack").textContent = areaLabel;
+  document.getElementById("citeBack").innerHTML = `<span class="cite-k">CITE</span>${c.cite}`;
+  document.getElementById("answerBack").innerHTML = c.answer;
+  document.getElementById("readyBack").innerHTML = "<ul>" + c.ready.map(r=>`<li>${r}</li>`).join("") + "</ul>";
+
+  const g1 = document.getElementById("ghost1"), g2 = document.getElementById("ghost2");
+  if(g1) g1.style.display = list.length>1 ? "" : "none";
+  if(g2) g2.style.display = list.length>2 ? "" : "none";
+
+  cardCountEl.textContent = `Card ${currentPos+1} / ${list.length}`;
+  document.getElementById("navIndex").textContent = `${currentPos+1} / ${list.length}`;
+
+  flipped = false;
+  document.getElementById("card").classList.remove("flipped");
+
+  updateProgressBar();
+  fitCardHeight();
+}
+
+function fitCardHeight(){
+  const card = document.getElementById("card");
+  if(!card) return;
+  const front = card.querySelector(".face-front");
+  const back = card.querySelector(".face-back");
+  if(!front || !back) return;
+  card.style.height = "auto";
+  const h = Math.max(front.scrollHeight, back.scrollHeight);
+  card.style.height = (h + 2) + "px";
+}
+
+function updateProgressBar(){
+  const total = CARDS.length;
+  let mastered=0, review=0;
+  CARDS.forEach((_,i)=>{
+    if(progress[i]==="mastered") mastered++;
+    else if(progress[i]==="review") review++;
+  });
+  const untouched = total - mastered - review;
+  const pct = Math.round((mastered/total)*100);
+
+  document.getElementById("progressPct").textContent = pct+"%";
+  document.getElementById("segMastered").style.width = (mastered/total*100)+"%";
+  document.getElementById("segReview").style.width = (review/total*100)+"%";
+  document.getElementById("countMastered").textContent = mastered;
+  document.getElementById("countReview").textContent = review;
+  document.getElementById("countUntouched").textContent = untouched;
+
+  const banner = document.getElementById("completionBanner");
+  if(banner) banner.hidden = pct < 100;
+}
+
+function goTo(delta){
+  const list = filteredOrder();
+  if(list.length===0) return;
+  currentPos = (currentPos + delta + list.length) % list.length;
+  render();
+}
+
+function flip(){
+  const list = filteredOrder();
+  if(list.length===0) return;
+  flipped = !flipped;
+  document.getElementById("card").classList.toggle("flipped", flipped);
+}
+
+function rate(status){
+  const list = filteredOrder();
+  if(list.length===0) return;
+  const idx = list[currentPos];
+  progress[idx] = status;
+  saveJSON(STORAGE_KEY, progress);
+  const newList = filteredOrder();
+  if(newList.length===0){ render(); return; }
+  if(currentPos >= newList.length) currentPos = 0;
+  render();
+}
+
+function shuffle(){
+  for(let i=order.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [order[i],order[j]] = [order[j],order[i]];
+  }
+  currentPos = 0;
+  render();
+}
+
+function resetProgress(){
+  if(!confirm("Reset all card progress on this device? This can't be undone.")) return;
+  progress = {};
+  saveJSON(STORAGE_KEY, progress);
+  render();
+}
+
+/* ---- checklist ---- */
+function buildChecklist(){
+  const wrap = document.getElementById("clGroups");
+  wrap.innerHTML = "";
+  const groups = [];
+  const byArea = {};
+  CARDS.forEach((c,ci)=>{
+    const label = AREAS[c.area];
+    if(!byArea[label]){ byArea[label] = {area:label, cites:new Set(), items:[]}; groups.push(byArea[label]); }
+    byArea[label].cites.add(c.cite);
+    c.ready.forEach((r,ri)=>{
+      byArea[label].items.push({id:`${ci}-${ri}`, text:r});
+    });
+  });
+
+  groups.forEach(g=>{
+    const div = document.createElement("div");
+    div.className = "cl-group";
+    const head = document.createElement("div");
+    head.className = "cl-head";
+    head.innerHTML = `<span class="cl-area">${g.area}</span><span class="cl-cite">${[...g.cites].join(" · ")}</span>`;
+    div.appendChild(head);
+    g.items.forEach(item=>{
+      const row = document.createElement("div");
+      row.className = "cl-item" + (clState[item.id] ? " done" : "");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.id = "cl-"+item.id;
+      cb.checked = !!clState[item.id];
+      const label = document.createElement("label");
+      label.htmlFor = cb.id;
+      label.textContent = item.text;
+      cb.addEventListener("change", ()=>{
+        if(cb.checked) clState[item.id] = true; else delete clState[item.id];
+        row.classList.toggle("done", cb.checked);
+        saveJSON(CL_KEY, clState);
+        updateClCount();
+      });
+      row.appendChild(cb);
+      row.appendChild(label);
+      div.appendChild(row);
+    });
+    wrap.appendChild(div);
+  });
+  updateClCount();
+}
+
+function updateClCount(){
+  const total = CARDS.reduce((n,c)=>n+c.ready.length, 0);
+  const done = Object.keys(clState).length;
+  document.getElementById("clDone").textContent = done;
+  document.getElementById("clTotal").textContent = total;
+}
+
+function setView(which){
+  const cards = which==="cards";
+  document.getElementById("cardsView").style.display = cards ? "" : "none";
+  document.getElementById("checklistView").style.display = cards ? "none" : "block";
+  document.getElementById("viewCards").classList.toggle("active", cards);
+  document.getElementById("viewChecklist").classList.toggle("active", !cards);
+}
+
+document.getElementById("card").addEventListener("click", flip);
+document.getElementById("flipBtn").addEventListener("click", flip);
+document.getElementById("prevBtn").addEventListener("click", ()=>goTo(-1));
+document.getElementById("nextBtn").addEventListener("click", ()=>goTo(1));
+document.getElementById("reviewBtn").addEventListener("click", ()=>rate("review"));
+document.getElementById("masteredBtn").addEventListener("click", ()=>rate("mastered"));
+document.getElementById("shuffleBtn").addEventListener("click", shuffle);
+document.getElementById("resetBtn").addEventListener("click", resetProgress);
+document.getElementById("viewCards").addEventListener("click", ()=>setView("cards"));
+document.getElementById("viewChecklist").addEventListener("click", ()=>setView("checklist"));
+document.getElementById("printBtn").addEventListener("click", ()=>window.print());
+document.getElementById("clResetBtn").addEventListener("click", ()=>{
+  if(!confirm("Clear all checklist checkmarks on this device?")) return;
+  clState = {};
+  saveJSON(CL_KEY, clState);
+  buildChecklist();
+});
+
+document.querySelectorAll(".filters .pill").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".filters .pill").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    statusFilter = btn.dataset.filter;
+    currentPos = 0;
+    render();
+  });
+});
+
+document.addEventListener("keydown",(e)=>{
+  if(e.key==="ArrowLeft") goTo(-1);
+  if(e.key==="ArrowRight") goTo(1);
+  if(e.key===" " && document.getElementById("cardsView").style.display!=="none"){ e.preventDefault(); flip(); }
+});
+
+progress = loadJSON(STORAGE_KEY);
+clState = loadJSON(CL_KEY);
+buildAreaFilters();
+buildChecklist();
+render();
+
+let _fitTimer;
+window.addEventListener("resize", ()=>{ clearTimeout(_fitTimer); _fitTimer = setTimeout(fitCardHeight, 120); });
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitCardHeight); }
+</script>
+
+</body>
+</html>
