@@ -138,6 +138,10 @@
   .tool .cta{margin-top:20px;font-weight:700;font-size:14.5px;color:var(--accent,var(--cerulean));text-decoration:none;display:inline-flex;align-items:center;gap:8px}
   .tool .cta:hover{gap:11px}
   .tool .cta.disabled{color:var(--slate);font-weight:600;font-style:italic;pointer-events:none}
+  .tool .cta-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;margin-top:20px}
+  .tool .cta-row .cta{margin-top:0}
+  .tool .cta-secondary{font-weight:600;font-size:13px;color:var(--slate);text-decoration:underline;text-underline-offset:2px}
+  .tool .cta-secondary:hover{color:var(--ink)}
   /* ---- updates ---- */
   .updates{display:flex;flex-direction:column;border-top:1px solid var(--line)}
   .update{display:grid;grid-template-columns:148px 1fr auto;gap:22px;align-items:start;padding:22px 6px;border-bottom:1px solid var(--line)}
@@ -363,17 +367,28 @@ const TOOLS=[
   {
     key:"cacfp deck", status:"live",
     accent:"#C68A1E", soft:"#f6ecd9",
-    kicker:"CACFP ME Prep & self-accessment",
+    kicker:"CACFP ME Prep & Self-Assessment",
     name:"CACFP Readiness Deck & Checklist",
     desc:"Built for state agency staff preparing for a federal Management Evaluation of CACFP administration. Study the questions a reviewer probes, then work the evidence checklist so every document is on hand before the review begins.",
-    badges:["19+ Prep Cars","Printable Checklist"],
+    badges:["20 Prep Cards","Printable Checklist"],
     cta:"Open the deck", url:"/cacfp-rdeck/",
     icon:'<path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
   },
   {
+    key:"cacfp ar deck", status:"live",
+    accent:"#32533D", soft:"#e7efe9",
+    kicker:"For Sponsors · Review Prep",
+    name:"CACFP Review Prep — For Sponsors",
+    desc:"For sponsors of centers and day care homes preparing for your state agency's review of you — not the SA's own Management Evaluation. Covers monitoring, meal counts, meal pattern, tiering, procurement, civil rights, and more, cited to 7 CFR Part 226.",
+    badges:["39 topics","Centers + day care homes","Step-by-step or study cards"],
+    cta:"Start the guided walkthrough", url:"/cacfp-ar-slides/",
+    secondary:{label:"Prefer study cards? →", url:"/cacfp-ar-deck/"},
+    icon:'<path d="M9 6l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+  },
+  {
     key:"sfsp deck", status:"live",
     accent:"#C68A1E", soft:"#f6ecd9",
-    kicker:"SFSP ME Prep & self-accessment",
+    kicker:"SFSP ME Prep & Self-Assessment",
     name:"SFSP Readiness Deck & Checklist",
     desc:"Built for state agency staff preparing for a federal Management Evaluation of SFSP administration. Study the questions a reviewer probes, then work the evidence checklist so every document is on hand before the review begins.",
     badges:["20 Cards for review","Online checklist"],
@@ -399,6 +414,12 @@ const TOOLS=[
    tag = short label · when = display date text · link optional ({label,href}).
    ===================================================================== */
 const ANNOUNCEMENTS=[
+  {
+    date:"2026-09-16", when:"Sep 2026", tag:"New tool",
+    title:"CACFP Review Prep for Sponsors is live",
+    body:"The first sponsor-facing tool on CNPSuite — for centers and day care homes preparing for your state agency's own review of you. Choose a step-by-step guided walkthrough or the full study-cards version.",
+    link:{label:"Start the walkthrough", href:"/cacfp-ar-slides/"}
+  },
   {
     date:"2026-07-08", when:"Jul 2026", tag:"Tool Update",
     title:"ME Checklist added to the NSLP Readiness Deck",
@@ -427,6 +448,9 @@ function renderTools(){
     const cta = (live && t.url)
       ? `<a class="cta" href="${t.url}"${t.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.cta} →</a>`
       : `<span class="cta disabled">${t.cta}</span>`;
+    const secondary = (live && t.secondary && t.secondary.url)
+      ? `<a class="cta-secondary" href="${t.secondary.url}"${t.secondary.url.startsWith("http")?' target="_blank" rel="noopener"':''}>${t.secondary.label}</a>`
+      : "";
     return `<article class="tool ${t.status} reveal" style="--accent:${t.accent};--accent-soft:${t.soft}">
       <div class="topline">
         <span class="tmark">${iconSvg(t.icon)}</span>
@@ -436,7 +460,7 @@ function renderTools(){
       <h3>${t.name}</h3>
       <p>${t.desc}</p>
       <div class="badges">${t.badges.map(b=>`<span>${b}</span>`).join("")}</div>
-      ${cta}
+      <div class="cta-row">${cta}${secondary}</div>
     </article>`;
   }).join("");
 }
