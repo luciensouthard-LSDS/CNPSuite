@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSP News Feed Case Study — LS Digital Solutions, LLC</title>
+<meta name="description" content="Case study: a custom WordPress plugin for the PA State Police Retirees Association that turns hand-hunting press coverage into a one-click, review-first publishing workflow.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.lsdigitalsolutions.com/psp-news-feed.html">
+
+<meta property="og:title" content="Case study: a newsroom workflow that keeps people in control">
+<meta property="og:description" content="A custom WordPress plugin that takes the busywork out of news curation and leaves the judgment in.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.lsdigitalsolutions.com/psp-news-feed.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#0C2140;
+    --navy-2:#102A50;
+    --navy-deep:#081A33;
+    --navy-line:#23436E;
+    --blue:#3D6EA5;
+    --blue-h:#345E8C;
+    --sky:#8FB8E0;
+    --sky-soft:#A9C7E6;
+    --paper:#ECEFF4;
+    --card:#FBFCFE;
+    --line:#D3DCE6;
+    --ink:#16263D;
+    --ink-2:#33455C;
+    --muted:#5E7088;
+    --maxw:1140px;
+    --measure:760px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .measure{max-width:calc(var(--measure) + 56px);}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--blue);display:inline-flex;align-items:center;
+    gap:.55em;margin:0 0 22px;
+  }
+  .eyebrow .sec{color:var(--sky);font-weight:500;}
+  .hero .eyebrow{color:var(--sky);}
+  .hero .eyebrow .sec{color:var(--blue);}
+
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;line-height:1.1;letter-spacing:-.01em;margin:0;}
+  h2{font-size:clamp(1.8rem,3.6vw,2.5rem);}
+  h3{font-size:1.25rem;line-height:1.18;}
+  p{margin:0;}
+  .lede{
+    font-family:"Newsreader",Georgia,serif;font-size:clamp(1.12rem,2.1vw,1.42rem);
+    line-height:1.5;color:var(--ink-2);font-weight:400;font-style:italic;
+  }
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.5em;font-family:"Public Sans",sans-serif;
+    font-weight:600;font-size:.98rem;padding:14px 22px;border-radius:3px;text-decoration:none;
+    border:1.5px solid transparent;transition:background .15s ease,border-color .15s ease;
+  }
+  .btn .arr{transition:transform .15s ease;}
+  .btn:hover .arr{transform:translateX(3px);}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-primary:hover{background:var(--blue-h);}
+  .btn-ghost{background:transparent;color:#EAF1FA;border-color:var(--navy-line);}
+  .btn-ghost:hover{border-color:var(--sky);}
+
+  :focus-visible{outline:2.5px solid var(--sky);outline-offset:3px;}
+
+  /* logo */
+  .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;}
+  .logo .sq{
+    width:32px;height:32px;border-radius:4px;background:var(--blue);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+    font-family:"Newsreader",serif;font-weight:600;color:#fff;font-size:1rem;letter-spacing:.02em;
+  }
+  .logo .word{font-family:"Public Sans",sans-serif;font-weight:700;font-size:.92rem;
+    letter-spacing:.16em;text-transform:uppercase;line-height:1;color:#fff;}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:1px solid var(--navy-line);}
+  .navbar{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;align-items:center;}
+  nav a{text-decoration:none;font-weight:600;font-size:.95rem;color:#C7D6E8;padding:4px 0;}
+  nav a:hover{color:#fff;}
+  nav a.cta{background:var(--blue);color:#fff;padding:9px 16px;border-radius:3px;}
+  nav a.cta:hover{background:var(--blue-h);color:#fff;}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px;color:#fff;}
+
+  /* hero */
+  .hero{
+    background:radial-gradient(120% 90% at 85% -10%, #16386040 0%, transparent 55%),var(--navy);
+    color:#EAF1FA;padding:84px 0 80px;border-bottom:1px solid var(--navy-deep);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
+  .hero h1{color:#fff;font-size:clamp(2.2rem,4.8vw,3.4rem);max-width:17ch;}
+  .hero .lede{color:var(--sky-soft);margin:24px 0 0;max-width:46ch;}
+  .back{display:inline-flex;align-items:center;gap:.45em;font-family:"IBM Plex Mono",monospace;
+    font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#6E89AD;text-decoration:none;margin-bottom:26px;}
+  .back:hover{color:var(--sky);}
+
+  .meta{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:16px 40px;
+    margin:34px 0 0;padding-top:24px;border-top:1px solid var(--navy-line);}
+  .meta dt{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--sky);}
+  .meta dd{margin:4px 0 0;font-size:.95rem;color:#EAF1FA;}
+
+  /* signature: feed panel */
+  .feed{background:var(--navy-2);border:1px solid var(--navy-line);border-radius:6px;
+    padding:22px 22px 18px;box-shadow:0 24px 60px -28px rgba(0,0,0,.6);}
+  .feed .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .feed .tag{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--sky);}
+  .feed .refresh{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.06em;color:#6E89AD;}
+  .row{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;
+    border:1px solid var(--navy-line);border-radius:5px;padding:11px 13px;background:#16386030;}
+  .row + .row{margin-top:8px;}
+  .row .h{font-size:.88rem;font-weight:600;color:#EAF1FA;line-height:1.3;}
+  .row .src{grid-column:1;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.06em;
+    color:#6E89AD;text-transform:uppercase;}
+  .chip{grid-row:1 / span 2;grid-column:2;font-family:"IBM Plex Mono",monospace;font-size:.58rem;
+    letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:3px;border:1px solid;white-space:nowrap;}
+  .chip.pending{color:var(--sky);border-color:var(--navy-line);}
+  .chip.pub{color:#9FD3B0;border-color:#2E5A44;}
+  .chip.pay{color:#D9B26E;border-color:#5C4A2A;}
+  .row.removed{opacity:.5;}
+  .row.removed .h{text-decoration:line-through;text-decoration-color:#6E89AD;}
+  .chip.rm{color:#9FB6C8;border-color:var(--navy-line);border-style:dashed;}
+  .feed .via{margin-top:16px;padding-top:12px;border-top:1px solid var(--navy-line);
+    font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.08em;color:#6E89AD;text-transform:uppercase;}
+
+  /* body sections */
+  section.body{padding:88px 0;}
+  section.body.alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .sec-head{margin-bottom:26px;}
+  .sec-head .eyebrow{margin-bottom:14px;}
+  .prose p{color:var(--ink-2);font-size:1.02rem;}
+  .prose p + p{margin-top:1.1rem;}
+  .pull{font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:clamp(1.3rem,2.8vw,1.65rem);
+    line-height:1.38;color:var(--ink);border-left:3px solid var(--blue);padding:4px 0 4px 22px;margin:38px 0 0;}
+
+  .shotfig{margin:34px 0 0;}
+  .shotfig .frame{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;
+    box-shadow:0 22px 50px -30px rgba(12,33,64,.45);}
+  .shotfig img{display:block;width:100%;height:auto;border-radius:5px;}
+  .shotfig figcaption{margin-top:12px;font-family:"IBM Plex Mono",monospace;font-size:.68rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);line-height:1.6;}
+  .shotfig figcaption b{color:var(--blue);font-weight:500;}
+  .feat .detail{margin:16px 0 0;}
+  .feat .detail img{display:block;width:100%;max-width:406px;height:auto;border:1px solid var(--line);
+    border-radius:5px;background:#fff;padding:6px;}
+  .feat .detail figcaption{margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:.62rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px;}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:26px 26px 24px;}
+  .feat .no{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--blue);display:block;
+    margin-bottom:12px;letter-spacing:.05em;}
+  .feat h3{font-size:1.18rem;margin-bottom:8px;}
+  .feat p{color:var(--muted);font-size:.94rem;}
+
+  .ledger{border-top:1px solid var(--line);margin-top:30px;}
+  .entry{display:grid;grid-template-columns:120px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start;}
+  .entry .meta2{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--blue);padding-top:4px;}
+  .entry h3{font-size:1.2rem;margin:0 0 4px;}
+  .entry p{color:var(--ink-2);font-size:.97rem;}
+
+  /* CTA band */
+  .closing{background:var(--navy);color:#D7E4F2;padding:92px 0;}
+  .closing h2{color:#fff;max-width:20ch;}
+  .closing .lede{color:var(--sky-soft);margin-top:20px;max-width:58ch;}
+  .closing .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .closing .contact{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px 28px;
+    font-family:"IBM Plex Mono",monospace;font-size:.92rem;}
+  .closing .contact .k{color:var(--sky);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-right:8px;}
+  .closing .contact a{color:#EAF1FA;text-decoration:none;border-bottom:1px solid var(--navy-line);}
+  .closing .contact a:hover{border-color:var(--sky);}
+
+  /* footer */
+  footer{background:var(--navy-deep);color:var(--sky);padding:42px 0;}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;}
+  footer .copy{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.04em;}
+  footer .tagline{font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:.92rem;color:var(--sky-soft);}
+  footer .mbe{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;
+    text-transform:uppercase;border:1px solid var(--navy-line);border-radius:3px;padding:6px 12px;color:var(--sky-soft);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;}
+    .meta{grid-template-columns:repeat(2,auto);}
+  }
+  @media(max-width:640px){
+    body{font-size:17px;}
+    nav ul{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;gap:0;
+      background:var(--navy);border-bottom:1px solid var(--navy-line);padding:8px 0;}
+    nav ul.open{display:flex;}
+    nav li{padding:0 28px;}
+    nav ul a{display:block;padding:12px 0;border-bottom:1px solid var(--navy-line);color:#C7D6E8;}
+    nav a.cta{text-align:center;margin:10px 0;}
+    .menu-btn{display:block;}
+    .wrap{padding:0 20px;}
+    .hero{padding:56px 0 56px;}
+    section.body{padding:64px 0;}
+    .closing{padding:68px 0;}
+    .features{grid-template-columns:1fr;}
+    .entry{grid-template-columns:1fr;gap:6px;}
+    .meta{gap:14px 28px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .btn .arr{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap navbar">
+    <a class="logo" href="index.html" aria-label="LS Digital Solutions home">
+      <span class="sq">LS</span>
+      <span class="word">Digital Solutions</span>
+    </a>
+    <nav>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul id="menu">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="capability-statement.html">Capability</a></li>
+        <li><a class="cta" href="index.html#contact">Start a project</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <a class="back" href="index.html#work">← All work</a>
+      <p class="eyebrow"><span class="sec">§</span> Case study · Custom WordPress plugin</p>
+      <h1>A newsroom workflow that keeps people in control.</h1>
+      <p class="lede">How a members' association went from hand-hunting press coverage to a one-click, review-first publishing workflow — without handing the keys to a machine.</p>
+      <dl class="meta">
+        <div><dt>Client</dt><dd>PA State Police Retirees Association</dd></div>
+        <div><dt>Scope</dt><dd>Custom WordPress plugin</dd></div>
+        <div><dt>Focus</dt><dd>Editorial workflow</dd></div>
+        <div><dt>Role</dt><dd>Design, build &amp; handoff</dd></div>
+      </dl>
+    </div>
+    <div class="reveal">
+      <div class="feed" role="img" aria-label="Illustration of the plugin's curated news list showing pending, published, paywalled, and trashed stories">
+        <div class="top">
+          <span class="tag">Illustrative — news feed</span>
+          <span class="refresh">refreshed 9:42 AM</span>
+        </div>
+        <div class="row">
+          <span class="h">Retired troopers honored at annual memorial service</span>
+          <span class="src">Regional daily · 2h</span>
+          <span class="chip pending">Pending review</span>
+        </div>
+        <div class="row">
+          <span class="h">New cadet class graduates from training academy</span>
+          <span class="src">Capital-area news · 5h</span>
+          <span class="chip pub">Published</span>
+        </div>
+        <div class="row">
+          <span class="h">Pension board outlines changes for next fiscal year</span>
+          <span class="src">Statewide paper · 7h</span>
+          <span class="chip pay">Paywall</span>
+        </div>
+        <div class="row removed">
+          <span class="h">Highway safety campaign kicks off for the holidays</span>
+          <span class="src">Local TV · 3d</span>
+          <span class="chip rm">In trash</span>
+        </div>
+        <div class="via">Draft-first · admin-only · one click to curate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap measure">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span class="sec">§</span> 01 · The challenge</p>
+      <h2>Staying current meant hunting by hand.</h2>
+    </div>
+    <div class="prose reveal">
+      <p>The association wanted its website to keep pace with news coverage relevant to its members. In practice that meant a staff member searching several outlets by hand, copying stories across, reformatting them, and hoping nothing worth sharing slipped by on a busy day.</p>
+      <p>It was slow, easy to fall behind on, and it stopped entirely whenever the person doing it was away. They needed something faster — but they were clear about one thing: a person, not an algorithm, had to decide what went live.</p>
+    </div>
+    <p class="pull reveal">The brief wasn't "automate the news." It was "take the busywork out, and leave the judgment in."</p>
+  </div>
+</section>
+
+<section class="body alt">
+  <div class="wrap measure">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span class="sec">§</span> 02 · The approach</p>
+      <h2>Built with the client, refined against real use.</h2>
+    </div>
+    <div class="prose reveal">
+      <p>Rather than deliver a black box, I built the tool in close collaboration with the client, shipping working versions and refining them against day-to-day use. Each round surfaced the kind of detail you only find in the wild — timestamps landing in the wrong time zone, stories from subscription outlets that would frustrate readers behind a paywall, access that needed tightening to administrators only.</p>
+      <p>Some ideas were tried and deliberately dropped when they didn't earn their place. That willingness to cut is part of the service: the client ends up with what works, not every feature that sounded good in a meeting.</p>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap measure">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span class="sec">§</span> 03 · What it does</p>
+      <h2>One list, a few clicks, a person on every call.</h2>
+    </div>
+    <div class="prose reveal">
+      <p>The plugin gathers relevant coverage into a single, always-current list inside the WordPress admin. Curating is a matter of clicks — but every story still passes through a person before it reaches the public.</p>
+    </div>
+    <figure class="shotfig reveal">
+      <div class="frame">
+        <img src="psp-news-feed-screen.png" width="862" height="728" loading="lazy"
+             alt="The plugin's news panel in the WordPress admin: a list of Pennsylvania State Police stories from Google News, each with source and time, marked Published, In trash, or Pending review, with Edit/publish links and a Create Post button.">
+      </div>
+      <figcaption><b>§</b> The live panel in the client's WordPress admin. One headline blurred for this page.</figcaption>
+    </figure>
+    <div class="features reveal">
+      <div class="feat"><span class="no">§ 3.1</span><h3>One-click curation</h3><p>Relevant stories collect in one place, pulled from Google News and refreshed hourly. Adding one to the site takes a single click.</p></div>
+      <div class="feat"><span class="no">§ 3.2</span><h3>Review before publish</h3><p>Nothing goes live on its own. Each item is created as a draft and published only by a person.</p></div>
+      <div class="feat"><span class="no">§ 3.3</span><h3>Status at a glance</h3><p>Each story shows whether it's awaiting review, published, or in the trash — so nothing falls through.</p></div>
+      <div class="feat"><span class="no">§ 3.4</span><h3>Reader-first signals</h3><p>Stories likely to sit behind a subscription are flagged before anyone sends readers to a paywall.</p>
+        <figure class="detail">
+          <img src="psp-paywall-flag.png" width="406" height="112" loading="lazy"
+               alt="A story from PennLive.com in the live panel, marked with a yellow 'Subscription may be required' badge above the Create Post button.">
+          <figcaption>From the live panel · headline cropped</figcaption>
+        </figure></div>
+      <div class="feat"><span class="no">§ 3.5</span><h3>Scheduled cleanup</h3><p>Older items are cleared out on a schedule, so the news section stays fresh without manual pruning.</p></div>
+      <div class="feat"><span class="no">§ 3.6</span><h3>Administrator-only access</h3><p>Curation and publishing are limited to administrators, keeping the workflow in the right hands.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="body alt">
+  <div class="wrap measure">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span class="sec">§</span> 04 · How publishing works</p>
+      <h2>Four steps from headline to homepage.</h2>
+    </div>
+    <div class="ledger reveal">
+      <div class="entry"><span class="meta2">Step 01</span><div><h3>Review the feed</h3><p>An administrator opens the curated list of current, relevant coverage.</p></div></div>
+      <div class="entry"><span class="meta2">Step 02</span><div><h3>Pick a story</h3><p>One click turns the chosen article into a draft, pre-filled with headline, summary, source, and link.</p></div></div>
+      <div class="entry"><span class="meta2">Step 03</span><div><h3>Review and edit</h3><p>The draft opens for a read-through — add context, adjust the headline, confirm it's right.</p></div></div>
+      <div class="entry"><span class="meta2">Step 04</span><div><h3>Publish</h3><p>One more click and it's live, filed exactly where the site expects it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap measure">
+    <div class="sec-head reveal">
+      <p class="eyebrow"><span class="sec">§</span> 05 · The outcome</p>
+      <h2>Minutes instead of an hour — and full editorial control.</h2>
+    </div>
+    <div class="prose reveal">
+      <p>What used to be an hour of searching and formatting is now a few minutes of reviewing and approving. The news section stays current even during busy stretches, and the association kept full editorial control — the tool does the fetching and formatting, a person makes every call.</p>
+      <p>Just as important, the client runs it themselves. It shipped with a plain-language guide and a workflow their whole team understands, so any administrator can publish confidently on day one.</p>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap measure">
+    <p class="eyebrow reveal" style="color:var(--sky)"><span class="sec" style="color:var(--blue)">§</span> How I work</p>
+    <h2 class="reveal">Tools built around your team — not the other way around.</h2>
+    <p class="lede reveal">Custom functionality that fits how an organization actually operates, built in collaboration, refined against real use, and handed over so you're never dependent on me to run it. If a repetitive task is eating your team's time, there's usually a better way — and it rarely means giving up control.</p>
+    <div class="actions reveal">
+      <a class="btn btn-primary" href="plugin-demo.html">Try the live demo <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="index.html#contact">Start a project</a>
+    </div>
+    <div class="contact reveal">
+      <span><span class="k">Phone</span><a href="tel:+17173199622">717.319.9622</a></span>
+      <span><span class="k">Email</span><a href="mailto:luciensouthard@outlook.com">luciensouthard@outlook.com</a></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="copy">© 2026 LS Digital Solutions, LLC</span>
+    <span class="tagline">Experience, built into software.</span>
+    <span class="mbe">MBE Certified</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var btn=document.querySelector('.menu-btn');var menu=document.getElementById('menu');
+    btn.addEventListener('click',function(){var open=menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');});
+    menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');}});
+  })();
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12});
+    els.forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>
